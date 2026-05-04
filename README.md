@@ -58,6 +58,7 @@
 style_desktop.css          Desktop stylesheet
 style_mobile.css   Mobile add-on (requires style.css as parent skin)
 stylus_fonts.css   Optional: loads custom fonts via the Stylus browser extension
+CHANGELOG.md       Version history
 README.md          This file
 ```
 
