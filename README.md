@@ -1,6 +1,6 @@
 # Poudre et Plume — AO3 Site Skin
 
-**Poudre et Plume** is a soft, romantic site skin for [Archive of Our Own](https://archiveofourown.org) (AO3), built on a palette of dusty pink, slate blue, antique gold, and aged ivory. It is a full palette recolor of [Peacock Flare](https://github.com/intothisshadow/AO3-SiteSkin_PeacockFlare) by intothisshadow, preserving the original structure and logic while replacing every colour with the Poudre & Plume scheme.
+**Poudre et Plume** is a soft, romantic site skin for [Archive of Our Own](https://archiveofourown.org) (AO3), built on a palette of dusty pink, slate blue, antique gold, and aged ivory. It is a full palette recolor of [Peacock Flare](https://github.com/intothisshadow/AO3-SiteSkin_PoudreetPlume) by intothisshadow, preserving the original structure and logic while replacing every colour with the Poudre & Plume scheme.
 
 **Based on:** Peacock Flare by intothisshadow  
 **Version:** 1.0.0  
@@ -14,26 +14,26 @@
 <details>
 <summary>Desktop</summary>
 <p align="center">
-  <img src="https://raw.githubusercontent.com/intothisshadow/AO3-SiteSkin_PeacockFlare/refs/heads/main/screenshots/screenshot_desktop1.jpg" width="48%" />
+  <img src="https://raw.githubusercontent.com/intothisshadow/AO3-SiteSkin_PoudreetPlume/refs/heads/main/screenshots/screenshot_desktop1.jpg" width="48%" />
   &nbsp;
-  <img src="https://raw.githubusercontent.com/intothisshadow/AO3-SiteSkin_PeacockFlare/refs/heads/main/screenshots/screenshot_desktop2.jpg" width="48%" />
+  <img src="https://raw.githubusercontent.com/intothisshadow/AO3-SiteSkin_PoudreetPlume/refs/heads/main/screenshots/screenshot_desktop2.jpg" width="48%" />
 </p>
 <p align="center">
-  <img src="https://raw.githubusercontent.com/intothisshadow/AO3-SiteSkin_PeacockFlare/refs/heads/main/screenshots/screenshot_desktop3.jpg" width="48%" />
+  <img src="https://raw.githubusercontent.com/intothisshadow/AO3-SiteSkin_PoudreetPlume/refs/heads/main/screenshots/screenshot_desktop3.jpg" width="48%" />
   &nbsp;
-  <img src="https://raw.githubusercontent.com/intothisshadow/AO3-SiteSkin_PeacockFlare/refs/heads/main/screenshots/screenshot_desktop4.jpg" width="48%" />
+  <img src="https://raw.githubusercontent.com/intothisshadow/AO3-SiteSkin_PoudreetPlume/refs/heads/main/screenshots/screenshot_desktop4.jpg" width="48%" />
 </p>
 <p align="center">
-  <img src="https://raw.githubusercontent.com/intothisshadow/AO3-SiteSkin_PeacockFlare/refs/heads/main/screenshots/screenshot_desktop5.jpg" width="48%" />
+  <img src="https://raw.githubusercontent.com/intothisshadow/AO3-SiteSkin_PoudreetPlume/refs/heads/main/screenshots/screenshot_desktop5.jpg" width="48%" />
   &nbsp;
-  <img src="https://raw.githubusercontent.com/intothisshadow/AO3-SiteSkin_PeacockFlare/refs/heads/main/screenshots/screenshot_desktop6.jpg" width="48%" />
+  <img src="https://raw.githubusercontent.com/intothisshadow/AO3-SiteSkin_PoudreetPlume/refs/heads/main/screenshots/screenshot_desktop6.jpg" width="48%" />
  </p>
  <p>
-  <img src="https://raw.githubusercontent.com/intothisshadow/AO3-SiteSkin_PeacockFlare/refs/heads/main/screenshots/screenshot_desktop7.jpg" width="48%" />
+  <img src="https://raw.githubusercontent.com/intothisshadow/AO3-SiteSkin_PoudreetPlume/refs/heads/main/screenshots/screenshot_desktop7.jpg" width="48%" />
   &nbsp;
-  <img src="https://raw.githubusercontent.com/intothisshadow/AO3-SiteSkin_PeacockFlare/refs/heads/main/screenshots/screenshot_desktop8.jpg" width="48%" />
+  <img src="https://raw.githubusercontent.com/intothisshadow/AO3-SiteSkin_PoudreetPlume/refs/heads/main/screenshots/screenshot_desktop8.jpg" width="48%" />
 </p>
-  <img src="https://raw.githubusercontent.com/intothisshadow/AO3-SiteSkin_PeacockFlare/refs/heads/main/screenshots/screenshot_desktop9.jpg" width="48%" />
+  <img src="https://raw.githubusercontent.com/intothisshadow/AO3-SiteSkin_PoudreetPlume/refs/heads/main/screenshots/screenshot_desktop9.jpg" width="48%" />
 </p>
 </details>
 
@@ -41,27 +41,27 @@
 <details>
 <summary>Mobile</summary>
 <p align="center">
-  <img src="https://raw.githubusercontent.com/intothisshadow/AO3-SiteSkin_PeacockFlare/refs/heads/main/screenshots/screenshot_mobile1.jpg" width="30%" />
+  <img src="https://raw.githubusercontent.com/intothisshadow/AO3-SiteSkin_PoudreetPlume/refs/heads/main/screenshots/screenshot_mobile1.jpg" width="30%" />
   &nbsp;
-  <img src="https://raw.githubusercontent.com/intothisshadow/AO3-SiteSkin_PeacockFlare/refs/heads/main/screenshots/screenshot_mobile2.jpg" width="30%" />
+  <img src="https://raw.githubusercontent.com/intothisshadow/AO3-SiteSkin_PoudreetPlume/refs/heads/main/screenshots/screenshot_mobile2.jpg" width="30%" />
 </p>
 <p align="center">
-  <img src="https://raw.githubusercontent.com/intothisshadow/AO3-SiteSkin_PeacockFlare/refs/heads/main/screenshots/screenshot_mobile3.jpg" width="30%" />
+  <img src="https://raw.githubusercontent.com/intothisshadow/AO3-SiteSkin_PoudreetPlume/refs/heads/main/screenshots/screenshot_mobile3.jpg" width="30%" />
   &nbsp;
-  <img src="https://raw.githubusercontent.com/intothisshadow/AO3-SiteSkin_PeacockFlare/refs/heads/main/screenshots/screenshot_mobile4.jpg" width="30%" />
+  <img src="https://raw.githubusercontent.com/intothisshadow/AO3-SiteSkin_PoudreetPlume/refs/heads/main/screenshots/screenshot_mobile4.jpg" width="30%" />
 </p>
 <p align="center">
-  <img src="https://raw.githubusercontent.com/intothisshadow/AO3-SiteSkin_PeacockFlare/refs/heads/main/screenshots/screenshot_mobile5.jpg" width="30%" />
+  <img src="https://raw.githubusercontent.com/intothisshadow/AO3-SiteSkin_PoudreetPlume/refs/heads/main/screenshots/screenshot_mobile5.jpg" width="30%" />
   &nbsp;
-  <img src="https://raw.githubusercontent.com/intothisshadow/AO3-SiteSkin_PeacockFlare/refs/heads/main/screenshots/screenshot_mobile6.jpg" width="30%" />
+  <img src="https://raw.githubusercontent.com/intothisshadow/AO3-SiteSkin_PoudreetPlume/refs/heads/main/screenshots/screenshot_mobile6.jpg" width="30%" />
 </p>
 <p align="center">
-  <img src="https://raw.githubusercontent.com/intothisshadow/AO3-SiteSkin_PeacockFlare/refs/heads/main/screenshots/screenshot_mobile7.jpg" width="30%" />
+  <img src="https://raw.githubusercontent.com/intothisshadow/AO3-SiteSkin_PoudreetPlume/refs/heads/main/screenshots/screenshot_mobile7.jpg" width="30%" />
   &nbsp;
-  <img src="https://raw.githubusercontent.com/intothisshadow/AO3-SiteSkin_PeacockFlare/refs/heads/main/screenshots/screenshot_mobile8.jpg" width="30%" />
+  <img src="https://raw.githubusercontent.com/intothisshadow/AO3-SiteSkin_PoudreetPlume/refs/heads/main/screenshots/screenshot_mobile8.jpg" width="30%" />
 </p>
 <p align="center">
-  <img src="https://raw.githubusercontent.com/intothisshadow/AO3-SiteSkin_PeacockFlare/refs/heads/main/screenshots/screenshot_mobile9.jpg" width="30%" />
+  <img src="https://raw.githubusercontent.com/intothisshadow/AO3-SiteSkin_PoudreetPlume/refs/heads/main/screenshots/screenshot_mobile9.jpg" width="30%" />
 </p>
 </details>
 
