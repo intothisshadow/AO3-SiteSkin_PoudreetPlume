@@ -1,0 +1,40 @@
+/*
+ * ============================================================
+ * Poudre et Plume — Font Loader (Stylus)
+ * Addon to: Poudre et Plume AO3 Site SKin by intothisshadow
+ * https://github.com/intothisshadow/AO3-SiteSkin_PoudreetPlume
+ * Last Updated: 2026-May-04 11:37 GMT
+ *
+ * HOW TO USE:
+ * This loads the custom fonts used by Poudre et Plume on AO3.
+ * AO3's site skin system cannot load external fonts directly,
+ * but Stylus (a browser extension) can.
+ *
+ * INSTALL:
+ * 1. Install the Stylus extension for your browser:
+ *    - Firefox: https://addons.mozilla.org/en-US/firefox/addon/styl-us/
+ *    - Chrome:  https://chrome.google.com/webstore/detail/stylus/clngdbkpkpeebahjckkjfobafhncgmne
+ *
+ * 2. Click the Stylus icon in your browser toolbar → Manage
+ *
+ * 3. Click "Write new style"
+ *
+ * 4. Paste this entire file into the code editor
+ *
+ * 5. Under "Applies to", click "URLs on the domain" and
+ *    enter:  archiveofourown.org
+ *
+ * 6. Give the style a name (e.g. "AO3 Poudre et Plume Fonts") and Save
+ *
+ * That's it. The fonts will load automatically whenever you
+ * visit AO3, and this theme will use them.
+ * ============================================================
+ *
+ * FONTS LOADED:
+ * - EB Garamond       — body text (regular, italic, medium, semibold)
+ * - Cormorant Garamond — headers / site title (semibold, bold, italic)
+ * - Source Code Pro   — code & monospace elements
+ * ============================================================
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');

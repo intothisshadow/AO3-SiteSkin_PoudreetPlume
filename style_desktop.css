@@ -1,0 +1,5690 @@
+/*
+ * ============================================
+ * Theme Name: Poudre et Plume - AO3 Site Skin
+ * Based on: Peacock Flare by intothisshadow
+ *   https://github.com/intothisshadow/AO3-SiteSkin_PeacockFlare
+ * Last Updated: 2026-May-04 11:37 GMT
+ *
+ * CREDITS:
+ * - Structure & logic: Moonlit Wisteria by intothisshadow
+ *   https://archiveofourown.org/works/79008746
+ * - Icons: "Replace the AO3 Icons 2.0" by ZerafinaCSS
+ *   https://github.com/ZerafinaCSS/
+ * - Fonts: EB Garamond (body) + Cormorant Garamond (header title)
+ *   https://fonts.google.com/specimen/EB+Garamond
+ *   https://fonts.google.com/specimen/Cormorant+Garamond
+ *
+ *
+ * var(--clr-bg)              Antique Ivory       (page background)
+ * var(--clr-card)            Warm Parchment      (card backgrounds)
+ * var(--clr-card-nested)     Aged Linen          (nested card / fieldset bg)
+ * var(--clr-seafoam)         Dusty Vellum        (hover backgrounds, tag base)
+ * var(--clr-blush)           Muted Mauve         (header, fieldset borders)
+ * var(--clr-rose)            Antique Rose        (accents, gradients, borders)
+ * var(--clr-rose-soft)       Petal Pink          (fandom tags, footer text)
+ * var(--clr-emerald-soft)    Slate Sage          (nav, sidebar)
+ * var(--clr-emerald-muted)   Dusty Slate         (gradient midpoint, borders)
+ * var(--clr-emerald-dusty)   Weathered Sage      (button gradient end)
+ * var(--clr-teal)            Rococo Blue         (accents, gradients, borders)
+ * var(--clr-teal-deep)       Faded Indigo        (links, stats, headings)
+ * var(--clr-teal-indigo)     Dusty Periwinkle    (visited links, meta text)
+ * var(--clr-ocean)           Slate Blue          (navigation, character tags)
+ * var(--clr-sage)            Dusty Celadon       (blurb hover, freeform tags)
+ * var(--clr-gold)            Antique Gold        (relationship tags, hover states, fic titles)
+ * var(--clr-ink)             Warm Umber          (primary foreground / body text)
+ * var(--clr-abyss)           Deep Walnut         (footer, darkest surfaces)
+ *
+ * GRADIENT FLOW:
+ * Header     → Muted Mauve   → Slate Sage
+ * Navigation → Slate Sage    → Slate Blue
+ * Sidebar    → Slate Sage    → Slate Blue
+ * Footer     → Slate Blue    → Deep Walnut
+ *
+ * ============================================
+ *
+ * HOW TO USE:
+ * 1. Edit the :root block (sec 0) — this is
+ *    the only place you need to change colours.
+ * 2. Update the two font rules marked FONT: BODY
+ *    and FONT: HEADER with your preferred fonts.
+ * ============================================
+ *
+ * Table of contents:
+ * 0.  Root Variables
+ * 1.  Global / Reset
+ * 2.  Typography
+ * 3.  Links
+ * 4.  Header & Navigation
+ * 5.  Greeting / User Menu
+ * 6.  Sidebar & Dashboard
+ * 7.  Buttons & Actions
+ * 8.  Forms & Inputs
+ * 9.  Tag System
+ * 10. Work Blurb Cards
+ * 11. Work Page
+ * 12. Comments
+ * 13. Inbox
+ * 14. Dropdowns & Listboxes
+ * 15. Notices & Alerts
+ * 16. Front Page (Splash)
+ * 17. Index Pages (Media, Fandoms, Collections)
+ * 18. Profile & Stats Pages
+ * 19. Reading History
+ * 20. Miscellaneous (Scrollbar, Selection, Pre)
+ * 21. System (Sessions, Skins, Docs, FAQ, TOS, Proxy)
+ * 22. AO3 Default Elements
+ * 23. Footer
+ * 24. Replace the AO3 Icons by zerafinacss
+ * ============================================
+ */
+
+
+/*
+ * ============================================
+ * 0. ROOT VARIABLES
+ * ============================================
+ */
+
+:root
+{
+  /* --- Palette from Adobe Color / Poudre & Plume --- */
+  /* #F7E9E3 pale blush cream  | #F3E1D6 warm ivory     */
+  /* #D0D8D1 muted sage        | #BAC2C0 cool grey-teal  */
+  /* #A9B4AB sage green-grey   | #DBB9BC dusty rose-grey */
+  /* #D7979F antique rose      | #D87884 deeper rose     */
+  /* #DFC5A6 warm antique gold | #71A7B0 rococo teal     */
+
+  /* --- Palette: backgrounds --- */
+  --clr-bg: #fdfaf6;
+  --clr-card: #F3E1D6;
+  --clr-card-nested: #EDD8CC;
+  --clr-seafoam: #D0D8D1;
+  /* --- Palette: accents & borders --- */
+  --clr-blush: #D7979F;
+  --clr-rose: #D87884;
+  --clr-rose-soft: #DBB9BC;
+  --clr-emerald-soft: #A9B4AB;
+  --clr-emerald-muted: #8FA09A;
+  --clr-emerald-dusty: #9AACAA;
+  --clr-teal: #BAC2C0;
+  --clr-teal-deep: #6A8FAA;
+  --clr-teal-indigo: #8A8AA8;
+  --clr-ocean: #6890A0;
+  --clr-sage: #A9B4AB;
+  --clr-gold: #DFC5A6;
+  /* --- Palette: text & dark surfaces --- */
+  --clr-ink: #3a2a22;
+  --clr-abyss: #4a3830;
+  /* --- Alpha: rococo teal (113,167,176) --- */
+  --clr-teal-006: rgba(113, 167, 176, 0.06);
+  --clr-teal-007: rgba(113, 167, 176, 0.07);
+  --clr-teal-008: rgba(113, 167, 176, 0.08);
+  --clr-teal-010: rgba(113, 167, 176, 0.1);
+  --clr-teal-018: rgba(113, 167, 176, 0.18);
+  --clr-teal-020: rgba(113, 167, 176, 0.2);
+  --clr-teal-025: rgba(113, 167, 176, 0.25);
+  --clr-teal-030: rgba(113, 167, 176, 0.3);
+  --clr-teal-050: rgba(113, 167, 176, 0.5);
+  /* --- Alpha: antique rose (216,120,132) --- */
+  --clr-rose-008: rgba(216, 120, 132, 0.08);
+  --clr-rose-010: rgba(216, 120, 132, 0.1);
+  --clr-rose-015: rgba(216, 120, 132, 0.15);
+  --clr-rose-020: rgba(216, 120, 132, 0.2);
+  --clr-rose-025: rgba(216, 120, 132, 0.25);
+  --clr-rose-030: rgba(216, 120, 132, 0.3);
+  --clr-rose-035: rgba(216, 120, 132, 0.35);
+  --clr-rose-040: rgba(216, 120, 132, 0.4);
+  /* --- Alpha: warm brown (74,56,48) --- */
+  --clr-abyss-015: rgba(74, 56, 48, 0.15);
+  --clr-abyss-025: rgba(74, 56, 48, 0.25);
+  --clr-abyss-035: rgba(74, 56, 48, 0.35);
+  --clr-abyss-040: rgba(74, 56, 48, 0.4);
+  /* --- Alpha: sage (169,180,171) --- */
+  --clr-emerald-025: rgba(169, 180, 171, 0.25);
+  --clr-emerald-035: rgba(169, 180, 171, 0.35);
+  --clr-emerald-040: rgba(169, 180, 171, 0.4);
+  --clr-emerald-050: rgba(169, 180, 171, 0.5);
+  /* --- Alpha: misc --- */
+  --clr-bg-075: rgba(247, 233, 227, 0.85);
+  --clr-white-010: rgba(255, 255, 255, 0.4);
+  /* --- Font size --- */
+  --desktop-base: 20px;
+  /* 🟢 USER SETTING: change this to resize all text */
+}
+
+
+/*
+ * ============================================
+ * 1. GLOBAL / RESET
+ * ============================================
+ */
+
+html
+{
+  font-size: var(--desktop-base) !important;
+}
+
+/* Body: fixed diagonal ivory gradient prevents the page bg looking flat.
+   overflow-x: hidden stops horizontal scroll from AO3's full-width elements.
+   font-smoothing on body is inherited by most children via body *. */
+body background-color: #fdf8f5 !important;
+color: var(--clr-ink) !important;
+line-height: 1.6 !important;
+overflow-x: hidden !important;
+text-align: left !important;
+-webkit-font-smoothing: antialiased !important;
+-moz-osx-font-smoothing: grayscale !important;
+text-rendering: optimizeLegibility !important;
+}
+
+/* Prevent oversized embedded media from breaking layout */
+img,
+video,
+object,
+embed
+{
+  height: auto !important;
+  max-width: 100% !important;
+}
+
+iframe
+{
+  max-width: 100% !important;
+}
+
+/* FONT: BODY. Replace the body font here. */
+body *
+{
+  font-family: 'EB Garamond', 'Garamond', 'Book Antiqua', 'Palatino Linotype', Palatino, Georgia, serif !important;
+  font-weight: 500 !important;
+}
+
+input,
+select,
+textarea,
+button,
+.actions,
+pre,
+code
+{}
+
+/* <hr> rule: zero border-width, then border-image draws the visible line.
+   No border-radius on <hr>, so border-image is safe here. */
+hr border-bottom: 2px dotted !important;
+border-image: linear-gradient(90deg, transparent 0%, #A9B4AB 15%, #D7979F 35%, #D87884 50%, #DFC5A6 65%, #71A7B0 85%, transparent 100%) 1 !important;
+opacity: 0.7 !important;
+}
+
+strong,
+b
+{
+  font-weight: bold !important;
+}
+
+em,
+cite,
+i
+{
+  font-style: oblique !important;
+}
+
+/* Text selection highlight: rose tint on the selected range. */
+::selection
+{
+  background: var(--clr-rose-035) !important;
+  color: var(--clr-ink) !important;
+}
+
+
+/*
+ * ============================================
+ * 2. TYPOGRAPHY
+ * ============================================
+ * Heading sizes are set on #main/#content children only, so AO3's own
+ * structural headings outside #main (header h1, nav headings) are not
+ * inadvertently oversized.  The Cormorant Garamond heading font is applied
+ * via the shared .heading selector later in the stylesheet.
+ */
+
+#main h1,
+#content h1
+{
+  font-size: 2.5em !important;
+}
+
+#main h2,
+#content h2
+{
+  font-size: 2em !important;
+}
+
+#main h3,
+#content h3
+{
+  font-size: 1.5em !important;
+}
+
+#main h4,
+#content h4
+{
+  font-size: 1.25em !important;
+}
+
+#main h5,
+#content h5
+{
+  font-size: 1.1em !important;
+}
+
+#main h6,
+#content h6
+{
+  font-size: 0.95em !important;
+}
+
+p
+{
+  font-size: 1em !important;
+  letter-spacing: 0.01em !important;
+  line-height: 1.65 !important;
+}
+
+small
+{
+  font-size: 0.8em !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.heading
+{
+  color: var(--clr-ink) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.02em !important;
+  overflow-wrap: break-word !important;
+}
+
+/* Section headings: rose→blush→teal gradient underline via border-image.
+   These elements have no border-radius so border-image is safe. */
+h2.heading,
+h3.heading,
+h4.heading
+{
+  border-bottom: 1px solid !important;
+  border-image: linear-gradient(90deg, #D87884 0%, #D7979F 30%, #DBB9BC 55%, #BAC2C0 78%, transparent 100%) 1 !important;
+  color: var(--clr-abyss) !important;
+  padding-bottom: 4px !important;
+}
+
+/* AO3 landmark headings are structural/ARIA anchors — visually hidden so they
+   don't render as actual headings on screen while remaining in the DOM */
+h3.landmark.heading,
+h4.landmark.heading,
+h5.landmark.heading,
+h6.landmark.heading
+{
+  background: transparent !important;
+  background-image: none !important;
+  border: none !important;
+  color: transparent !important;
+  font-size: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+}
+
+
+/*
+ * ============================================
+ * 3. LINKS
+ * ============================================
+ * Base link colour is a warm terracotta (#9a5a48).
+ * Visited links shift to antique gold (#8a7040) with a dashed border.
+ * Both border-bottom treatments are stripped on specific contexts below
+ * (tags, headers, nav, blurb titles) that use their own visual treatment.
+ */
+
+a,
+a:link
+{
+  border-bottom: 1px solid var(--clr-rose) !important;
+  color: #9a5a48 !important;
+  text-decoration: none !important;
+}
+
+a:visited
+{
+  border-bottom: 1px dashed var(--clr-rose) !important;
+  color: #8a7040 !important;
+  text-decoration: none !important;
+}
+
+a:hover,
+a:focus
+{
+  color: var(--clr-ink) !important;
+  text-decoration: underline !important;
+}
+
+a:active,
+button:focus
+{
+  outline: 1px dotted var(--clr-teal) !important;
+}
+
+#header a:hover,
+#header a:focus,
+#greeting a:hover,
+#greeting a:focus
+{
+  text-decoration: none !important;
+}
+
+.heading a,
+.heading a:visited,
+h4.heading a,
+h4.heading a:visited
+{
+  color: #9a5a48 !important;
+  font-weight: bold !important;
+}
+
+li.work.blurb h4.heading,
+li.bookmark.blurb h4.heading,
+li.series.blurb h4.heading,
+li.reading.work.blurb h4.heading
+{
+  border-bottom: none !important;
+}
+
+/* Fic/series/bookmark titles: gradient text instead of a plain link colour.
+   Uses -webkit-background-clip + transparent text-fill, which requires
+   border-bottom: none to avoid the underline clipping through. */
+li.work.blurb h4.heading a,
+li.bookmark.blurb h4.heading a,
+li.series.blurb h4.heading a,
+li.reading.work.blurb h4.heading a,
+li.work.blurb h4.heading a:visited,
+li.bookmark.blurb h4.heading a:visited,
+li.series.blurb h4.heading a:visited,
+li.reading.work.blurb h4.heading a:visited
+{
+  background: linear-gradient(90deg, #8a6030 0%, #b86878 40%, #2a6878 70%, #7a5a80 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  border-bottom: none !important;
+  -webkit-font-smoothing: antialiased !important;
+}
+
+li.work.blurb h4.heading a:hover,
+li.bookmark.blurb h4.heading a:hover,
+li.series.blurb h4.heading a:hover,
+li.reading.work.blurb h4.heading a:hover
+{
+  background: linear-gradient(90deg, #2a6878 0%, #b86878 40%, #8a6030 70%, #b86878 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  text-decoration: underline !important;
+}
+
+/* Author / byline links: no border-bottom, italic, dusty periwinkle colour.
+   Covers both rel="author" on work pages and .byline links on blurbs. */
+a[rel="author"],
+a[rel="author"]:link,
+a[rel="author"]:visited,
+a[rel="author"]:hover,
+a[rel="author"]:focus,
+.byline a,
+.byline a:link,
+.byline a:visited,
+.byline a:hover,
+.byline a:focus
+{
+  border-bottom: none !important;
+  color: var(--clr-teal-indigo) !important;
+  font-style: italic !important;
+  text-decoration: none !important;
+}
+
+/* Injects a "by" label on a separate line before the author name.
+   \a creates a newline inside a pre-formatted string. */
+h3.byline.heading::before
+{
+  content: "by \a" !important;
+  white-space: pre !important;
+  display: block;
+  font-style: italic !important;
+  font-weight: 400 !important;
+}
+
+
+/*
+ * ============================================
+ * 4. HEADER & NAVIGATION
+ * ============================================
+ */
+
+/* Site header: blush → rose → champagne gradient with a full-palette
+   border-image rainbow stripe on the bottom edge. */
+#header
+{
+  border-bottom: 4px solid !important;
+  border-image: linear-gradient(90deg, #D87884 0%, #DFC5A6 25%, #71A7B0 50%, #D7979F 75%, #8a6030 100%) 1 !important;
+  box-shadow: 0 6px 0 0 rgba(215, 151, 159, 0.3) !important;
+}
+
+/* AO3 ships its own "A" logo image — we hide it so the h1 text
+   (the site name) renders as styled text instead. */
+#header .logo,
+#header .logo img,
+#header h1 img
+{
+  display: none !important;
+}
+
+#header h1
+{
+  line-height: 1 !important;
+  margin: 0 0 0 0.75em !important;
+  padding: 0 !important;
+}
+
+/* Site title: Cormorant Garamond with a gold→teal→rose gradient clipped to
+   the text. Gradient text requires -webkit-text-fill-color: transparent and
+   background-clip: text; filter/text-shadow must be cleared. */
+#header h1,
+#header h1 span,
+#header h1 sup
+{
+  background: linear-gradient(135deg, #8a6030 0%, #2a6878 40%, #8a3848 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  filter: none !important;
+  font-family: 'Cormorant Garamond', 'Didot', 'Bodoni MT', 'Palatino Linotype', Palatino, 'Book Antiqua', serif !important;
+  /* FONT: HEADER. Replace Cormorant Garamond as the header font here. */
+  font-size: 1.7rem !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.05em !important;
+  text-shadow: none !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+}
+
+#header h1 sup
+{
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4)) !important;
+  font-family: 'EB Garamond', 'Garamond', 'Book Antiqua', 'Palatino Linotype', Palatino, Georgia, serif !important;
+  font-size: 1.0rem !important;
+}
+
+#header .logo a,
+#header .logo a:visited,
+#header .logo a:hover,
+#header h1 a,
+#header h1 a:visited,
+#header h1 a:hover
+{
+  -webkit-text-fill-color: transparent !important;
+  border-bottom: none !important;
+}
+
+#header .primary.navigation
+{
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+#header .primary.navigation .dropdown .menu
+{
+  background: linear-gradient(180deg, var(--clr-card) 0%, var(--clr-bg) 100%) !important;
+  border: 1px solid var(--clr-rose) !important;
+  border-radius: 6px !important;
+}
+
+#header .primary.navigation .dropdown .menu li
+{
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 1px solid var(--clr-rose-020) !important;
+  border-radius: 0 !important;
+}
+
+#header .primary.navigation .dropdown .menu li:last-child
+{
+  border-bottom: none !important;
+}
+
+#header .primary.navigation .dropdown .menu a,
+#header .primary.navigation .dropdown .menu a:visited
+{
+  border-bottom: none !important;
+  box-sizing: border-box !important;
+  color: var(--clr-ink) !important;
+  display: block !important;
+  padding: 0.5em 1em !important;
+  transition: background 0.15s ease, padding-left 0.15s ease !important;
+  width: 100% !important;
+}
+
+/* Nav dropdown menu item hover: blush→teal gradient + left accent bar that
+   pushes the text right (padding-left transition) for a sliding-door effect. */
+#header .primary.navigation .dropdown .menu a:hover
+{
+  background: linear-gradient(135deg, var(--clr-blush) 0%, var(--clr-teal) 100%) !important;
+  border-left: 3px solid var(--clr-rose) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+  color: var(--clr-ink) !important;
+  padding-left: 1.2em !important;
+  text-decoration: none !important;
+  transition: background 0.15s ease, padding-left 0.15s ease !important;
+}
+
+#header .primary.navigation>ul>li,
+#header .primary.navigation>ol>li
+{
+  display: inline-block !important;
+  height: 100% !important;
+  vertical-align: middle !important;
+}
+
+/* Top-level nav items: teal translucent wash on hover signals the dropdown
+   is about to open.  .primary.navigation itself is transparent. */
+#header .primary.navigation>ul>li:hover,
+#header .primary.navigation>ol>li:hover
+{
+  background: var(--clr-teal-050) !important;
+}
+
+#header .primary.navigation li li
+{
+  background: none !important;
+  display: block !important;
+  height: auto !important;
+}
+
+#header .primary.navigation li li:hover
+{
+  background: none !important;
+}
+
+#header .primary.navigation li li a,
+#header .primary.navigation li li a:visited
+{
+  padding: 0.5em 1em !important;
+}
+
+/* Primary nav links: strip all inherited link chrome (border, radius,
+   box-shadow, background) and render as plain inline blocks.  Font-smoothing
+   re-applied to compensate for any antialiasing lost in the reset. */
+#header .primary.navigation a,
+#header .primary.navigation a:visited border-radius: 0 !important;
+box-shadow: none !important;
+color: var(--clr-ink) !important;
+display: inline-block !important;
+font-size: 1.2em !important;
+line-height: normal !important;
+margin-top: 0 !important;
+padding: 0.25em 0.75em !important;
+-webkit-font-smoothing: antialiased !important;
+-moz-osx-font-smoothing: grayscale !important;
+text-rendering: optimizeLegibility !important;
+white-space: nowrap !important;
+}
+
+#header .primary.navigation .dropdown .menu li a,
+#header .primary.navigation .dropdown .menu li a:visited
+{
+  box-sizing: border-box !important;
+  display: block !important;
+  font-size: 1.2em !important;
+  margin-top: 0 !important;
+  width: 100% !important;
+}
+
+#header .primary.navigation a:hover,
+#header .primary.navigation a:focus
+{
+  background: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  color: var(--clr-gold) !important;
+  text-decoration: none !important;
+}
+
+/* Header search: flex row so the text input and submit button sit flush
+   as a joined pill. left input gets rounded left corners, button gets right. */
+#header form[action="/search"],
+#header .search form,
+#header form.search
+{
+  display: flex !important;
+  padding-top: 0 !important;
+  width: auto !important;
+}
+
+#header li.search
+{
+  vertical-align: middle !important;
+}
+
+#header form[action="/search"] fieldset,
+#header .search form fieldset,
+#header form.search fieldset
+{
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  display: flex !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#header form[action="/search"] fieldset p,
+#header .search form fieldset p,
+#header form.search fieldset p
+{
+  display: flex !important;
+  margin: 0 !important;
+}
+
+#header form[action="/search"] input[type="text"],
+#header .search form input[type="text"],
+#header form.search input[type="text"]
+{
+  border-radius: 6px 0 0 6px !important;
+  flex: 1 !important;
+  margin: 0 !important;
+  width: 14em !important;
+}
+
+#header form[action="/search"] input[type="submit"],
+#header form[action="/search"] button,
+#header .search form input[type="submit"],
+#header .search form button,
+#header form.search input[type="submit"],
+#header form.search button
+{
+  background: linear-gradient(135deg, var(--clr-blush) 0%, var(--clr-teal) 60%, var(--clr-emerald-soft) 100%) !important;
+  border: 1px solid var(--clr-teal) !important;
+  border-left: none !important;
+  border-radius: 0 6px 6px 0 !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 4px var(--clr-teal-025) !important;
+  color: var(--clr-ink) !important;
+  font-size: 0.85em !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  margin: 0 !important;
+  padding: 0.3em 1em !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4) !important;
+  text-transform: uppercase !important;
+  transition: background 0.2s ease, box-shadow 0.2s ease !important;
+  white-space: nowrap !important;
+}
+
+#header form[action="/search"] input[type="submit"]:hover,
+#header form[action="/search"] button:hover,
+#header .search form input[type="submit"]:hover,
+#header .search form button:hover,
+#header form.search input[type="submit"]:hover,
+#header form.search button:hover
+{
+  background: linear-gradient(135deg, var(--clr-teal) 0%, var(--clr-rose) 60%, var(--clr-blush) 100%) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 2px 8px var(--clr-rose-030) !important;
+  color: var(--clr-ink) !important;
+}
+
+
+/*
+ * ============================================
+ * 5. GREETING / USER MENU
+ * ============================================
+ */
+
+#greeting,
+#greeting a,
+#greeting a:visited
+{
+  color: var(--clr-ink) !important;
+  font-size: 1.1em !important;
+  font-weight: 600 !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  text-rendering: optimizeLegibility !important;
+}
+
+#greeting>ul>li,
+#greeting>ol>li
+{
+  display: inline-block !important;
+  height: 100% !important;
+  vertical-align: middle !important;
+}
+
+/* User avatar in the greeting bar: teal inner ring + rose outer ring
+   via layered box-shadows.  Same double-ring as the profile page icon. */
+#greeting .icon img,
+#greeting .user .icon img
+{
+  border-radius: 6px !important;
+  box-shadow: 0 0 0 3px var(--clr-teal), 0 0 0 5px var(--clr-rose) !important;
+}
+
+/* User menu dropdown (avatar + username in the header): parchment card with
+   rose border, matching the primary nav dropdown style. */
+#greeting .dropdown .menu,
+#greeting .dropdown .menu li
+{
+  background: var(--clr-card) !important;
+  border-bottom: none !important;
+}
+
+#greeting>ul>li:hover,
+#greeting>ol>li:hover
+{
+  background: var(--clr-white-010) !important;
+  border-radius: 6px !important;
+}
+
+#greeting li li
+{
+  display: block !important;
+  height: auto !important;
+}
+
+#greeting li li:hover
+{
+  background: var(--clr-white-010) !important;
+  border-radius: 6px !important;
+}
+
+/* Greeting bar links: strip all button/link chrome so text sits flush in
+   the bar without pill borders or underlines. */
+#greeting a,
+#greeting a:visited,
+#greeting a:hover
+{
+  background: none !important;
+  border: none !important;
+  border-bottom: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  display: inline-block !important;
+  height: auto !important;
+  line-height: normal !important;
+  padding: 0.25em 0.75em !important;
+}
+
+#greeting a:hover
+{
+  color: var(--clr-gold) !important;
+}
+
+#greeting .dropdown .menu
+{
+  background: linear-gradient(180deg, var(--clr-card) 0%, var(--clr-bg) 100%) !important;
+  border: 1px solid var(--clr-rose) !important;
+  border-radius: 6px !important;
+  box-sizing: border-box !important;
+}
+
+#greeting .dropdown .menu li
+{
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 1px solid var(--clr-rose-020) !important;
+  border-radius: 0 !important;
+  box-sizing: border-box !important;
+  display: block !important;
+  height: auto !important;
+  padding: 0 !important;
+}
+
+#greeting .dropdown .menu li:last-child
+{
+  border-bottom: none !important;
+}
+
+#greeting .dropdown .menu a,
+#greeting .dropdown .menu a:visited
+{
+  box-sizing: border-box !important;
+  color: var(--clr-ink) !important;
+  display: block !important;
+  height: auto !important;
+  line-height: 1.5 !important;
+  min-height: 2em !important;
+  padding: 0.4em 0.75em !important;
+  transition: background 0.15s ease, padding-left 0.15s ease !important;
+  vertical-align: unset !important;
+  white-space: normal !important;
+}
+
+#greeting .dropdown .menu a:hover
+{
+  background: linear-gradient(135deg, var(--clr-blush) 0%, var(--clr-teal) 100%) !important;
+  border-left: 3px solid var(--clr-rose) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+  color: var(--clr-ink) !important;
+  padding-left: 1em !important;
+  transition: background 0.15s ease, padding-left 0.15s ease !important;
+}
+
+
+/*
+ * ============================================
+ * 6. SIDEBAR & DASHBOARD
+ * ============================================
+ */
+
+/* Dashboard sidebar: warm rose→blush→gold gradient, prominent border-radius
+   for the rococo card aesthetic. Internal links are styled separately below. */
+nav#dashboard,
+div#dashboard,
+#dashboard
+{
+  background: linear-gradient(160deg, var(--clr-rose) 0%, var(--clr-blush) 40%, var(--clr-gold) 100%) !important;
+  border: 1px solid var(--clr-blush) !important;
+  border-radius: 24px !important;
+}
+
+nav#dashboard h2,
+div#dashboard h2,
+#dashboard h2,
+nav#dashboard h3,
+div#dashboard h3,
+#dashboard h3
+{
+  background: linear-gradient(90deg, var(--clr-teal) 0%, var(--clr-emerald-muted) 100%) !important;
+  border-radius: 6px 6px 0 0 !important;
+  color: var(--clr-ink) !important;
+  font-size: 1em !important;
+  letter-spacing: 0.03em !important;
+  margin: 0 !important;
+  padding: 6px 10px !important;
+}
+
+nav#dashboard a,
+nav#dashboard a:link,
+nav#dashboard a:visited,
+div#dashboard a,
+div#dashboard a:link,
+div#dashboard a:visited,
+#dashboard a,
+#dashboard a:link,
+#dashboard a:visited
+{
+  background: none !important;
+  border: none !important;
+  border-bottom: none !important;
+  border-radius: 6px !important;
+  box-shadow: none !important;
+  color: var(--clr-ink) !important;
+  display: block !important;
+  font-size: 0.85em !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.04em !important;
+  overflow-wrap: break-word !important;
+  padding: 2px 6px !important;
+  text-transform: uppercase !important;
+  transition: background 0.2s ease, color 0.2s ease, padding-left 0.15s ease !important;
+  white-space: normal !important;
+  word-break: break-word !important;
+}
+
+nav#dashboard a:hover,
+div#dashboard a:hover,
+#dashboard a:hover
+{
+  background: linear-gradient(135deg, var(--clr-card) 0%, var(--clr-bg) 100%) !important;
+  border-left: 3px solid var(--clr-rose) !important;
+  box-shadow: none !important;
+  box-sizing: border-box !important;
+  color: var(--clr-abyss) !important;
+  display: block !important;
+  padding-left: 10px !important;
+  text-decoration: none !important;
+}
+
+nav#dashboard ul.navigation.actions li,
+div#dashboard ul.navigation.actions li
+{
+  display: block !important;
+  position: relative !important;
+}
+
+/* Thin teal hairline divider between adjacent nav items in the dashboard,
+   generated via ::before rather than border-bottom to avoid box-model issues. */
+nav#dashboard ul.navigation.actions li+li::before,
+div#dashboard ul.navigation.actions li+li::before
+{
+  background: var(--clr-teal) !important;
+  content: "" !important;
+  display: block !important;
+  height: 1px !important;
+  margin-bottom: 2px !important;
+  opacity: 0.5 !important;
+  width: 100% !important;
+}
+
+/* Pseuds expanded dropdown — ul.expandable.secondary inside li.pseud —
+   floats below the pseud name as a nested sub-card within the dashboard. */
+#dashboard li.pseud ul.expandable,
+#dashboard li.pseud ul.secondary,
+#dashboard li.pseud ul
+{
+  background: var(--clr-card-nested) !important;
+  border: 1px solid var(--clr-teal) !important;
+  border-radius: 6px !important;
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 4px 0 !important;
+}
+
+#dashboard li.pseud ul li
+{
+  background: var(--clr-card-nested) !important;
+  border: none !important;
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Active nav item in the dashboard sidebar: left accent border + card bg,
+   mimicking a selected-tab affordance. */
+nav#dashboard .current,
+div#dashboard .current,
+#dashboard .current,
+nav#dashboard li.current a,
+div#dashboard li.current a,
+#dashboard li.current a,
+nav#dashboard .current a,
+div#dashboard .current a,
+#dashboard .current a
+{
+  background: linear-gradient(135deg, var(--clr-bg) 0%, var(--clr-card) 100%) !important;
+  border-left: 4px solid var(--clr-rose) !important;
+  border-radius: 6px !important;
+  box-shadow: 0 2px 8px var(--clr-rose-020) !important;
+  box-sizing: border-box !important;
+  color: var(--clr-abyss) !important;
+  display: block !important;
+  font-weight: bold !important;
+  padding: 3px 10px 3px 9px !important;
+  text-decoration: none !important;
+}
+
+/* Inner fandom list inside the profile sidebar fandoms module: parchment
+   card with rounded corners, sitting inside the outer module card. */
+#user-fandoms ol.index.group
+{
+  background: linear-gradient(135deg, #F3E1D6 0%, #EDD8CC 100%) !important;
+  border-radius: 16px !important;
+  margin-bottom: 1em !important;
+  margin-top: 1em !important;
+  padding: 1em !important;
+}
+
+/* User profile sidebar modules (fandoms list, works list): standard card
+   shape with rose left accent and sage/ivory gradient. */
+#user-fandoms,
+#user-works,
+.user .primary .module.group
+{
+  background: linear-gradient(180deg, var(--clr-bg) 0%, var(--clr-emerald-soft) 100%) !important;
+  border: 1px solid var(--clr-emerald-soft) !important;
+  border-left: 4px solid #D7979F !important;
+  border-radius: 24px !important;
+  box-shadow: 0 2px 10px var(--clr-teal-008) !important;
+  box-sizing: border-box !important;
+  margin-bottom: 1em !important;
+  padding: 0.75em 1em !important;
+  width: 100% !important;
+}
+
+/* The inner .listbox within profile modules gets its own chrome stripped —
+   the outer module card provides all the visual container treatment. */
+#user-fandoms .listbox,
+#user-works .listbox,
+.user .primary .module.group .listbox
+{
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* User profile page bio/wrapper module: same card shape as dashboard panels.
+   dl.meta inside this context strips card chrome (no double-nested cards). */
+.user.home .wrapper,
+.user.home .bio.module
+{
+  background: linear-gradient(135deg, var(--clr-card) 0%, var(--clr-seafoam) 100%) !important;
+  border: 1px solid var(--clr-emerald-soft) !important;
+  border-left: 4px solid #D7979F !important;
+  border-radius: 24px !important;
+  box-shadow: 0 2px 10px var(--clr-teal-008) !important;
+  box-sizing: border-box !important;
+  margin-bottom: 1em !important;
+  padding: 0.75em 1.2em !important;
+  width: 100% !important;
+}
+
+.user.home p.icon,
+.user.home p.icon a
+{
+  display: inline-block !important;
+}
+
+/* User avatar: double ring — teal inner, rose outer — using layered
+   box-shadows.  No border-image: the border-radius (from img being square)
+   must be preserved. */
+.user.home p.icon img
+{
+  border-radius: 6px !important;
+  box-shadow: 0 0 0 3px var(--clr-teal), 0 0 0 5px var(--clr-rose) !important;
+  outline: 3px solid transparent !important;
+}
+
+#user-fandoms h2,
+#user-fandoms h3,
+#user-works h2,
+#user-works h3,
+.user .primary .module.group h2,
+.user .primary .module.group h3
+{
+  background: linear-gradient(135deg, var(--clr-teal) 0%, var(--clr-ocean) 100%) !important;
+  border-radius: 6px 6px 0 0 !important;
+  color: var(--clr-ink) !important;
+  font-size: 1em !important;
+  margin: 0 0 0.5em 0 !important;
+  padding: 6px 10px !important;
+}
+
+
+/*
+ * ============================================
+ * 7. BUTTONS & ACTIONS
+ * ============================================
+ * All interactive action elements share a blush-gradient pill base.
+ * Hover / active states flip to the dark abyss→teal→rose gradient.
+ * border-radius: 6px is used throughout (not 32px) so buttons look
+ * less "pill" and more "chip" — leaving the full round-pill to tags.
+ */
+
+.actions a,
+.actions a:link,
+.action,
+.action:link,
+.actions button,
+.actions input,
+input[type="submit"],
+button,
+.current,
+.actions label
+{
+  background: linear-gradient(135deg, #eddde0 0%, #e8d4d8 50%, #e0d0d8 100%) !important;
+  border: 1px solid #d4b8c0 !important;
+  border-bottom: 1px solid #c8a8b4 !important;
+  border-radius: 6px !important;
+  box-shadow: none !important;
+  color: var(--clr-ink) !important;
+  cursor: pointer !important;
+  display: inline-block !important;
+  font-size: 100% !important;
+  font-weight: 700 !important;
+  height: auto !important;
+  line-height: 1.286 !important;
+  overflow: hidden !important;
+  padding: 0.25em 0.75em !important;
+  position: relative !important;
+  text-decoration: none !important;
+  text-rendering: optimizeLegibility !important;
+  transition: background 0.15s ease, box-shadow 0.15s ease, color 0.15s ease !important;
+  vertical-align: middle !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  white-space: nowrap !important;
+  width: auto !important;
+}
+
+button
+{
+  box-sizing: content-box !important;
+}
+
+label.action
+{
+  padding: 0.15em 0.375em !important;
+}
+
+input[type="submit"]
+{
+  height: auto !important;
+  white-space: normal !important;
+}
+
+.actions input[type="checkbox"]
+{
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+.actions a:visited,
+.action:visited,
+.action a:link,
+.action a:visited
+{
+  color: var(--clr-ink) !important;
+}
+
+.actions a:hover,
+.actions button:hover,
+.actions input:hover,
+.actions a:focus,
+.actions button:focus,
+.actions input:focus,
+label.action:hover,
+.action:hover,
+.action:focus,
+input[type="submit"]:hover,
+input[type="submit"]:focus,
+button:hover,
+button:focus
+{
+  background: linear-gradient(135deg, var(--clr-abyss) 0%, var(--clr-teal) 60%, var(--clr-rose) 100%) !important;
+  border-left: 1px solid var(--clr-teal-deep) !important;
+  border-top: 1px solid var(--clr-teal-deep) !important;
+  box-shadow: inset 2px 2px 2px var(--clr-abyss-035) !important;
+  color: var(--clr-ink) !important;
+  text-decoration: none !important;
+}
+
+/* Pressed / currently-active state: deeper dark gradient with inset shadow
+   to simulate a depressed key.  Also applied to .current on pagination. */
+.actions a:active,
+.current,
+a.current,
+a:link.current,
+.current a:visited
+{
+  background: linear-gradient(135deg, var(--clr-abyss) 0%, var(--clr-teal) 70%, var(--clr-rose) 100%) !important;
+  border-color: var(--clr-rose) !important;
+  box-shadow: inset 1px 1px 3px var(--clr-abyss-040), 0 2px 8px var(--clr-teal-020) !important;
+  color: var(--clr-ink) !important;
+}
+
+/* Disabled action label (e.g. "Post" when form incomplete): sage green
+   gradient at reduced opacity. cursor: default removes the pointer. */
+.actions label.disabled
+{
+  background: linear-gradient(180deg, var(--clr-emerald-soft) 0%, var(--clr-emerald-dusty) 100%) !important;
+  color: var(--clr-ink) !important;
+  cursor: default !important;
+  opacity: 0.65 !important;
+}
+
+.actions .disabled select
+{
+  background: transparent !important;
+  border-color: var(--clr-teal) !important;
+  color: var(--clr-ink) !important;
+}
+
+/* AO3 skiplinks and landmark anchors: fully hidden visually.
+   These are kept in the DOM for accessibility but must not render. */
+ul#skiplinks,
+.landmark,
+.landmark a,
+.index .heading.landmark
+{
+  color: transparent !important;
+  font-size: 0 !important;
+  height: 0 !important;
+  line-height: 0 !important;
+  margin: 0 !important;
+  opacity: 0 !important;
+}
+
+p.submit,
+input.submit,
+dd.submit
+{
+  text-align: right !important;
+}
+
+th .actions,
+td .actions
+{
+  float: none !important;
+}
+
+dl.stats+.landmark+.actions,
+.mystery .summary+.landmark+.actions
+{
+  clear: none !important;
+  float: left !important;
+  margin: 0 auto !important;
+}
+
+.actions .secondary .submit,
+.nomination .actions
+{
+  float: none !important;
+}
+
+nav#dashboard .landmark,
+div#dashboard .landmark
+{
+  clear: right !important;
+}
+
+.actions .landmark
+{
+  clear: none !important;
+}
+
+.many p.actions
+{
+  float: none !important;
+  text-align: right !important;
+}
+
+.concise label.action
+{
+  float: left !important;
+}
+
+dd.any label.action
+{
+  margin-left: 0.5625em !important;
+}
+
+dl.index p.actions
+{
+  margin: 0 !important;
+}
+
+/* Work page action nav (Edit, Bookmark, Download, etc.): spacing and
+   transition tweaks for the top action bar. */
+ul.work.navigation.actions
+{
+  margin-bottom: 1.5em !important;
+}
+
+ul.work.navigation.actions li a,
+ul.work.navigation.actions li button,
+ul.work.navigation.actions li input[type="submit"]
+{
+  padding: 3px 12px 6px !important;
+  transition: background 0.15s ease, box-shadow 0.15s ease, color 0.15s ease !important;
+}
+
+ul.work.navigation.actions li a:hover,
+ul.work.navigation.actions li button:hover,
+ul.work.navigation.actions li input[type="submit"]:hover
+{
+  background: linear-gradient(135deg, var(--clr-abyss) 0%, var(--clr-teal) 60%, var(--clr-rose) 100%) !important;
+  color: var(--clr-ink) !important;
+}
+
+
+/*
+ * ============================================
+ * 8. FORMS & INPUTS
+ * ============================================
+ * Text inputs/selects: parchment→seafoam gradient with teal border.
+ * Focus ring is a rose glow (outline: none + box-shadow).
+ * Fieldsets use border-radius: 32px ("balloon" cards) — NO border-image.
+ * Legends get a pill gradient badge floating over the fieldset top border.
+ */
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="url"],
+input[type="number"],
+input[type="search"],
+input[type="tel"],
+textarea,
+select
+{
+  background: linear-gradient(160deg, var(--clr-card) 0%, var(--clr-seafoam) 100%) !important;
+  border: 1px solid var(--clr-teal) !important;
+  border-radius: 6px !important;
+  box-shadow: inset 0 1px 3px rgba(100, 120, 110, 0.15) !important;
+  color: var(--clr-ink) !important;
+}
+
+/* Focus ring: suppress the browser default outline, replace with a rose glow
+   via box-shadow so it respects border-radius. */
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="number"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+textarea:focus,
+select:focus
+{
+  border-color: var(--clr-rose) !important;
+  box-shadow: 0 0 0 2px var(--clr-rose-020) !important;
+  outline: none !important;
+}
+
+/* Fieldsets: rounded "card within a card" look with a dashed teal top border.
+   The large border-radius gives the rococo balloon effect.
+   Note: no border-image here because border-radius + border-image don't mix. */
+fieldset border-top: 3px dashed #71A7B0 !important;
+box-shadow: 0 2px 10px var(--clr-teal-008) !important;
+box-sizing: border-box !important;
+}
+
+fieldset legend
+{
+  background: linear-gradient(135deg, var(--clr-teal) 0%, var(--clr-emerald-soft) 100%) !important;
+  border-radius: 32px !important;
+  color: var(--clr-ink) !important;
+  font-weight: 700 !important;
+  padding: 0.2em 0.9em !important;
+  position: relative !important;
+  top: -0.4em !important;
+}
+
+/* Nested fieldset legend (e.g. a fieldset inside a fieldset): rose start
+   instead of teal, to visually distinguish the nesting level. */
+fieldset fieldset legend
+{
+  background: linear-gradient(135deg, var(--clr-rose) 0%, var(--clr-emerald-soft) 100%) !important;
+  box-shadow: none !important;
+}
+
+/* .listbox fieldsets (tag autocomplete, filter panels): same balloon-card
+   style as regular fieldsets.  overflow: hidden clips the inner index list.
+   The double box-shadow adds both a rose glow and a dark outer ring. */
+.listbox,
+fieldset fieldset.listbox
+{
+  background: linear-gradient(160deg, #dde5eb 0%, #e8e4ee 50%, #f2ece8 100%) !important;
+  border: 1px solid var(--clr-blush) !important;
+  border-radius: 32px !important;
+  border-top: 3px dashed #71A7B0 !important;
+  box-shadow: 0 2px 10px var(--clr-rose-010), 0 0 0 1px rgba(30, 60, 50, 0.8) !important;
+  clear: right !important;
+  margin: 0.643em auto !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+}
+
+.listbox .index
+{
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* The inbox form fieldset wraps message checkboxes — strip its card chrome
+   so it doesn't create a visual box inside the already-styled inbox layout. */
+form.inbox fieldset
+{
+  background: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  border-top: none !important;
+  box-shadow: none !important;
+}
+
+/* Filter panel "expand/collapse" toggle button on search/listing pages:
+   smaller and less prominent than main action buttons. */
+dt.filter-toggle button.expander
+{
+  background: var(--clr-emerald-025) !important;
+  border: 1px solid var(--clr-emerald-soft) !important;
+  border-bottom: 1px solid var(--clr-emerald-soft) !important;
+  border-radius: 16px !important;
+  box-shadow: none !important;
+  color: var(--clr-ink) !important;
+  font-size: 0.8em !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.02em !important;
+  padding: 0.15em 0.6em !important;
+}
+
+dt.filter-toggle button.expander:hover
+{
+  background: var(--clr-teal-020) !important;
+  border-color: var(--clr-teal) !important;
+  box-shadow: none !important;
+  color: var(--clr-ink) !important;
+}
+
+
+/*
+ * ============================================
+ * 9. TAG SYSTEM
+ * ============================================
+ * Tag pills use border-radius: 32px — DO NOT add border-image to these
+ * selectors; border-image and border-radius are incompatible and the
+ * rounded corners will disappear.  Colours are applied per tag type below.
+ * All coloured tag backgrounds must use light text (#fdf8f5) for contrast.
+ * The relationship tag uses --clr-gold (a light background) so it gets
+ * dark text (--clr-abyss) instead — this is the one intentional exception.
+ */
+
+/* Base tag pill shape: applied to ALL tag types.
+   Colour overrides follow per tag-type below. */
+.tags a,
+.tags a:visited,
+ul.tags a,
+dl.meta a.tag
+{
+  border-radius: 32px !important;
+  display: inline-block !important;
+  font-size: 0.82em !important;
+  font-weight: 600 !important;
+  margin: 3px 1px !important;
+  max-width: 100% !important;
+  overflow-wrap: break-word !important;
+  padding: 2px 10px !important;
+  text-decoration: none !important;
+  transition: filter 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease !important;
+  white-space: normal !important;
+}
+
+.tags a:hover,
+dl.meta a.tag:hover
+{
+  filter: brightness(1.15) !important;
+  text-decoration: none !important;
+  transform: translateY(-1px) !important;
+}
+
+.fandom a.tag,
+.fandoms a.tag,
+.work .fandom a.tag,
+.relationships .tag,
+.work .relationships a.tag,
+dl.meta dd.relationship a.tag,
+.character .tag,
+.work .character a.tag,
+dl.meta dd.character a.tag,
+.characters .tag,
+.work .characters a.tag,
+.rating .tag,
+.work .rating a.tag,
+dl.meta dd.rating a.tag,
+.warnings a.tag,
+dl.meta dd.warnings a.tag,
+.warning a.tag,
+dl.meta dd.warning a.tag,
+.freeform .tag,
+.work .freeform a.tag,
+.freeforms .tag,
+.work .freeforms a.tag
+{
+  display: inline-block;
+  max-width: 90vw;
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+/* --- RATING — deep abyss + teal border --- */
+.rating a,
+.rating a:link,
+.rating a:visited,
+dl.meta dd.rating a
+{
+  background: linear-gradient(135deg, #4a8898 0%, #71A7B0 100%) !important;
+  border: 1px solid #3a7888 !important;
+  box-shadow: 0 1px 3px rgba(74, 136, 152, 0.3) !important;
+  color: #fdf8f5 !important;
+}
+
+.rating a:hover,
+dl.meta dd.rating a:hover
+{
+  background: linear-gradient(135deg, #2a6878 0%, #4a8898 100%) !important;
+  border-color: #2a6878 !important;
+  box-shadow: 0 3px 10px rgba(74, 136, 152, 0.4) !important;
+  color: #fdf8f5 !important;
+}
+
+/* --- WARNING — vivid rose/fuchsia --- */
+.warnings a,
+.warning a,
+.warnings a:link,
+.warning a:link,
+.warnings a:visited,
+.warning a:visited,
+dl.meta dd.warning a,
+dl.meta dd.warnings a
+{
+  background: linear-gradient(135deg, var(--clr-rose) 0%, var(--clr-blush) 100%) !important;
+  border: 1px solid var(--clr-rose) !important;
+  border-bottom: 1px solid var(--clr-rose) !important;
+  border-bottom-style: solid !important;
+  box-shadow: 0 1px 4px var(--clr-rose-025) !important;
+  color: var(--clr-ink) !important;
+  transition: filter 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease !important;
+}
+
+.warnings a:hover,
+.warning a:hover,
+dl.meta dd.warning a:hover,
+dl.meta dd.warnings a:hover
+{
+  background: linear-gradient(135deg, var(--clr-blush) 0%, #8a3848 100%) !important;
+  box-shadow: 0 3px 12px var(--clr-rose-040) !important;
+  color: #fdf8f5 !important;
+  text-decoration: none !important;
+  transform: translateY(-1px) !important;
+}
+
+/* --- CATEGORY — slate teal --- */
+.tags .category a,
+.tags .category a:link,
+.tags .category a:visited,
+dl.meta dd.category a,
+dl.meta dd.category a:visited,
+li.blurb .category a,
+li.blurb .category a:visited,
+dl.work.meta.group dd.category a,
+dl.work.meta.group dd.category a:visited,
+.work .tags .category a,
+.work .tags .category a:visited
+{
+  background: linear-gradient(135deg, #4a7880 0%, #5a8890 50%, #7aa8a8 100%) !important;
+  border: 1px solid #3a6870 !important;
+  box-shadow: 0 1px 3px rgba(74, 120, 128, 0.3) !important;
+  color: #fdf8f5 !important;
+  -webkit-text-fill-color: #fdf8f5 !important;
+  transition: filter 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease !important;
+}
+
+.tags .category a:hover,
+dl.meta dd.category a:hover,
+dl.work.meta.group dd.category a:hover,
+li.blurb .category a:hover,
+.work .tags .category a:hover
+{
+  background: linear-gradient(135deg, #2a5860 0%, #4a7880 100%) !important;
+  box-shadow: 0 3px 10px rgba(74, 120, 128, 0.4) !important;
+  color: #fdf8f5 !important;
+  -webkit-text-fill-color: #fdf8f5 !important;
+  transform: translateY(-1px) !important;
+}
+
+/* --- FANDOM — magenta/fuchsia --- */
+.fandoms a,
+.fandoms a:link,
+.fandoms a:visited,
+h5.fandoms.heading a,
+h5.fandoms.heading a:link,
+h5.fandoms.heading a:visited,
+dl.meta dd.fandom a,
+dl.meta dd.fandom a:link,
+#main.fandoms-index ul.tags.index.group li a.tag,
+#main.fandoms-index ul.tags.index.group li a.tag:visited,
+#main.media-index ol.index.group li a.tag,
+#main.media-index ol.index.group li a.tag:visited
+{
+  background: linear-gradient(135deg, #b86878 0%, #c87888 100%) !important;
+  border: 1px solid #a85868 !important;
+  border-bottom: none !important;
+  border-radius: 32px !important;
+  box-shadow: 0 1px 3px rgba(184, 104, 120, 0.3) !important;
+  color: #fdf8f5 !important;
+  display: inline-block !important;
+  font-size: 0.82em !important;
+  font-style: normal !important;
+  font-weight: 600 !important;
+  padding: 2px 10px !important;
+  text-decoration: none !important;
+  transition: filter 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease !important;
+}
+
+.fandoms a:hover,
+h5.fandoms.heading a:hover,
+dl.meta dd.fandom a:hover,
+#main.fandoms-index ol.index.group li a.tag:hover,
+#main.fandoms-index ul.tags.index.group li a.tag:hover,
+#main.media-index ol.index.group li a.tag:hover
+{
+  background: linear-gradient(135deg, #8a4858 0%, #b86878 100%) !important;
+  box-shadow: 0 3px 10px rgba(184, 104, 120, 0.4) !important;
+  color: #fdf8f5 !important;
+  text-decoration: none !important;
+  transform: translateY(-1px) !important;
+}
+
+/* --- CHARACTER — slate blue/teal --- */
+.characters a,
+.characters a:link,
+.characters a:visited,
+dl.meta dd.character a
+{
+  background: linear-gradient(135deg, #4a7a90 0%, #5e90a8 100%) !important;
+  border: 1px solid #3d6878 !important;
+  box-shadow: 0 1px 3px rgba(74, 122, 144, 0.3) !important;
+  color: #fdf8f5 !important;
+  transition: filter 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease !important;
+}
+
+.characters a:hover,
+dl.meta dd.character a:hover
+{
+  background: linear-gradient(135deg, #2a5068 0%, #4a7a90 100%) !important;
+  box-shadow: 0 3px 10px rgba(74, 122, 144, 0.4) !important;
+  color: #fdf8f5 !important;
+  transform: translateY(-1px) !important;
+}
+
+/* --- RELATIONSHIP — golden ---
+   Antique gold background is light enough that dark text is used here.
+   This is the only tag type that intentionally breaks the "light text" rule. */
+.relationships a,
+.relationships a:link,
+.relationships a:visited,
+dl.meta dd.relationship a
+{
+  background: linear-gradient(135deg, var(--clr-gold) 0%, #c8a870 100%) !important;
+  border: 1px solid var(--clr-gold) !important;
+  box-shadow: 0 1px 3px rgba(180, 140, 60, 0.25) !important;
+  color: var(--clr-abyss) !important;
+  transition: filter 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease !important;
+}
+
+.relationships a:hover,
+dl.meta dd.relationship a:hover
+{
+  background: linear-gradient(135deg, #6a4828 0%, #8a6030 100%) !important;
+  box-shadow: 0 3px 10px rgba(201, 160, 90, 0.4) !important;
+  color: #fdf8f5 !important;
+  transform: translateY(-1px) !important;
+}
+
+/* --- FREEFORM — muted teal/seafoam ---
+   Additional/freeform tags: muted teal-green, lighter than character tags.
+   .additional-tags is an alias AO3 uses in some views. */
+.freeforms a,
+.freeforms a:link,
+.freeforms a:visited,
+.additional-tags a,
+.additional-tags a:link,
+.additional-tags a:visited,
+dl.meta dd.freeform a
+{
+  background: linear-gradient(135deg, #5a8a82 0%, #7aa898 100%) !important;
+  border: 1px solid #4a7870 !important;
+  box-shadow: 0 1px 3px rgba(90, 138, 130, 0.3) !important;
+  color: #fdf8f5 !important;
+  transition: filter 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease !important;
+}
+
+.freeforms a:hover,
+.additional-tags a:hover,
+dl.meta dd.freeform a:hover
+{
+  background: linear-gradient(135deg, #3a6860 0%, #5a8a82 100%) !important;
+  box-shadow: 0 3px 10px rgba(90, 138, 130, 0.4) !important;
+  color: #fdf8f5 !important;
+  transform: translateY(-1px) !important;
+}
+
+/* --- Bookmarker's tags ---
+   Tags added by the person who bookmarked a work (not the author).
+   Same colour as freeform tags since they are semantically similar. */
+ul.meta.tags a,
+ul.meta.tags a:visited
+{
+  background: linear-gradient(135deg, #5a8a82 0%, #7aa898 100%) !important;
+  border: 1px solid #4a7870 !important;
+  box-shadow: 0 1px 3px rgba(90, 138, 130, 0.3) !important;
+  color: #fdf8f5 !important;
+}
+
+ul.meta.tags a:hover
+{
+  background: linear-gradient(135deg, #3a6860 0%, #5a8a82 100%) !important;
+  box-shadow: 0 3px 10px rgba(90, 138, 130, 0.4) !important;
+  color: #fdf8f5 !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Tag cloud */
+ul.tags.cloud.index.group li
+{
+  display: inline-block !important;
+  list-style: none !important;
+  margin: 3px !important;
+}
+
+ul.tags.cloud.index.group li a
+{
+  background: linear-gradient(135deg, var(--clr-seafoam) 0%, var(--clr-emerald-soft) 100%) !important;
+  border-bottom: none !important;
+  border-radius: 32px !important;
+  color: var(--clr-ink) !important;
+  display: inline-block !important;
+  font-weight: 600 !important;
+  max-width: 90vw !important;
+  padding: 3px 10px !important;
+  text-decoration: none !important;
+  transition: filter 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease !important;
+  white-space: normal !important;
+}
+
+ul.tags.cloud.index.group li a:hover
+{
+  background: linear-gradient(135deg, var(--clr-abyss) 0%, var(--clr-teal-deep) 100%) !important;
+  border-bottom: none !important;
+  box-shadow: 0 2px 8px var(--clr-teal-030) !important;
+  color: #fdfaf6 !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Tag cloud: cloud1–cloud8 classes scale font-size from smallest to largest.
+   cloud8 gets a teal background shift in addition to the size increase. */
+ul.tags.cloud.index.group li a.cloud1
+{
+  font-size: 0.75em !important;
+  font-weight: 500 !important;
+  opacity: 0.85 !important;
+}
+
+ul.tags.cloud.index.group li a.cloud2
+{
+  font-size: 0.85em !important;
+  font-weight: 500 !important;
+}
+
+ul.tags.cloud.index.group li a.cloud3
+{
+  font-size: 0.95em !important;
+  font-weight: 600 !important;
+}
+
+ul.tags.cloud.index.group li a.cloud4
+{
+  font-size: 1.05em !important;
+  font-weight: 600 !important;
+}
+
+ul.tags.cloud.index.group li a.cloud5
+{
+  font-size: 1.15em !important;
+  font-weight: 600 !important;
+}
+
+ul.tags.cloud.index.group li a.cloud6
+{
+  font-size: 1.3em !important;
+  font-weight: 700 !important;
+}
+
+ul.tags.cloud.index.group li a.cloud7
+{
+  font-size: 1.5em !important;
+  font-weight: 700 !important;
+}
+
+ul.tags.cloud.index.group li a.cloud8
+{
+  background: linear-gradient(135deg, var(--clr-seafoam) 0%, var(--clr-teal) 100%) !important;
+  color: var(--clr-ink) !important;
+  font-size: 1.7em !important;
+  font-weight: 700 !important;
+}
+
+ul.tags.cloud.index.group li a.cloud8:hover
+{
+  background: linear-gradient(135deg, var(--clr-abyss) 0%, var(--clr-teal) 100%) !important;
+  color: #fdfaf6 !important;
+}
+
+.work .fandom.heading,
+h5.fandoms.heading,
+.fandoms.heading,
+.splash h5.fandoms.heading,
+.splash .random.readings h5.fandoms.heading
+{
+  color: transparent !important;
+}
+
+/* Fandom heading links on blurbs (h5.fandoms.heading): parent heading is
+   transparent so only the link text is coloured (rose-soft for legibility
+   against the blurb card gradient without using a full pill). */
+.work .fandom.heading a,
+.fandoms.heading a,
+h5.fandoms.heading a,
+.splash h5.fandoms.heading a,
+.splash .random.readings h5.fandoms.heading a
+{
+  color: var(--clr-rose-soft) !important;
+}
+
+/* Remove the default AO3 comma separators between tags — pills are
+   visually self-separated by their shape and spacing. */
+.work .fandom.heading li::after,
+.fandoms.heading li::after,
+.work .character.heading li::after,
+.characters.heading li::after,
+.work .relationship.heading li::after,
+.relationships.heading li::after,
+.work .freeform.heading li::after,
+.freeforms.heading li::after,
+.work .warning.heading li::after,
+.warnings.heading li::after,
+.work .category.heading li::after,
+.category.heading li::after,
+ul.tags li::after,
+ul.commas li::after,
+.splash ul.fandoms li::after,
+.splash .fandoms li::after,
+.splash ul.commas li::after
+{
+  content: "" !important;
+  display: none !important;
+}
+
+
+/* Override global a:visited dashed border-bottom for all tag pill types.
+   Visited tags keep a solid border so the pill outline stays clean. */
+.tags a:visited,
+ul.tags a:visited,
+dl.meta a.tag:visited,
+.warnings a:visited,
+.warning a:visited,
+.fandoms a:visited,
+.characters a:visited,
+.relationships a:visited,
+.freeforms a:visited,
+.additional-tags a:visited,
+.tags .category a:visited,
+dl.meta dd.warning a:visited,
+dl.meta dd.warnings a:visited,
+dl.meta dd.fandom a:visited,
+dl.meta dd.character a:visited,
+dl.meta dd.relationship a:visited,
+dl.meta dd.freeform a:visited,
+dl.meta dd.category a:visited,
+dl.meta dd.rating a:visited,
+ul.meta.tags a:visited
+{
+  border-bottom-style: solid !important;
+  color: inherit !important;
+  -webkit-text-fill-color: unset !important;
+}
+
+
+/*
+ * ============================================
+ * 10. WORK BLURB CARDS
+ * ============================================
+ */
+
+/* Work/bookmark/series list cards: alternating diagonal border-radius
+   (2px 16px 2px 16px) gives a subtle rococo asymmetry.
+   Hover swaps the corners (16px 2px 16px 2px) and deepens the shadow.
+   NO border-image here — cards have border-radius. */
+li.work.blurb,
+li.bookmark.blurb,
+li.series.blurb
+{
+  background: linear-gradient(135deg, rgba(247, 233, 227, 0.7) 0%, rgba(208, 216, 209, 0.35) 50%, rgba(243, 225, 214, 0.6) 100%) !important;
+  border: none !important;
+  border-bottom: 1px solid #DBB9BC !important;
+  border-left: 1px dashed rgba(215, 151, 159, 0.4) !important;
+  border-radius: 2px 16px 2px 16px !important;
+  border-top: 2px solid #D7979F !important;
+  box-shadow: 0 1px 6px rgba(169, 180, 171, 0.2), inset 0 0 0 1px rgba(215, 151, 159, 0.06) !important;
+  margin-bottom: 2em !important;
+  padding: 1.25em 1em !important;
+}
+
+li.own.collection.picture.blurb.group,
+li.skins.own.picture.blurb.group,
+li.collection.picture.blurb.group
+{
+  background: linear-gradient(135deg, rgba(208, 216, 209, 0.45) 0%, rgba(186, 194, 192, 0.3) 50%, rgba(219, 185, 188, 0.35) 100%) !important;
+  border: none !important;
+  border-bottom: 1px solid #DBB9BC !important;
+  border-left: 1px dashed rgba(215, 151, 159, 0.4) !important;
+  border-radius: 2px 16px 2px 16px !important;
+  border-top: 2px solid #D7979F !important;
+  box-shadow: 0 1px 6px rgba(169, 180, 171, 0.2), inset 0 0 0 1px rgba(215, 151, 159, 0.06) !important;
+  margin-bottom: 2em !important;
+  padding: 1.25em 1em !important;
+}
+
+li.work.blurb:hover,
+li.bookmark.blurb:hover,
+li.own.collection.picture.blurb.group:hover,
+li.skins.own.picture.blurb.group:hover,
+li.collection.picture.blurb.group:hover
+{
+  background: linear-gradient(135deg, rgba(215, 151, 159, 0.2) 0%, rgba(208, 216, 209, 0.4) 40%, rgba(113, 167, 176, 0.15) 100%) !important;
+  border-bottom-color: var(--clr-rose) !important;
+  border-left: 2px solid #D7979F !important;
+  border-image: none !important;
+  border-radius: 16px 2px 16px 2px !important;
+  box-shadow: 0 2px 16px rgba(215, 151, 159, 0.22), 0 0 0 1px rgba(113, 167, 176, 0.18) !important;
+}
+
+li.work.blurb p.datetime,
+li.bookmark.blurb p.datetime,
+li.series.blurb p.datetime
+{
+  margin-right: 0.5em !important;
+}
+
+/* Bookmarker's annotation section inside a bookmark blurb: sage-tinted
+   background with a teal left border to distinguish it from the work content. */
+.bookmark .user 0%,
+rgba(186, 194, 192, 0.4) 100%) !important;
+border-bottom: none !important;
+border-left: 3px solid #71A7B0 !important;
+border-right: none !important;
+border-top: none !important;
+color: var(--clr-ink) !important;
+margin-top: 0.75em !important;
+overflow: hidden !important;
+padding: 0.4em 0.75em !important;
+}
+
+/* AO3 "orphan work" or abuse-report caution banner inside a blurb —
+   kept intentionally high-contrast (dark red / white) regardless of theme. */
+li.work.blurb p.caution.notice
+{
+  background: linear-gradient(135deg, #8B0000 0%, #5a0000 100%) !important;
+  border: 1px solid #5a0000 !important;
+  border-left: 4px solid #3a0000 !important;
+  box-shadow: 0 2px 6px rgba(139, 0, 0, 0.4) !important;
+  color: #fff !important;
+  display: inline-block !important;
+  font-size: 0.85em !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.02em !important;
+  margin: 0.25em 0 0.5em 1em !important;
+  padding: 4px 12px !important;
+}
+
+li.own.collection.picture.blurb.group h4.heading a,
+li.own.collection.picture.blurb.group h4.heading a:visited,
+li.skins.own.picture.blurb.group h4.heading a,
+li.skins.own.picture.blurb.group h4.heading a:visited,
+li.collection.picture.blurb.group h4.heading a,
+li.collection.picture.blurb.group h4.heading a:visited
+{
+  border-bottom: none !important;
+  color: #9a5a48 !important;
+  font-weight: bold !important;
+}
+
+li.own.collection.picture.blurb.group h4.heading a:hover,
+li.skins.own.picture.blurb.group h4.heading a:hover,
+li.collection.picture.blurb.group h4.heading a:hover
+{
+  color: var(--clr-gold) !important;
+  text-decoration: underline !important;
+}
+
+/* "Works inspired by this" / related-works listing on a work page.
+   Uses a full-palette border-image on the bottom rule (no border-radius here,
+   so border-image is safe to use). */
+dl.inspired.index.group(90deg, transparent 0%, #A9B4AB 10%, #D0D8D1 25%, #BAC2C0 38%, #DBB9BC 50%, #D7979F 60%, #DFC5A6 72%, #71A7B0 82%, #D87884 92%, transparent 100%) 1 0 0 0 !important;
+border-radius: 0 !important;
+border-top: 2px solid !important;
+border-top-color: transparent !important;
+box-shadow: none !important;
+margin-bottom: 2em !important;
+padding: 1.25em 0 !important;
+}
+
+dl.inspired.index.group:hover
+{
+  background: linear-gradient(135deg, rgba(29, 128, 96, 0.15) 0%, rgba(42, 122, 96, 0.12) 60%, var(--clr-teal-010) 100%) !important;
+  border-bottom-color: var(--clr-sage) !important;
+  border-image: none !important;
+  border-radius: 10px !important;
+}
+
+dl.inspired.index.group dt.parent
+{
+  border-bottom: 1px solid var(--clr-emerald-035) !important;
+  color: var(--clr-ink) !important;
+  font-size: 0.85em !important;
+  font-style: italic !important;
+  padding: 0 0 0.4em 0 !important;
+}
+
+dl.inspired.index.group dt.parent a,
+dl.inspired.index.group dt.parent a:visited
+{
+  border-bottom: none !important;
+  color: #9a5a48 !important;
+  font-style: normal !important;
+  font-weight: bold !important;
+}
+
+dl.inspired.index.group dt.parent a:hover
+{
+  color: var(--clr-gold) !important;
+  text-decoration: underline !important;
+}
+
+dl.inspired.index.group dd.child
+{
+  background: none !important;
+  border-left: none !important;
+  border-radius: 0 !important;
+  color: var(--clr-ink) !important;
+  margin: 0.4em 0 0 0 !important;
+  padding: 0 !important;
+}
+
+dl.inspired.index.group dd.child a,
+dl.inspired.index.group dd.child a:visited
+{
+  border-bottom: none !important;
+  color: #9a5a48 !important;
+  font-weight: bold !important;
+}
+
+dl.inspired.index.group dd.child a:hover
+{
+  color: var(--clr-gold) !important;
+  text-decoration: underline !important;
+}
+
+
+/*
+ * ============================================
+ * 11. WORK PAGE
+ * ============================================
+ */
+
+.stats,
+dl.stats
+{
+  color: var(--clr-abyss) !important;
+  font-size: 0.85em !important;
+}
+
+dd.kudos,
+dd.bookmarks,
+dd.hits,
+dd.comments
+{
+  color: var(--clr-abyss) !important;
+  font-weight: bold !important;
+}
+
+p.kudos,
+p.kudos a
+{
+  font-weight: 700 !important;
+}
+
+/* Tag cloud container: flex + wrap so pills reflow naturally across multiple
+   rows without needing a fixed grid column count. */
+ul.tags.cloud.index.group flex-wrap: wrap !important;
+list-style: none !important;
+padding: 1em !important;
+}
+
+/* #workskin wraps the actual story text.  We clear AO3's default background
+   and border so the prose sits on the page background rather than a card. */
+#workskin border-radius: 0 !important;
+color: var(--clr-ink) !important;
+font-weight: 500 !important;
+line-height: 1.75 !important;
+margin-top: 1.5em !important;
+}
+
+.work-show #main>.wrapper,
+#main>div.wrapper,
+div.wrapper
+{
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* .userstuff is the user-authored story/notes text container.
+   Left dashed rose border acts as a quiet vertical margin marker. */
+.userstuff border-left-color: rgba(215, 151, 159, 0.55) !important;
+border-radius: 0 !important;
+box-sizing: border-box !important;
+color: var(--clr-ink) !important;
+font-weight: 500 !important;
+line-height: 1.75 !important;
+margin-bottom: 2.5em !important;
+margin-left: 1em !important;
+margin-right: auto !important;
+margin-top: 1.5em !important;
+max-width: 94% !important;
+overflow-wrap: break-word !important;
+padding: 0.5em 1.25em !important;
+text-align: left !important;
+text-transform: none !important;
+}
+
+/* Inside #chapters, .userstuff already inherits from the chapter wrapper —
+   strip the extra dashed left border added by the global .userstuff rule. */
+#chapters .userstuff
+{
+  border: none !important;
+  border-radius: 0 !important;
+}
+
+#workskin h3.heading:not(.byline),
+#chapters h3.heading:not(.byline)
+{
+  border-bottom: 2px solid !important;
+  border-image: linear-gradient(90deg, #71A7B0 0%, #D7979F 40%, #DFC5A6 70%, #A9B4AB 100%) 1 !important;
+  padding-bottom: 0.2em !important;
+}
+
+/* h3.byline inside workskin: the global h3.heading rule adds a border-image
+   gradient underline.  Bylines are not section headings, so we strip it. */
+#workskin h3.byline,
+#chapters h3.byline,
+#workskin h3.byline a,
+#workskin h3.byline a:link,
+#workskin h3.byline a:visited,
+#workskin h3.byline a:hover,
+#workskin h3.byline a:focus,
+#chapters h3.byline a,
+#chapters h3.byline a:link,
+#chapters h3.byline a:visited,
+#chapters h3.byline a:hover,
+#chapters h3.byline a:focus
+{
+  border-bottom: none !important;
+  border-image: none !important;
+  text-decoration: none !important;
+}
+
+#workskin p,
+.userstuff p,
+#chapters p
+{
+  font-weight: 500 !important;
+}
+
+/* --- Workskin headings: shared gradient text base ---
+   Each heading level gets its own palette sweep (see below).
+   -webkit-text-fill-color: transparent + background-clip: text is the
+   standard cross-browser gradient-text technique; filter must be none. */
+#workskin h1,
+#workskin h2,
+#workskin h3,
+#workskin h4,
+#workskin h5,
+#workskin h6,
+#chapters h1,
+#chapters h2,
+#chapters h3,
+#chapters h4,
+#chapters h5,
+#chapters h6
+{
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  display: block !important;
+  font-weight: 700 !important;
+  -webkit-font-smoothing: antialiased !important;
+  filter: none !important;
+}
+
+/* h1 — full rococo sweep: gold → rose → teal → plum */
+#workskin h1,
+#chapters h1
+{
+  background-image: linear-gradient(100deg, #8a6030 0%, #b86878 30%, #71A7B0 60%, #7a5a80 85%, #D87884 100%) !important;
+  line-height: 1.3 !important;
+  padding-bottom: 0.15em !important;
+}
+
+/* h2 — antique rose → rococo teal */
+#workskin h2,
+#chapters h2
+{
+  background-image: linear-gradient(95deg, #D87884 0%, #D7979F 40%, #71A7B0 100%) !important;
+  line-height: 1.3 !important;
+  padding-bottom: 0.15em !important;
+}
+
+/* h3 — teal → gold → rose */
+#workskin h3,
+#chapters h3
+{
+  background-image: linear-gradient(90deg, #4a8898 0%, #71A7B0 35%, #DFC5A6 65%, #D7979F 100%) !important;
+  border-bottom: none !important;
+  line-height: 1.3 !important;
+  padding-bottom: 0.15em !important;
+  text-decoration: none !important;
+}
+
+#workskin h3 a,
+#chapters h3 a
+{
+  border-bottom: none !important;
+  text-decoration: none !important;
+}
+
+/* h4 — sage → teal → slate */
+#workskin h4,
+#chapters h4
+{
+  background-image: linear-gradient(90deg, #A9B4AB 0%, #71A7B0 50%, #6878a0 100%) !important;
+  line-height: 1.3 !important;
+  padding-bottom: 0.15em !important;
+}
+
+/* h5 — antique gold → dusty rose */
+#workskin h5,
+#chapters h5
+{
+  background-image: linear-gradient(90deg, #8a6030 0%, #b86878 60%, #D7979F 100%) !important;
+}
+
+/* h6 — soft sage → teal */
+#workskin h6,
+#chapters h6
+{
+  background-image: linear-gradient(90deg, #A9B4AB 0%, #BAC2C0 50%, #71A7B0 100%) !important;
+}
+
+/* Work-page metadata card (rating, fandom, tags, stats).
+   Soft iridescent gradient with a rose top border.
+   Border-radius present, so NO border-image on this element. */
+dl.work.meta.group border: 1px solid var(--clr-blush) !important;
+border-radius: 24px !important;
+border-top: 3px solid #D7979F !important;
+box-shadow: 0 2px 12px var(--clr-rose-008) !important;
+box-sizing: border-box !important;
+max-width: 100% !important;
+overflow-wrap: break-word !important;
+padding: 1.5em 1.2em 1em !important;
+width: 100% !important;
+}
+
+dl.work.meta.group dt
+{
+  color: var(--clr-abyss) !important;
+  font-size: 0.85em !important;
+  font-weight: bold !important;
+  letter-spacing: 0.03em !important;
+  text-transform: uppercase !important;
+}
+
+dl.work.meta.group dt a,
+dl.work.meta.group dt a:link,
+dl.work.meta.group dt a:visited,
+dl.work.meta.group dt a:visited:hover
+{
+  background: none !important;
+  color: #9a5a48 !important;
+  text-decoration: none !important;
+}
+
+dl.work.meta.group dt a:hover
+{
+  color: var(--clr-gold) !important;
+  text-decoration: underline !important;
+}
+
+dl.work.meta.group dd
+{
+  border-left: 2px solid var(--clr-rose-030) !important;
+  color: var(--clr-ink) !important;
+  margin-bottom: 0.3em !important;
+  padding-left: 0.5em !important;
+}
+
+dl.work.meta.group dd.stats dl.stats
+{
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+dl.work.meta.group dd.stats dl.stats dt
+{
+  color: var(--clr-teal-indigo) !important;
+  font-size: 0.8em !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.03em !important;
+  text-transform: uppercase !important;
+}
+
+dl.work.meta.group dd.stats dl.stats dd
+{
+  border-left: none !important;
+  color: var(--clr-ink) !important;
+  font-weight: bold !important;
+}
+
+dl.work.meta.group dd.rating a,
+dl.work.meta.group dd.rating a:visited
+{
+  background: linear-gradient(135deg, #4a8898 0%, #71A7B0 100%) !important;
+  border: 1px solid #3a7888 !important;
+  color: #fdf8f5 !important;
+}
+
+dl.work.meta.group dd.rating a:hover
+{
+  background: linear-gradient(135deg, #2a6878 0%, #4a8898 100%) !important;
+  border-color: #2a6878 !important;
+  color: #fdf8f5 !important;
+}
+
+dl.work.meta.group dd.warning a,
+dl.work.meta.group dd.warning a:visited,
+dl.work.meta.group dd.warnings a,
+dl.work.meta.group dd.warnings a:visited
+{
+  background: linear-gradient(135deg, var(--clr-rose) 0%, var(--clr-blush) 100%) !important;
+  border: 1px solid var(--clr-rose) !important;
+  color: var(--clr-ink) !important;
+  transition: filter 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease !important;
+}
+
+dl.work.meta.group dd.warning a:hover,
+dl.work.meta.group dd.warnings a:hover
+{
+  background: linear-gradient(135deg, var(--clr-blush) 0%, #8a3848 100%) !important;
+  color: #fdf8f5 !important;
+  transform: translateY(-1px) !important;
+}
+
+dl.work.meta.group dd.relationship a,
+dl.work.meta.group dd.relationship a:visited
+{
+  background: linear-gradient(135deg, var(--clr-gold) 0%, #c8a870 100%) !important;
+  border: 1px solid var(--clr-gold) !important;
+  box-shadow: 0 1px 3px rgba(180, 140, 60, 0.25) !important;
+  color: var(--clr-abyss) !important;
+  transition: filter 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease !important;
+}
+
+dl.work.meta.group dd.relationship a:hover
+{
+  background: linear-gradient(135deg, #6a4828 0%, #8a6030 100%) !important;
+  box-shadow: 0 3px 10px rgba(201, 160, 90, 0.4) !important;
+  color: #fdf8f5 !important;
+  transform: translateY(-1px) !important;
+}
+
+dl.work.meta.group dd.fandom a,
+dl.work.meta.group dd.fandom a:visited
+{
+  background: linear-gradient(135deg, #b86878 0%, #c87888 100%) !important;
+  border: 1px solid #a85868 !important;
+  color: #fdf8f5 !important;
+}
+
+dl.work.meta.group dd.fandom a:hover
+{
+  background: linear-gradient(135deg, #8a4858 0%, #b86878 100%) !important;
+  color: #fdf8f5 !important;
+  transform: translateY(-1px) !important;
+}
+
+dl.work.meta.group dd.character a,
+dl.work.meta.group dd.character a:visited
+{
+  background: linear-gradient(135deg, #4a7a90 0%, #5e90a8 100%) !important;
+  border: 1px solid #3d6878 !important;
+  box-shadow: 0 1px 3px rgba(74, 122, 144, 0.3) !important;
+  color: #fdf8f5 !important;
+}
+
+dl.work.meta.group dd.character a:hover
+{
+  background: linear-gradient(135deg, #2a5068 0%, #4a7a90 100%) !important;
+  box-shadow: 0 3px 10px rgba(74, 122, 144, 0.4) !important;
+  color: #fdf8f5 !important;
+  transform: translateY(-1px) !important;
+}
+
+dl.work.meta.group dd.freeform a,
+dl.work.meta.group dd.freeform a:visited
+{
+  background: linear-gradient(135deg, #5a8a82 0%, #7aa898 100%) !important;
+  border: 1px solid #4a7870 !important;
+  box-shadow: 0 1px 3px rgba(90, 138, 130, 0.3) !important;
+  color: #fdf8f5 !important;
+}
+
+dl.work.meta.group dd.freeform a:hover
+{
+  background: linear-gradient(135deg, #3a6860 0%, #5a8a82 100%) !important;
+  box-shadow: 0 3px 10px rgba(90, 138, 130, 0.4) !important;
+  color: #fdf8f5 !important;
+  transform: translateY(-1px) !important;
+}
+
+.chapter.navigation
+{
+  margin-bottom: 1.5em !important;
+  margin-top: 1.5em !important;
+}
+
+/* Chapter previous/next navigation buttons: same pill shape as general
+   action buttons but with the rose border instead of the muted default. */
+.chapter.navigation .next a,
+.chapter.navigation .previous a
+{
+  background: linear-gradient(135deg, #eddde0 0%, #e8d4d8 50%, #e0d0d8 100%) !important;
+  border: 1px solid var(--clr-rose) !important;
+  border-radius: 6px !important;
+  color: var(--clr-ink) !important;
+  font-weight: 700 !important;
+  padding: 3px 12px 6px !important;
+  transition: background 0.15s ease, box-shadow 0.15s ease !important;
+}
+
+.chapter.navigation .next a:hover,
+.chapter.navigation .previous a:hover
+{
+  background: linear-gradient(135deg, var(--clr-abyss) 0%, var(--clr-teal) 60%, var(--clr-rose) 100%) !important;
+  color: #fdfaf6 !important;
+}
+
+div.preface.group
+{
+  margin-bottom: 1.5em !important;
+  padding-left: 0 !important;
+}
+
+/* Work title inside the preface block (shown above chapter text).
+   Border-bottom cleared — the title stands alone without a rule beneath it. */
+div.preface.group h3.title
+{
+  border-bottom: none !important;
+  color: var(--clr-ink) !important;
+  font-size: 1.3em !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.02em !important;
+  margin-bottom: 0.4em !important;
+}
+
+div.preface.group h3.title a,
+div.preface.group h3.title a:visited
+{
+  border-bottom: none !important;
+  color: var(--clr-ink) !important;
+}
+
+div.preface.group h3.title a:hover
+{
+  color: var(--clr-abyss) !important;
+  text-decoration: underline !important;
+}
+
+/* Chapter position label ("Chapter 3/12"): smaller and lighter than the
+   chapter title, rendered in slate ocean colour. */
+div.preface.group .chapter.preface h3 span.position
+{
+  color: var(--clr-ocean) !important;
+  font-size: 0.85em !important;
+  font-weight: 400 !important;
+}
+
+/* Author's notes / end notes module on the work page: iridescent blush→teal
+   gradient with a solid teal left border accent.  Asymmetric border-radius
+   (0 8px 8px 0) leaves the left edge flush to align with the accent border. */
+div.preface.group .notes.module,
+div.afterword.group .notes.module
+{
+  background: linear-gradient(155deg, rgba(215, 151, 159, 0.13) 0%, #EDD8CC 30%, #F3E1D6 65%, rgba(113, 167, 176, 0.11) 100%) !important;
+  border: 1px solid var(--clr-blush) !important;
+  border-left: 3px solid #71A7B0 !important;
+  border-radius: 0 8px 8px 0 !important;
+  margin: 0.75em 0 !important;
+  padding: 1em 1.25em !important;
+}
+
+div.preface.group .notes.module h3.heading,
+div.afterword.group .notes.module h3.heading
+{
+  border-bottom: 1px solid var(--clr-emerald-040) !important;
+  color: var(--clr-abyss) !important;
+  font-size: 0.82em !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.06em !important;
+  margin-bottom: 0.5em !important;
+  padding-bottom: 4px !important;
+  text-transform: uppercase !important;
+}
+
+div.preface.group .notes.module blockquote,
+div.afterword.group .notes.module blockquote
+{
+  color: var(--clr-ink) !important;
+  font-style: italic !important;
+  line-height: 1.65 !important;
+  margin: 0 !important;
+  padding: 0.6em 0.5em 0.6em 0.75em !important;
+}
+
+div.afterword.group
+{
+  border-left: 3px solid var(--clr-emerald-soft) !important;
+  margin-top: 1.5em !important;
+  padding-left: 1em !important;
+}
+
+div.afterword.group h3.heading
+{
+  border-bottom: 1px solid var(--clr-seafoam) !important;
+  color: var(--clr-abyss) !important;
+  font-size: 0.9em !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+}
+
+
+/*
+ * ============================================
+ * 12. COMMENTS
+ * ============================================
+ */
+
+#comments
+{
+  margin-top: 1.5em !important;
+}
+
+/* Comments are separated by a full-palette gradient border-image on the
+   bottom edge.  border-radius is 0 here to keep border-image working.
+   Hover adds a rounded background without border-image — hence the
+   border-image: none reset on :hover. */
+div.comment,
+li.comment
+{
+  border: none !important;
+  border-bottom: 1px solid var(--clr-emerald-035) !important;
+  border-image: linear-gradient(90deg, transparent 0%, #A9B4AB 10%, #D0D8D1 25%, #BAC2C0 38%, #DBB9BC 50%, #D7979F 60%, #DFC5A6 72%, #71A7B0 82%, #D87884 92%, transparent 100%) 1 0 0 0 !important;
+  border-radius: 0 !important;
+  border-top: 2px solid !important;
+  border-top-color: transparent !important;
+  box-shadow: none !important;
+  margin-bottom: 1.5em !important;
+  min-width: 0 !important;
+  overflow-wrap: break-word !important;
+  padding: 1em 0 !important;
+}
+
+div.comment:hover:not(:has(textarea)):not(:has(input[type="text"])),
+li.comment:hover:not(:has(textarea)):not(:has(input[type="text"]))
+{
+  background: linear-gradient(135deg, rgba(29, 128, 96, 0.15) 0%, rgba(42, 122, 96, 0.12) 60%, var(--clr-teal-010) 100%) !important;
+  border-bottom-color: var(--clr-sage) !important;
+  border-image: none !important;
+  border-radius: 10px !important;
+  box-shadow: none !important;
+}
+
+div.comment div.comment,
+li.comment li.comment
+{
+  background: none !important;
+  border-image: linear-gradient(90deg, transparent 0%, #A9B4AB 10%, #D0D8D1 25%, #BAC2C0 38%, #DBB9BC 50%, #D7979F 60%, #DFC5A6 72%, #71A7B0 82%, #D87884 92%, transparent 100%) 1 0 0 0 !important;
+  margin-left: 1.5em !important;
+}
+
+div.comment div.comment div.comment,
+li.comment li.comment li.comment
+{
+  background: none !important;
+  border-image: linear-gradient(90deg, transparent 0%, #A9B4AB 10%, #D0D8D1 25%, #BAC2C0 38%, #DBB9BC 50%, #D7979F 60%, #DFC5A6 72%, #71A7B0 82%, #D87884 92%, transparent 100%) 1 0 0 0 !important;
+  margin-left: 1.5em !important;
+}
+
+li.comment .heading
+{
+  border-bottom: 1px solid var(--clr-seafoam) !important;
+  margin-bottom: 6px !important;
+  padding-bottom: 4px !important;
+}
+
+li.comment .heading a,
+li.comment .heading a:visited
+{
+  color: #9a5a48 !important;
+  font-weight: bold !important;
+}
+
+/* Thread zebra-striping: odd comments lean rose, even comments lean teal.
+   These use border-radius, so NO border-image. */
+.thread li.comment:not(.even)
+{
+  background: linear-gradient(160deg, rgba(215, 151, 159, 0.45) 0%, rgba(243, 225, 214, 0.6) 60%, rgba(208, 216, 209, 0.2) 100%) !important;
+  border-radius: 0 10px 10px 0 !important;
+  padding: 1em 0.75em !important;
+}
+
+.thread .even
+{
+  background: linear-gradient(160deg, rgba(71, 137, 150, 0.35) 0%, rgba(113, 167, 176, 0.45) 60%, rgba(208, 216, 209, 0.2) 100%) !important;
+  border-radius: 10px 0 0 10px !important;
+  padding: 1em 0.75em !important;
+}
+
+.comment h4.byline
+{
+  background: none !important;
+  border-radius: 0 !important;
+  box-sizing: border-box !important;
+  color: var(--clr-ink) !important;
+  font-size: 0.85em !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.02em !important;
+  margin: 0 0 0.5em 0 !important;
+  overflow: hidden !important;
+  padding: 0.3em 0.75em !important;
+}
+
+.thread li.comment:not(.even) h4.byline
+{
+  border-bottom: 1px solid rgba(215, 151, 159, 0.6) !important;
+}
+
+.thread .even h4.byline
+{
+  border-bottom: 1px solid rgba(113, 167, 176, 0.5) !important;
+}
+
+li.comment h4.byline a,
+li.comment h4.byline a:visited
+{
+  color: var(--clr-abyss) !important;
+  font-style: italic !important;
+  font-weight: 700 !important;
+}
+
+li.comment .icon
+{
+  border: 2px solid var(--clr-teal) !important;
+  border-radius: 50% !important;
+  box-shadow: 0 0 8px var(--clr-teal-030) !important;
+  flex-shrink: 0 !important;
+  float: left !important;
+  height: 100px !important;
+  margin-right: 1em !important;
+  margin-top: 0.5em !important;
+  min-width: 60px !important;
+  overflow: hidden !important;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease !important;
+  width: 100px !important;
+}
+
+li.comment .icon img
+{
+  border-radius: 50% !important;
+  display: block !important;
+  height: 100px !important;
+  max-width: 100px !important;
+  width: 100px !important;
+}
+
+/* Comment avatar rings: odd comments get teal rings, even get rose rings,
+   complementing the thread zebra-stripe colours. */
+li.comment:nth-child(odd) .icon
+{
+  border-color: var(--clr-teal) !important;
+  box-shadow: 0 0 8px var(--clr-teal-030), 0 0 0 3px var(--clr-teal-010) !important;
+}
+
+li.comment:nth-child(even) .icon
+{
+  border-color: var(--clr-rose) !important;
+  box-shadow: 0 0 8px var(--clr-rose-030), 0 0 0 3px var(--clr-rose-010) !important;
+}
+
+li.comment .icon:hover
+{
+  border-color: var(--clr-gold) !important;
+  box-shadow: 0 0 14px var(--clr-teal-050), 0 0 0 4px var(--clr-rose-020) !important;
+}
+
+
+
+/*
+ * ============================================
+ * 13. INBOX
+ * ============================================
+ */
+
+/* Inbox message state badges.
+   .unread  → cool teal tint (new/unseen)
+   .replied → sage-green tint (acknowledged)
+   .claimed → dark seafoam (challenge claim)
+   .defaulted → abyss background, rose text (missed deadline warning) */
+.unread border: 1px solid var(--clr-teal) !important;
+border-bottom: 1px solid var(--clr-teal) !important;
+box-shadow: inset 0 -1px 2px var(--clr-abyss-015) !important;
+color: var(--clr-ink) !important;
+}
+
+.replied
+{
+  background: linear-gradient(135deg, var(--clr-emerald-soft) 0%, var(--clr-teal) 100%) !important;
+  border: 1px solid var(--clr-emerald-muted) !important;
+  border-bottom: 1px solid var(--clr-emerald-muted) !important;
+  color: var(--clr-abyss) !important;
+}
+
+span.claimed
+{
+  background: linear-gradient(135deg, var(--clr-seafoam) 0%, #1a3830 100%) !important;
+  border: 1px solid var(--clr-blush) !important;
+  border-bottom: 1px solid var(--clr-rose) !important;
+  color: var(--clr-ink) !important;
+}
+
+.actions span.defaulted
+{
+  background: var(--clr-abyss) !important;
+  border: 1px solid var(--clr-teal) !important;
+  border-bottom: 1px solid #71A7B0 !important;
+  color: var(--clr-rose-soft) !important;
+}
+
+/* Inbox message subject/title headings */
+#inbox-messages h4.subject a,
+#inbox-messages h4.subject a:visited,
+.inbox h4.subject a,
+.inbox h4.subject a:visited,
+li.message h4 a,
+li.message h4 a:visited,
+.message h4.heading a,
+.message h4.heading a:visited
+{
+  background: linear-gradient(90deg, #b86878 0%, #c89878 50%, #a89060 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  border-bottom: none !important;
+  font-weight: 600 !important;
+  -webkit-font-smoothing: antialiased !important;
+}
+
+#inbox-messages h4.subject a:hover,
+.inbox h4.subject a:hover,
+li.message h4 a:hover,
+.message h4.heading a:hover
+{
+  background: linear-gradient(90deg, #a89060 0%, #c89878 50%, #b86878 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  text-decoration: underline !important;
+}
+
+/* Inbox comment list inside a fieldset (e.g. "comments on my works"):
+   rounder card treatment with rose hover and teal tint for unread. */
+fieldset.comments ol.comment.index.group li.comment
+{
+  background: linear-gradient(160deg, rgba(243, 225, 214, 0.5) 0%, rgba(237, 216, 204, 0.4) 100%) !important;
+  border: 1px solid var(--clr-blush) !important;
+  border-radius: 12px !important;
+  margin-bottom: 1em !important;
+  padding: 0.75em 1em !important;
+}
+
+fieldset.comments ol.comment.index.group li.comment:hover
+{
+  background: linear-gradient(160deg, rgba(215, 151, 159, 0.25) 0%, rgba(243, 225, 214, 0.65) 60%, rgba(208, 216, 209, 0.25) 100%) !important;
+  border-color: var(--clr-rose) !important;
+  box-shadow: 0 2px 10px var(--clr-rose-015) !important;
+}
+
+fieldset.comments ol.comment.index.group li.comment.unread
+{
+  background: linear-gradient(160deg, rgba(113, 167, 176, 0.25) 0%, rgba(208, 216, 209, 0.4) 100%) !important;
+  border-color: var(--clr-teal) !important;
+}
+
+fieldset.comments ol.comment.index.group li.comment.unread:hover
+{
+  background: linear-gradient(160deg, rgba(71, 137, 150, 0.35) 0%, rgba(113, 167, 176, 0.45) 60%, rgba(208, 216, 209, 0.2) 100%) !important;
+  border-color: var(--clr-ocean) !important;
+  box-shadow: 0 2px 10px var(--clr-teal-020) !important;
+}
+
+/* Standard inbox message list items: parchment card with rose border.
+   .unread variant shifts to a cool teal tint. */
+li.message,
+#inbox-messages li
+{
+  background: linear-gradient(160deg, rgba(243, 225, 214, 0.5) 0%, rgba(237, 216, 204, 0.4) 100%) !important;
+  border: 1px solid var(--clr-blush) !important;
+  border-radius: 12px !important;
+  margin-bottom: 1em !important;
+  padding: 0.75em 1em !important;
+}
+
+li.message.unread,
+#inbox-messages li.unread
+{
+  background: linear-gradient(160deg, rgba(113, 167, 176, 0.2) 0%, rgba(208, 216, 209, 0.35) 100%) !important;
+  border-color: var(--clr-teal) !important;
+}
+
+
+/*
+ * ============================================
+ * 14. DROPDOWNS & LISTBOXES
+ * ============================================
+ * Generic fallback for dropdowns that don't fall under the nav or greeting
+ * selectors.  Shares the same parchment card + rose border treatment.
+ */
+
+.dropdown .menu
+{
+  background: linear-gradient(180deg, var(--clr-card) 0%, var(--clr-bg) 100%) !important;
+  border: 1px solid var(--clr-rose) !important;
+  border-radius: 6px !important;
+}
+
+.dropdown .menu a,
+.dropdown .menu a:visited
+{
+  color: #9a5a48 !important;
+}
+
+.dropdown .menu a:hover
+{
+  background: var(--clr-rose-020) !important;
+  color: var(--clr-ink) !important;
+}
+
+
+/*
+ * ============================================
+ * 15. NOTICES & ALERTS
+ * ============================================
+ */
+
+/* General site notice: gold-tinted background with a dark amber left border.
+   Used for informational messages (quota warnings, queue info, etc.) */
+.notice,
+p.notice,
+.error,
+.required .notice
+{
+  background: linear-gradient(135deg, rgba(223, 197, 166, 0.25) 0%, rgba(243, 225, 214, 0.5) 100%) !important;
+  border: 1px solid var(--clr-gold) !important;
+  border-left: 3px solid #a07800 !important;
+  border-radius: 6px !important;
+  box-shadow: 0 2px 8px rgba(201, 160, 90, 0.15) !important;
+  color: var(--clr-ink) !important;
+  padding: 8px 12px !important;
+}
+
+.notice a,
+.notice a:visited,
+p.notice a,
+p.notice a:visited
+{
+  color: var(--clr-abyss) !important;
+  font-weight: 700 !important;
+}
+
+.notice a:hover,
+p.notice a:hover
+{
+  color: var(--clr-ocean) !important;
+  text-decoration: underline !important;
+}
+
+/* Caution variant of the notice box: rose-tinted background with blush left
+   border.  More urgent-feeling than the gold notice, less severe than an error. */
+.caution,
+p.caution,
+.caution.notice,
+p.caution.notice
+{
+  background: linear-gradient(135deg, rgba(219, 185, 188, 0.25) 0%, rgba(243, 225, 214, 0.5) 100%) !important;
+  border: 1px solid var(--clr-rose) !important;
+  border-left: 3px solid var(--clr-blush) !important;
+  border-radius: 6px !important;
+  box-shadow: 0 2px 8px var(--clr-rose-015) !important;
+  color: var(--clr-ink) !important;
+  padding: 8px 12px !important;
+}
+
+.caution a,
+.caution a:visited,
+p.caution a,
+p.caution a:visited
+{
+  color: var(--clr-abyss) !important;
+  font-weight: 700 !important;
+}
+
+.caution a:hover,
+p.caution a:hover
+{
+  color: var(--clr-ocean) !important;
+  text-decoration: underline !important;
+}
+
+
+/*
+ * ============================================
+ * 16. FRONT PAGE (SPLASH)
+ * ============================================
+ */
+
+/* Front page (.splash) feature modules: the same rococo card style as blurbs
+   but with alternating corner radii and a rose top border accent. */
+.splash .favorite,
+.splash .news,
+.splash .latest.messages.module,
+.splash .social.module
+{
+  background: linear-gradient(135deg, var(--clr-card) 0%, var(--clr-seafoam) 100%) !important;
+  border: 1px solid var(--clr-rose-025) !important;
+  border-radius: 2px 20px 2px 20px !important;
+  border-top: 3px solid #D7979F !important;
+  box-shadow: 0 2px 12px var(--clr-rose-010), 0 0 0 1px var(--clr-emerald-025) !important;
+  box-sizing: border-box !important;
+  margin-bottom: 1em !important;
+  padding: 1em 1.2em !important;
+}
+
+.splash .favorite h3,
+.splash .favorite h4,
+.splash .module h3,
+.splash .latest.messages.module h3,
+.splash .social.module h3
+{
+  background: none !important;
+  border-bottom: 2px solid var(--clr-rose) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: var(--clr-abyss) !important;
+  font-family: 'Cormorant Garamond', 'Didot', 'Bodoni MT', 'Palatino Linotype', Palatino, 'Book Antiqua', serif !important;
+  font-size: 1.05em !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.06em !important;
+  margin: 0 0 0.75em 0 !important;
+  padding: 0 0 4px 0 !important;
+  text-transform: uppercase !important;
+}
+
+.splash .latest.messages.module h3 span.title
+{
+  display: inline !important;
+}
+
+.splash .latest.messages.module h3 span.link a,
+.splash .latest.messages.module h3 span.link a:visited
+{
+  color: var(--clr-bg-075) !important;
+  font-size: 0.75em !important;
+  font-weight: 400 !important;
+}
+
+.splash .latest.messages.module h3 span.link a:hover
+{
+  color: var(--clr-ink) !important;
+}
+
+.splash .latest.messages.module p.note,
+.splash .social.module p.note
+{
+  color: var(--clr-ink) !important;
+  font-size: 0.9em !important;
+  font-style: italic !important;
+  margin-bottom: 0.75em !important;
+}
+
+.splash .social.module ul
+{
+  list-style: none !important;
+  padding: 0 !important;
+}
+
+.splash .social.module ul li
+{
+  margin-bottom: 0.5em !important;
+}
+
+.splash .social.module .resp-sharing-button
+{
+  align-items: center !important;
+  background: linear-gradient(135deg, var(--clr-abyss) 0%, var(--clr-teal) 100%) !important;
+  border-radius: 12px !important;
+  color: #fdfaf6 !important;
+  display: inline-flex !important;
+  font-size: 0.9em !important;
+  font-weight: 600 !important;
+  padding: 0.4em 0.9em !important;
+}
+
+.splash .social.module .resp-sharing-button__icon
+{
+  margin-right: 0.5em !important;
+}
+
+.splash .social.module .resp-sharing-button svg
+{
+  height: 1em !important;
+  width: 1em !important;
+}
+
+.splash .social.module a:hover .resp-sharing-button
+{
+  background: linear-gradient(135deg, var(--clr-abyss) 0%, var(--clr-teal-deep) 100%) !important;
+}
+
+.splash .news>h3,
+.splash .news>h4
+{
+  background: none !important;
+  border-bottom: 2px solid var(--clr-rose) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: var(--clr-abyss) !important;
+  font-family: 'Cormorant Garamond', 'Didot', 'Bodoni MT', 'Palatino Linotype', Palatino, 'Book Antiqua', serif !important;
+  font-size: 1.05em !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.06em !important;
+  margin: 0 0 0.75em 0 !important;
+  padding: 0 0 4px 0 !important;
+  text-transform: uppercase !important;
+}
+
+.news.module h3.heading,
+.news.module.group h3.heading
+{
+  border-bottom: none !important;
+}
+
+.splash .favorite h3 a,
+.splash .favorite h3 a:visited,
+.splash .favorite h4 a,
+.splash .favorite h4 a:visited,
+.splash .module h3 a,
+.splash .module h3 a:visited,
+.splash .news>h3 a,
+.splash .news>h3 a:visited,
+.splash .news>h4 a,
+.splash .news>h4 a:visited
+{
+  color: var(--clr-abyss) !important;
+}
+
+.splash .module h3 a:hover,
+.splash .news>h3 a:hover,
+.splash .news>h4 a:hover
+{
+  color: var(--clr-gold) !important;
+  text-decoration: underline !important;
+}
+
+.splash .favorite li
+{
+  border-bottom: 1px solid var(--clr-seafoam) !important;
+  margin: 0 !important;
+  padding: 6px 0 !important;
+}
+
+.splash .favorite li:last-child
+{
+  border-bottom: none !important;
+}
+
+.splash .favorite a,
+.splash .favorite a:visited,
+.splash .news a,
+.splash .news a:visited
+{
+  color: #9a5a48 !important;
+}
+
+.splash .favorite a:hover,
+.splash .news a:hover
+{
+  color: var(--clr-gold) !important;
+  text-decoration: underline !important;
+}
+
+.splash .favorite li a
+{
+  border-radius: 6px !important;
+  display: block !important;
+  padding: 3px 8px !important;
+  transition: background 0.2s ease, color 0.2s ease, padding-left 0.15s ease !important;
+}
+
+.splash .favorite li:nth-of-type(2n+1) a
+{
+  background: linear-gradient(135deg, var(--clr-seafoam) 0%, var(--clr-emerald-soft) 100%) !important;
+  border-radius: 6px !important;
+  color: var(--clr-ink) !important;
+  display: block !important;
+  padding: 2px 8px !important;
+}
+
+.splash .favorite li:nth-child(odd) a:hover
+{
+  background: linear-gradient(135deg, var(--clr-abyss) 0%, var(--clr-teal-deep) 60%, var(--clr-rose) 100%) !important;
+  box-shadow: 0 2px 8px var(--clr-teal-020) !important;
+  color: var(--clr-bg) !important;
+  padding-left: 14px !important;
+  text-decoration: none !important;
+}
+
+.splash .favorite li:nth-child(even) a:hover
+{
+  background: linear-gradient(135deg, var(--clr-ocean) 0%, var(--clr-rose) 60%, var(--clr-emerald-muted) 100%) !important;
+  box-shadow: 0 2px 8px var(--clr-rose-020) !important;
+  color: var(--clr-bg) !important;
+  padding-left: 14px !important;
+  text-decoration: none !important;
+}
+
+.splash .news article,
+.splash .news .post
+{
+  border-bottom: 1px solid var(--clr-seafoam) !important;
+  padding: 8px 0 !important;
+}
+
+.splash .news article:last-child,
+.splash .news .post:last-child
+{
+  border-bottom: none !important;
+}
+
+.splash .news article h4 a,
+.splash .news .post h4 a,
+.splash .news li h4 a,
+.splash .news article h4 a:visited,
+.splash .news .post h4 a:visited,
+.splash .news li h4 a:visited
+{
+  background: linear-gradient(90deg, #3a7a82 0%, #5a9898 40%, #7aaa9a 70%, #9aaa8a 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  border-bottom: none !important;
+  font-weight: 600 !important;
+  -webkit-font-smoothing: antialiased !important;
+}
+
+.splash .news article h4 a:hover,
+.splash .news .post h4 a:hover,
+.splash .news li h4 a:hover
+{
+  background: linear-gradient(90deg, #9aaa8a 0%, #5a9898 50%, #3a7a82 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  text-decoration: underline !important;
+}
+
+.splash .news .date,
+.splash .news .posted
+{
+  color: var(--clr-abyss) !important;
+  font-size: 0.82em !important;
+  font-style: normal !important;
+  font-weight: 600 !important;
+  opacity: 0.75 !important;
+}
+
+.splash .news blockquote
+{
+  box-sizing: border-box !important;
+  float: left !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+}
+
+.splash
+{
+  margin: auto !important;
+  max-width: 78em !important;
+}
+
+.splash span.link
+{
+  float: right !important;
+}
+
+.splash .link a
+{
+  font-size: 0.583em !important;
+}
+
+/* Front page layout: .browse + .news float left at 36%, .intro + .social
+   float right at 60%, forming a two-column grid.  Logged-in users get a
+   different module layout (48% wide float columns) directly below. */
+.splash .browse,
+.splash div.news
+{
+  width: 36% !important;
+}
+
+.splash .intro,
+.splash .social
+{
+  float: right !important;
+  width: 60% !important;
+}
+
+.splash .browse ul,
+.splash .browse li
+{
+  box-sizing: border-box !important;
+  float: left !important;
+  width: 100% !important;
+}
+
+.splash .browse li a,
+.splash .favorite a
+{
+  border-bottom: none !important;
+  display: block !important;
+}
+
+.splash .browse li
+{
+  margin: 0.375em 0 !important;
+  padding: 0.375em 0 !important;
+  width: 50% !important;
+}
+
+/* Decorative » chevron prepended to each Browse link via ::before. */
+.splash .browse li a:before
+{
+  color: var(--clr-rose) !important;
+  content: "\00BB" !important;
+  padding: 0 0.25em 0 0 !important;
+}
+
+.splash .browse li:nth-of-type(1),
+.splash .browse li:nth-of-type(2)
+{
+  margin-top: 0 !important;
+}
+
+.splash .browse li:nth-of-type(odd)
+{
+  padding-right: 0.375em !important;
+}
+
+.splash .favorite a
+{
+  padding: 0.25em 0.375em !important;
+}
+
+.splash .intro
+{
+  padding: 1em 0 2em !important;
+}
+
+.splash .intro h2
+{
+  font-size: 2em !important;
+  line-height: 1.375 !important;
+}
+
+.splash .intro .stats,
+.splash .parent
+{
+  text-align: center !important;
+}
+
+.splash .count
+{
+  font-weight: 700 !important;
+}
+
+/* Account sign-up/log-in card shown to logged-out visitors on the front page. */
+.splash .module div.account
+{
+  background: linear-gradient(160deg, var(--clr-card) 0%, var(--clr-seafoam) 100%) !important;
+  border: 1px solid var(--clr-emerald-soft) !important;
+  border-radius: 10px !important;
+  border-top: 3px solid #71A7B0 !important;
+  box-sizing: border-box !important;
+}
+
+.splash .account .heading
+{
+  margin: 1em !important;
+}
+
+.splash .account p
+{
+  margin-left: 1em !important;
+  margin-right: 1em !important;
+}
+
+.splash .account ul
+{
+  margin-left: 4em !important;
+  margin-right: 1em !important;
+}
+
+.splash .account li
+{
+  list-style-type: disc !important;
+}
+
+.splash .account .actions
+{
+  float: none !important;
+  font-size: 1.143em !important;
+}
+
+.splash .news li
+{
+  border-bottom: 1px solid var(--clr-emerald-soft) !important;
+}
+
+.splash .news li:last-of-type
+{
+  border-bottom: none !important;
+}
+
+.splash .news .meta
+{
+  color: var(--clr-abyss) !important;
+  font-size: 0.857em !important;
+  font-style: normal !important;
+}
+
+.splash .jump
+{
+  text-align: right !important;
+}
+
+.splash .placeholder
+{
+  font-style: italic !important;
+}
+
+.splash .blurb blockquote
+{
+  margin: 0.643em auto !important;
+}
+
+.splash .comment .userstuff
+{
+  margin: 1em !important;
+}
+
+.splash .social ul
+{
+  text-align: center !important;
+}
+
+.splash .social li
+{
+  display: inline-block !important;
+}
+
+/* Logged-in front page: modules stack in two 48%-wide float columns.
+   Odd-indexed modules clear left to start each new row. */
+.logged-in .splash>.module
+{
+  float: left !important;
+  margin: 0 1% 1.571em 1% !important;
+  width: 48% !important;
+}
+
+.logged-in .splash>div:nth-of-type(odd)
+{
+  clear: left !important;
+}
+
+.splash .module .module,
+.splash .dynamic,
+.splash .news blockquote
+{
+  margin: 0 !important;
+  width: 100% !important;
+}
+
+
+/*
+ * ============================================
+ * 17. INDEX PAGES (Media, Fandoms, Collections)
+ * ============================================
+ */
+
+ul.collection.picture.index.group
+{
+  list-style: none !important;
+  padding: 0 !important;
+}
+
+#main.media-index ul.media.fandom.index.group
+{
+  align-items: start !important;
+}
+
+#main.media-index .listbox .index
+{
+  background: transparent !important;
+  height: auto !important;
+}
+
+/* Media index (e.g. /media): each medium is a parchment card.
+   align-self: start stops cards stretching to equal height in grid containers.
+   height/max-height overrides reset AO3 defaults that cap card height. */
+#main.media-index li.medium.listbox.group
+{
+  align-self: start !important;
+  background: linear-gradient(180deg, var(--clr-card) 0%, var(--clr-card) 100%) !important;
+  border: 1px solid var(--clr-emerald-soft) !important;
+  border-radius: 24px !important;
+  box-shadow: 0 2px 8px var(--clr-teal-007) !important;
+  height: auto !important;
+  margin-bottom: 2em !important;
+  max-height: none !important;
+  min-height: 0 !important;
+  padding: 1.2em 1.5em 1.5em !important;
+}
+
+#main.media-index li.medium.listbox.group h3.heading
+{
+  background: none !important;
+  border-bottom: 2px solid var(--clr-rose) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: var(--clr-abyss) !important;
+  font-family: 'Cormorant Garamond', 'Didot', 'Bodoni MT', 'Palatino Linotype', Palatino, 'Book Antiqua', serif !important;
+  font-size: 1.1em !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.06em !important;
+  margin: 0 0 0.6em 0 !important;
+  padding: 0 0 4px 0 !important;
+  text-transform: uppercase !important;
+}
+
+#main.media-index li.medium.listbox.group h3.heading a,
+#main.media-index li.medium.listbox.group h3.heading a:visited
+{
+  border-bottom: none !important;
+  color: var(--clr-abyss) !important;
+  text-decoration: none !important;
+}
+
+#main.media-index li.medium.listbox.group h3.heading a:hover
+{
+  color: var(--clr-gold) !important;
+  text-decoration: underline !important;
+}
+
+#main.media-index ol.index.group
+{
+  list-style: none !important;
+  padding: 0.5em 0 0.5em 0.75em !important;
+}
+
+#main.media-index ol.index.group li
+{
+  color: var(--clr-ink) !important;
+  display: block !important;
+  font-size: 0.78em !important;
+  font-weight: 500 !important;
+  margin: 6px 0 !important;
+}
+
+#main.media-index li.medium.listbox.group p.actions a
+{
+  border-bottom: none !important;
+  color: #9a5a48 !important;
+  font-size: 0.85em !important;
+  font-style: italic !important;
+}
+
+#main.media-index li.medium.listbox.group p.actions a:hover
+{
+  color: var(--clr-gold) !important;
+  text-decoration: underline !important;
+}
+
+/* Fandoms index: one card per letter of the alphabet, same parchment card
+   treatment as the media index.  width: 100% + box-sizing: border-box ensures
+   cards fill their grid cell without overflowing. */
+#main.fandoms-index li.letter.listbox.group
+{
+  align-self: start !important;
+  background: linear-gradient(180deg, var(--clr-card) 0%, var(--clr-card) 100%) !important;
+  border: 1px solid var(--clr-emerald-soft) !important;
+  border-radius: 24px !important;
+  box-shadow: 0 2px 8px var(--clr-teal-007) !important;
+  box-sizing: border-box !important;
+  height: auto !important;
+  margin-bottom: 2em !important;
+  max-height: none !important;
+  min-height: 0 !important;
+  padding: 1.2em 1.5em 1.6em !important;
+  width: 100% !important;
+}
+
+/* Letter heading (A, B, C…) in the fandoms index: Cormorant Garamond,
+   uppercase, rose underline.  background/border-radius/box-shadow cleared
+   because the global h3.heading rule sets a gradient background. */
+#main.fandoms-index h3.heading
+{
+  background: none !important;
+  border-bottom: 2px solid var(--clr-rose) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: var(--clr-abyss) !important;
+  font-family: 'Cormorant Garamond', 'Didot', 'Bodoni MT', 'Palatino Linotype', Palatino, 'Book Antiqua', serif !important;
+  font-size: 1.3em !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.06em !important;
+  margin: 0 0 0.5em 0 !important;
+  padding: 0 0 4px 0 !important;
+  text-transform: uppercase !important;
+}
+
+#main.fandoms-index h3.heading a,
+#main.fandoms-index h3.heading a:visited
+{
+  border-bottom: none !important;
+  color: #9a5a48 !important;
+  font-size: 0.7em !important;
+  font-weight: 400 !important;
+  text-decoration: none !important;
+  vertical-align: middle !important;
+}
+
+#main.fandoms-index h3.heading a:hover
+{
+  color: var(--clr-ink) !important;
+  text-decoration: none !important;
+}
+
+/* "↑ top" back-to-top badge inside the letter heading: small pill button
+   rendered inline-block beside the letter character. */
+#main.fandoms-index h3.heading span.action.top
+{
+  background: var(--clr-rose-015) !important;
+  border: 1px solid var(--clr-rose-035) !important;
+  border-radius: 6px !important;
+  font-size: 0.65em !important;
+  margin-left: 0.5em !important;
+  padding: 1px 6px !important;
+  vertical-align: middle !important;
+}
+
+#main.fandoms-index h3.heading span.action.top a,
+#main.fandoms-index h3.heading span.action.top a:visited
+{
+  color: var(--clr-abyss) !important;
+  font-size: 1em !important;
+  opacity: 0.75 !important;
+}
+
+#main.fandoms-index h3.heading span.action.top a:hover
+{
+  color: var(--clr-abyss) !important;
+  opacity: 1 !important;
+}
+
+#main.fandoms-index ol.index.group,
+#main.fandoms-index ul.tags.index.group
+{
+  list-style: none !important;
+  padding: 0.5em 0 0.5em 0.75em !important;
+}
+
+#main.fandoms-index ol.index.group li,
+#main.fandoms-index ul.tags.index.group li
+{
+  color: var(--clr-ink) !important;
+  display: inline-block !important;
+  font-size: 0.82em !important;
+  font-weight: 500 !important;
+  margin: 5px 4px !important;
+}
+
+
+/*
+ * ============================================
+ * 18. PROFILE & STATS PAGES
+ * ============================================
+ */
+
+/* Profile stats and work metadata summary: card-style panel with rose
+   left accent border matching the dashboard sidebar treatment. */
+dl.statistics.meta.group,
+.wrapper dl.meta
+{
+  background: linear-gradient(135deg, var(--clr-card) 0%, var(--clr-seafoam) 100%) !important;
+  border: 1px solid var(--clr-emerald-soft) !important;
+  border-left: 4px solid #D7979F !important;
+  border-radius: 24px !important;
+  box-shadow: 0 2px 10px var(--clr-teal-008) !important;
+  margin-bottom: 1.2em !important;
+  padding: 0.75em 1.2em !important;
+}
+
+dl.statistics.meta.group dt,
+.wrapper dl.meta dt
+{
+  color: var(--clr-teal-indigo) !important;
+  font-size: 0.82em !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+}
+
+dl.statistics.meta.group dd,
+.wrapper dl.meta dd
+{
+  color: var(--clr-ink) !important;
+  font-size: 1em !important;
+  font-weight: 600 !important;
+}
+
+dl.statistics.meta.group dd
+{
+  margin-bottom: 0.2em !important;
+}
+
+.wrapper dl.meta dd
+{
+  margin-bottom: 0.3em !important;
+}
+
+.wrapper dl.meta dd a,
+.wrapper dl.meta dd a:visited
+{
+  color: #9a5a48 !important;
+  font-style: italic !important;
+}
+
+.wrapper dl.meta dd a:hover
+{
+  color: var(--clr-gold) !important;
+  text-decoration: underline !important;
+}
+
+/* The statistics chart SVG/canvas container: parchment background with
+   rounded corners to match the card system. */
+div#stat_chart,
+div.statistics.chart
+{
+  background: var(--clr-card) !important;
+  border: 1px solid var(--clr-emerald-soft) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 2px 12px var(--clr-teal-008) !important;
+  margin: 1em 0 !important;
+}
+
+ul.statistics.index.group li.fandom.listbox.group
+{
+  background: linear-gradient(180deg, var(--clr-card) 0%, var(--clr-card) 100%) !important;
+  border: 1px solid var(--clr-emerald-soft) !important;
+  border-radius: 24px !important;
+  box-shadow: 0 2px 8px var(--clr-teal-007) !important;
+  margin-bottom: 1.2em !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+}
+
+/* Per-fandom heading in the statistics page: full-sweep dark gradient with
+   light text — intentionally darker than most card headings for contrast. */
+ul.statistics.index.group li.fandom.listbox.group h5.heading
+{
+  background: linear-gradient(135deg, var(--clr-abyss) 0%, var(--clr-teal) 60%, var(--clr-rose) 100%) !important;
+  border-radius: 0 !important;
+  color: #fdfaf6 !important;
+  font-size: 1.05em !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.05em !important;
+  margin: 0 !important;
+  padding: 6px 16px !important;
+}
+
+ul.statistics.index.group li.fandom.listbox.group ul.index.group
+{
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+ul.statistics.index.group li.fandom.listbox.group ul.index.group li
+{
+  border-bottom: 1px solid var(--clr-seafoam) !important;
+  padding: 0.6em 1em !important;
+}
+
+ul.statistics.index.group li.fandom.listbox.group ul.index.group li:last-child
+{
+  border-bottom: none !important;
+}
+
+ul.statistics.index.group li.fandom.listbox.group ul.index.group li dl dt a
+{
+  color: #9a5a48 !important;
+  font-size: 0.95em !important;
+  font-weight: 600 !important;
+}
+
+ul.statistics.index.group li.fandom.listbox.group ul.index.group li dl dt a:hover
+{
+  color: var(--clr-gold) !important;
+  text-decoration: underline !important;
+}
+
+ul.statistics.index.group li.fandom.listbox.group ul.index.group li dl dt span.words
+{
+  color: var(--clr-teal-indigo) !important;
+  font-size: 0.82em !important;
+  font-weight: 400 !important;
+}
+
+ul.statistics.index.group li.fandom.listbox.group ul.index.group li dl dd dl.stats
+{
+  margin: 0.3em 0 0 0 !important;
+  padding: 0 !important;
+}
+
+ul.statistics.index.group li.fandom.listbox.group ul.index.group li dl dd dl.stats dt
+{
+  color: var(--clr-teal-indigo) !important;
+  font-size: 0.78em !important;
+  font-weight: 700 !important;
+}
+
+ul.statistics.index.group li.fandom.listbox.group ul.index.group li dl dd dl.stats dd
+{
+  color: var(--clr-ink) !important;
+  font-size: 0.82em !important;
+  font-weight: 500 !important;
+}
+
+/* Zebra-striping for even rows in statistics tables — very subtle teal wash. */
+.statistics .index li:nth-of-type(2n)
+{
+  background: rgba(29, 128, 128, 0.08) !important;
+}
+
+/* On the user home page, dl.meta is already inside a styled card wrapper,
+   so we strip its own card chrome to avoid double-nesting. */
+.user.home .wrapper dl.meta
+{
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+
+/*
+ * ============================================
+ * 19. READING HISTORY
+ * ============================================
+ */
+
+/* "Last visited" badge on reading history entries: dark gradient pill with
+   light text.  The h4.viewed.heading variant inside div.user.module.group
+   strips the pill treatment and renders inline as plain meta text instead. */
+.reading h4.viewed
+{
+  background: linear-gradient(135deg, var(--clr-abyss) 0%, var(--clr-teal) 60%, var(--clr-rose) 100%) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 2px 6px var(--clr-teal-020) !important;
+  color: #fdfaf6 !important;
+  display: inline-block !important;
+  font-size: 0.85em !important;
+  letter-spacing: 0.03em !important;
+  padding: 4px 12px !important;
+}
+
+.reading h4.viewed a,
+.reading h4.viewed a:visited
+{
+  color: #fdfaf6 !important;
+}
+
+.reading h4.viewed a:hover
+{
+  color: var(--clr-gold) !important;
+  text-decoration: underline !important;
+}
+
+/* Footer bar at the bottom of each reading history blurb: flex row holding
+   the "last viewed" label and the "Mark as read / Delete" action buttons. */
+li.reading.work.blurb.group div.user.module.group background: linear-gradient(135deg, var(--clr-card) 0%, var(--clr-seafoam) 100%) !important;
+border-radius: 0 0 6px 6px !important;
+border-top: 1px solid var(--clr-emerald-soft) !important;
+display: flex !important;
+flex-wrap: wrap !important;
+justify-content: space-between !important;
+margin-top: 1.5em !important;
+padding: 0.6em 0.5em !important;
+}
+
+#main li.reading.work.blurb.group div.user.module.group h4.viewed.heading
+{
+  background: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: var(--clr-abyss) !important;
+  display: inline !important;
+  font-size: 0.78em !important;
+  font-weight: 600 !important;
+  letter-spacing: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#main li.reading.work.blurb.group div.user.module.group h4.viewed.heading span
+{
+  color: var(--clr-rose) !important;
+  font-weight: 700 !important;
+}
+
+li.reading.work.blurb.group div.user.module.group input[type="submit"]
+{
+  appearance: none !important;
+  background: var(--clr-blush) !important;
+  border: 1px solid var(--clr-rose) !important;
+  border-radius: 32px !important;
+  color: var(--clr-ink) !important;
+  cursor: pointer !important;
+  font-size: 0.78em !important;
+  font-weight: 600 !important;
+  padding: 3px 12px 5px !important;
+  transition: background 0.15s ease, box-shadow 0.15s ease !important;
+  -webkit-appearance: none !important;
+}
+
+li.reading.work.blurb.group div.user.module.group input[type="submit"]:hover
+{
+  background: linear-gradient(135deg, var(--clr-abyss) 0%, var(--clr-teal) 60%, var(--clr-rose) 100%) !important;
+  box-shadow: 0 2px 8px var(--clr-abyss-025) !important;
+  color: var(--clr-ink) !important;
+}
+
+li.reading.work.blurb.group div.user.module.group ul.actions
+{
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+li.reading.work.blurb.group div.user.module.group ul.actions li
+{
+  display: inline-block !important;
+  margin: 0 !important;
+}
+
+
+/*
+ * ============================================
+ * 20. MISCELLANEOUS (Scrollbar, Selection, Pre)
+ * ============================================
+ */
+
+/* Custom webkit scrollbar: thin teal→rose gradient thumb on ivory track.
+   Firefox does not support the webkit API; its scrollbar keeps browser defaults. */
+::-webkit-scrollbar
+{
+  width: 8px !important;
+}
+
+::-webkit-scrollbar-track
+{
+  background: var(--clr-bg) !important;
+}
+
+::-webkit-scrollbar-thumb
+{
+  background: linear-gradient(180deg, var(--clr-teal) 0%, var(--clr-rose) 100%) !important;
+  border-radius: 6px !important;
+}
+
+::-webkit-scrollbar-thumb:hover
+{
+  background: var(--clr-gold) !important;
+}
+
+/* <pre> blocks (CSS skin editor, code samples): card bg with teal left border.
+   The ::before pseudo-element adds a decorative gradient stripe at the top. */
+pre border: 1px solid var(--clr-emerald-soft) !important;
+border-left: 3px solid var(--clr-teal) !important;
+border-radius: 0 8px 8px 0 !important;
+box-shadow: inset 0 1px 4px var(--clr-teal-006),
+0 2px 8px var(--clr-teal-008) !important;
+color: var(--clr-ink) !important;
+line-height: 1.45 !important;
+overflow-x: auto !important;
+padding: 1em 1.2em !important;
+position: relative !important;
+white-space: pre-wrap !important;
+}
+
+pre::before
+{
+  background: linear-gradient(90deg, var(--clr-abyss) 0%, var(--clr-teal) 40%, var(--clr-rose) 70%, var(--clr-gold) 100%) !important;
+  border-radius: 0 8px 0 0 !important;
+  content: "" !important;
+  height: 2px !important;
+  left: 0 !important;
+  position: absolute !important;
+  right: 0 !important;
+  top: 0 !important;
+}
+
+/* Highlight for items that belong to or involve the current user:
+   own works, drafts, unread items, child works, unwrangled/unreviewed tags. */
+.own,
+.draft,
+.draft .wrapper,
+.unread,
+.child,
+.unwrangled,
+.unreviewed
+{
+  background: linear-gradient(160deg, #dde5eb 0%, #e8e4ee 100%) !important;
+  border: 1px solid var(--clr-teal) !important;
+  border-radius: 6px !important;
+  box-shadow: none !important;
+  color: var(--clr-ink) !important;
+}
+
+/*
+ * ======================================================================
+ * 21. SYSTEM (Sessions, Skins, Docs, FAQ, TOS, Proxy)
+ * ======================================================================
+ */
+
+.system p
+{
+  line-height: 1.5 !important;
+}
+
+.system .userstuff
+{
+  margin: auto !important;
+  max-width: 72em !important;
+}
+
+.system:not(.feedbacks) .userstuff h3
+{
+  margin-top: 3em !important;
+}
+
+.system .notice .userstuff
+{
+  max-width: initial !important;
+}
+
+/* Login page: push the sign-in form to the right half of the page.
+   The left side shows the welcome/marketing content. */
+.session #signin
+{
+  margin-left: 48% !important;
+  width: 48% !important;
+}
+
+/* Login and two-factor auth forms: centred at 75% width to keep the
+   form readable without stretching across the full viewport. */
+.sessions-new form.login,
+.sessions-create form.totp
+{
+  margin: auto !important;
+  width: 75% !important;
+}
+
+.session dt
+{
+  min-width: 0 !important;
+}
+
+/* Login / 2FA authentication forms: lighter card background without the
+   heavy dashed top border used on general fieldsets, since the form itself
+   provides enough visual structure. */
+.authentication fieldset
+{
+  background: linear-gradient(160deg, var(--clr-card) 0%, var(--clr-seafoam) 100%) !important;
+  border: 1px solid var(--clr-emerald-soft) !important;
+  box-shadow: none !important;
+}
+
+.authentication legend
+{
+  background: linear-gradient(135deg, var(--clr-teal) 0%, var(--clr-ocean) 100%) !important;
+  border-radius: 32px !important;
+  color: var(--clr-ink) !important;
+  font-size: inherit !important;
+  font-weight: normal !important;
+  height: auto !important;
+  opacity: 1 !important;
+  padding: 0.5em 0.5em 0 !important;
+  width: auto !important;
+}
+
+.authentication .note
+{
+  padding-top: 0 !important;
+}
+
+.authentication label
+{
+  display: block !important;
+  font-weight: bold !important;
+}
+
+.authentication input[type="submit"]
+{
+  vertical-align: bottom !important;
+}
+
+#main.skins-index li.skins.own.picture.blurb.group,
+#main.skins-index li.blurb
+{
+  padding-left: 1em !important;
+  padding-right: 1em !important;
+}
+
+/* Skin editor textarea: decorative palette gradient on the top edge only.
+   This element has no border-radius, so border-image is safe here. */
+#main.skins-new textarea,
+#main.skins-edit textarea
+{
+  border-image: linear-gradient(90deg, transparent 0%, var(--clr-blush) 15%, var(--clr-rose) 35%, var(--clr-teal) 65%, var(--clr-gold) 85%, transparent 100%) 1 0 0 0 !important;
+  border-top: 2px solid !important;
+  border-top-color: transparent !important;
+}
+
+.docs .userstuff h6
+{
+  border-bottom: none !important;
+  margin: 0.714em 0 !important;
+}
+
+.docs .userstuff ul,
+.docs .userstuff ol,
+.docs .userstuff details .toc
+{
+  margin: 0.643em auto !important;
+  padding: 0 !important;
+}
+
+.docs .userstuff li
+{
+  padding: 0 1.5em !important;
+}
+
+.docs .userstuff ul ul li
+{
+  list-style-type: circle !important;
+}
+
+.docs .userstuff ol.toc li
+{
+  list-style-type: upper-roman !important;
+}
+
+.docs .userstuff ol.toc li ol li
+{
+  list-style-type: upper-alpha !important;
+}
+
+.docs .userstuff summary .heading
+{
+  display: inline !important;
+}
+
+#main.faq h2.heading,
+#main.support h2.heading,
+#main.docs h2.heading,
+#main.guideline h2.heading,
+#main.donate h2.heading
+{
+  background: none !important;
+  border-bottom: 2px solid var(--clr-rose) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: var(--clr-abyss) !important;
+  font-family: 'Cormorant Garamond', 'Didot', 'Bodoni MT', 'Palatino Linotype', Palatino, 'Book Antiqua', serif !important;
+  font-size: 1.4em !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.06em !important;
+  padding: 0 0 4px 0 !important;
+  text-transform: uppercase !important;
+}
+
+#main.donate h3.heading
+{
+  background: none !important;
+  border-bottom: 1px solid var(--clr-rose) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: var(--clr-abyss) !important;
+  font-family: 'Cormorant Garamond', 'Didot', 'Bodoni MT', 'Palatino Linotype', Palatino, 'Book Antiqua', serif !important;
+  font-size: 1.1em !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.05em !important;
+  margin-top: 1.5em !important;
+  padding: 0 0 3px 0 !important;
+  text-transform: uppercase !important;
+}
+
+#main.faq h2.heading a,
+#main.faq h2.heading a:visited,
+#main.support h2.heading a,
+#main.support h2.heading a:visited,
+#main.docs h2.heading a,
+#main.docs h2.heading a:visited,
+#main.guideline h2.heading a,
+#main.guideline h2.heading a:visited,
+#main.donate h2.heading a,
+#main.donate h2.heading a:visited,
+#main.donate h3.heading a,
+#main.donate h3.heading a:visited
+{
+  border-bottom: none !important;
+  color: var(--clr-abyss) !important;
+  opacity: 1 !important;
+  text-decoration: none !important;
+}
+
+#main.faq h2.heading a:hover,
+#main.support h2.heading a:hover,
+#main.docs h2.heading a:hover,
+#main.guideline h2.heading a:hover,
+#main.donate h2.heading a:hover,
+#main.donate h3.heading a:hover
+{
+  color: var(--clr-gold) !important;
+  text-decoration: underline !important;
+}
+
+#main.faq p.notice,
+#main.support p.notice,
+#main.docs p.notice,
+#main.guideline p.notice,
+#main.donate p.notice
+{
+  margin-top: 1.5em !important;
+}
+
+#main.faq p.notes,
+#main.support p.notes,
+#main.docs p.notes,
+#main.guideline p.notes,
+#main.donate p.notes
+{
+  background: linear-gradient(135deg, var(--clr-card) 0%, var(--clr-bg) 100%) !important;
+  border: 1px solid var(--clr-rose) !important;
+  border-left: 3px solid var(--clr-teal) !important;
+  border-radius: 6px !important;
+  color: var(--clr-ink) !important;
+  padding: 8px 12px !important;
+}
+
+.feedbacks h3
+{
+  clear: right !important;
+  padding-top: 1.929em !important;
+}
+
+.feedbacks form
+{
+  margin-top: 1.929em !important;
+}
+
+.feedbacks form .notice,
+.feedbacks .banner
+{
+  margin: 0.643em !important;
+}
+
+.faq .categories
+{
+  float: none !important;
+  margin: 0 auto !important;
+  max-width: 72em !important;
+}
+
+.faq .categories h3
+{
+  border-bottom: 0.25em double var(--clr-emerald-soft) !important;
+  color: var(--clr-abyss) !important;
+  margin-top: 1.929em !important;
+}
+
+#main.faq .userstuff h3,
+#main.faq .userstuff h4,
+#main.guideline .userstuff h3,
+#main.guideline .admin h3,
+#main.guideline .admin h4,
+#main.donate .userstuff h3,
+#main.donate .userstuff h4
+{
+  border-bottom: 1px solid var(--clr-emerald-050) !important;
+  color: var(--clr-ink) !important;
+  font-size: 1.35em !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.02em !important;
+  margin-bottom: 0.5em !important;
+  padding-bottom: 4px !important;
+}
+
+.faq .categories li
+{
+  padding: 0 !important;
+}
+
+.faq .userstuff .toc li
+{
+  list-style-type: circle !important;
+}
+
+.faq .categories .userstuff
+{
+  clear: both !important;
+}
+
+.faq .screencast .label
+{
+  font-weight: 700 !important;
+}
+
+.faq .userstuff .notice,
+.faq .userstuff .caution,
+.faq .example,
+.guideline .userstuff .notice,
+.guideline .userstuff .caution,
+.guideline .example
+{
+  margin: 0.643em 3.858em !important;
+  padding: 0.643em !important;
+}
+
+.faq .example,
+.guideline .example
+{
+  border: 1px solid var(--clr-emerald-soft) !important;
+  border-radius: 6px !important;
+}
+
+.faq .userstuff nav.toc
+{
+  margin: 3.215em auto !important;
+}
+
+.categories h3.heading
+{
+  align-items: center !important;
+  background: linear-gradient(90deg, var(--clr-teal) 0%, var(--clr-emerald-muted) 100%) !important;
+  border-radius: 6px !important;
+  color: var(--clr-ink) !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  padding: 6px 14px !important;
+}
+
+.categories .userstuff
+{
+  background: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 12px 16px !important;
+}
+
+ul.faq.index.group li.category>a
+{
+  color: #9a5a48 !important;
+  text-decoration: none !important;
+}
+
+ul.faq.index.group li.category>a:hover,
+ul.faq.index.group ul.questions li a:hover
+{
+  text-decoration: underline !important;
+}
+
+ul.faq.index.group ul.questions li a
+{
+  color: #9a5a48 !important;
+  padding-left: 1em !important;
+  text-decoration: none !important;
+}
+
+/* TOS table of contents: each section is a <details>/<summary> collapsible.
+   Double-border on summary signals it is interactive/expandable. */
+.tos .userstuff nav.toc>details
+{
+  margin-top: 3em !important;
+}
+
+.tos .userstuff nav.toc>details>summary
+{
+  border-bottom: 0.25em double var(--clr-emerald-soft) !important;
+}
+
+.tos .userstuff nav.toc>details>summary h3
+{
+  border-bottom: none !important;
+}
+
+.tos_faq .userstuff .toc
+{
+  margin-bottom: 3.215em !important;
+}
+
+#tos-partial .tos
+{
+  height: 36em !important;
+  overflow: auto !important;
+}
+
+#tos-partial .userstuff
+{
+  margin: 0.643em !important;
+  max-width: 100% !important;
+}
+
+/* TOS agreement prompt: full-viewport fixed overlay shown to new users.
+   z-index: 999 ensures it sits above all other content.
+   The heading uses the dark abyss→teal gradient for gravitas. */
+#tos_prompt bottom: 0 !important;
+margin: 0 !important;
+overflow-y: scroll !important;
+position: fixed !important;
+top: 0 !important;
+width: 100% !important;
+z-index: 999 !important;
+}
+
+#tos_prompt .heading
+{
+  background: linear-gradient(135deg, var(--clr-abyss) 0%, var(--clr-teal-deep) 100%) !important;
+  color: var(--clr-ink) !important;
+  display: block !important;
+  margin: 0 !important;
+  padding: 0.125em 0 !important;
+}
+
+#tos_prompt .heading span
+{
+  display: block !important;
+  margin: auto !important;
+  max-width: 80% !important;
+  width: 40rem !important;
+}
+
+#tos_prompt .agreement
+{
+  margin: auto !important;
+  max-width: 80% !important;
+  overflow: hidden !important;
+  width: 40rem !important;
+}
+
+#tos_prompt p
+{
+  line-height: 1.4 !important;
+}
+
+#tos_prompt p:first-of-type
+{
+  margin: 2em 0 0.643em 0 !important;
+}
+
+#tos_prompt .confirmation
+{
+  margin: 2em 0 1em !important;
+}
+
+#tos_prompt p.submit
+{
+  line-height: 1.125 !important;
+  margin-bottom: 2em !important;
+}
+
+#tos_prompt .submit input,
+#tos_prompt .submit button
+{
+  height: 100% !important;
+  white-space: normal !important;
+}
+
+/* Disabled "I agree" button before the user has scrolled to the bottom
+   of the TOS — sage green tint signals it is not yet actionable. */
+#tos_prompt [disabled]
+{
+  background: var(--clr-emerald-soft) !important;
+  box-shadow: none !important;
+  color: var(--clr-ink) !important;
+}
+
+/* Proxy / third-party reader notice bar shown at the top of the page when
+   AO3 detects the content is being served through a proxy or mirror. */
+#proxy-notice
+{
+  background: linear-gradient(135deg, var(--clr-blush) 0%, var(--clr-seafoam) 100%) !important;
+  border-bottom: 1px solid var(--clr-rose) !important;
+  font-size: 0.875em !important;
+}
+
+#proxy-notice .userstuff
+{
+  padding: 0.643em 0.875em !important;
+}
+
+#proxy-notice .submit
+{
+  margin-bottom: 0 !important;
+}
+
+/*
+ * ============================================
+ * 22. AO3 DEFAULT ELEMENTS
+ * ============================================
+ */
+
+/* --- Inline text semantics --- */
+
+/* Nested italic elements: AO3 convention is to un-italicise a nested em/i
+   inside an already-italic context (e.g. italic prose that quotes a title). */
+cite em,
+em cite,
+cite i,
+i cite,
+i em,
+em i,
+em em,
+i i,
+cite cite
+{
+  font-style: normal !important;
+}
+
+em cite,
+i cite,
+ins,
+u
+{
+  text-decoration: underline !important;
+}
+
+del,
+strike
+{
+  color: rgba(90, 70, 60, 0.5) !important;
+  text-decoration: line-through !important;
+}
+
+/* Abbreviations, definitions, acronyms: dotted teal underline + help cursor
+   signals that hovering will reveal a tooltip/title attribute. */
+dfn,
+abbr,
+acronym
+{
+  border-bottom: 1px dotted var(--clr-teal) !important;
+  cursor: help !important;
+}
+
+sub
+{
+  line-height: 0 !important;
+  vertical-align: sub !important;
+}
+
+sup
+{
+  line-height: 0 !important;
+  vertical-align: super !important;
+}
+
+big
+{
+  font-size: 114% !important;
+}
+
+/* Inline code / keyboard / sample text: warm card-nested background,
+   teal border, monospace stack.  EB Garamond is overridden here because
+   proportional serif looks wrong for code. */
+kbd,
+tt,
+code,
+var,
+samp
+{
+  background: var(--clr-card-nested) !important;
+  border: 1px solid var(--clr-teal-018) !important;
+  border-radius: 3px !important;
+  color: var(--clr-abyss) !important;
+  font-family: 'Source Code Pro', 'Consolas', 'Monaco', 'Courier New', Courier, monospace !important;
+  font-size: 0.857em !important;
+  font-variant-ligatures: none !important;
+  padding: 0.1em 0.35em !important;
+}
+
+/* --- Tables --- */
+
+/* Tables: block display + overflow-x: auto so wide tables scroll horizontally
+   rather than breaking layout.  border-radius + border-collapse don't
+   interact perfectly in all browsers — the outer radius is decorative only. */
+table border-collapse: collapse !important;
+border: 1px solid var(--clr-teal-018) !important;
+border-radius: 10px !important;
+clear: right !important;
+display: block !important;
+margin: auto !important;
+max-width: 100% !important;
+overflow: hidden !important;
+overflow-x: auto !important;
+width: 100% !important;
+word-break: break-word !important;
+}
+
+/* AO3 uses <caption> elements for accessibility text — visually hidden. */
+caption
+{
+  font-size: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  opacity: 0 !important;
+  padding: 0 !important;
+  width: 0 !important;
+}
+
+thead,
+tfoot
+{
+  background: linear-gradient(90deg, var(--clr-abyss) 0%, var(--clr-teal) 100%) !important;
+  border-bottom: 2px solid var(--clr-teal) !important;
+  color: var(--clr-ink) !important;
+  padding: 0.643em !important;
+  vertical-align: top !important;
+}
+
+tfoot td
+{
+  border-top: 1px solid var(--clr-teal-025) !important;
+}
+
+td
+{
+  border-bottom: 1px solid var(--clr-teal-010) !important;
+  color: var(--clr-ink) !important;
+  padding: 0.4em 0.6em !important;
+  vertical-align: top !important;
+}
+
+th
+{
+  background: var(--clr-seafoam) !important;
+  border: 1px solid var(--clr-teal-025) !important;
+  color: var(--clr-ink) !important;
+  font-weight: 700 !important;
+  padding: 0.4em 0.6em !important;
+  text-align: start !important;
+  vertical-align: top !important;
+}
+
+tbody tr:hover
+{
+  background: var(--clr-teal-006) !important;
+}
+
+tbody tr
+{
+  border-bottom: 1px solid var(--clr-teal-010) !important;
+}
+
+thead td
+{
+  background: transparent !important;
+  border-bottom: 1px solid var(--clr-teal-025) !important;
+}
+
+th a,
+th a:visited,
+th a:link
+{
+  color: var(--clr-ink) !important;
+  text-decoration: none !important;
+}
+
+th a:hover
+{
+  color: var(--clr-gold) !important;
+  text-decoration: underline !important;
+}
+
+/* --- System message extras --- */
+
+.important
+{
+  font-weight: 900 !important;
+}
+
+.footnote
+{
+  color: var(--clr-teal-indigo) !important;
+  float: right !important;
+  font-size: 0.75em !important;
+}
+
+.datetime
+{
+  color: var(--clr-teal-indigo) !important;
+  font-family: monospace !important;
+  font-size: 0.85em !important;
+}
+
+/* System notification banners shown after leaving a kudos or comment:
+   teal-tinted background with a solid left accent stripe. */
+.comment_notice,
+.kudos_notice,
+ul.notes
+{
+  background: linear-gradient(135deg, rgba(113, 167, 176, 0.15) 0%, rgba(208, 216, 209, 0.3) 100%) !important;
+  border: 1px solid var(--clr-teal) !important;
+  border-left: 3px solid #71A7B0 !important;
+  border-radius: 6px !important;
+  box-shadow: none !important;
+  color: var(--clr-ink) !important;
+  margin: 0.643em auto !important;
+  padding: 0.25em 0.375em !important;
+  word-wrap: break-word !important;
+}
+
+/* Error variant of the kudos/comment notification (e.g. already left kudos,
+   comment failed validation). Rose-tinted to signal a problem. */
+.comment_error,
+.kudos_error
+{
+  background: linear-gradient(135deg, rgba(215, 151, 159, 0.15) 0%, rgba(243, 225, 214, 0.4) 100%) !important;
+  border: 1px solid var(--clr-rose) !important;
+  border-left: 3px solid var(--clr-blush) !important;
+  border-radius: 6px !important;
+  box-shadow: none !important;
+  color: var(--clr-ink) !important;
+  margin: 0.643em auto !important;
+  padding: 0.25em 0.375em !important;
+}
+
+ul.notes li,
+.notice ul li,
+.caution ul li
+{
+  list-style-type: disc !important;
+  padding-left: 1.5em !important;
+}
+
+/* --- Announcements --- */
+
+.announcement
+{
+  clear: both !important;
+  position: relative !important;
+}
+
+.announcement .userstuff
+{
+  background: linear-gradient(135deg, rgba(113, 167, 176, 0.15) 0%, rgba(208, 216, 209, 0.3) 100%) !important;
+  border: 1px solid var(--clr-teal) !important;
+  border-left: 3px solid #71A7B0 !important;
+  border-radius: 6px !important;
+  color: var(--clr-ink) !important;
+  margin: 0 2em !important;
+  padding: 0.375em 0.75em !important;
+}
+
+.announcement p.submit
+{
+  bottom: -1em !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  position: absolute !important;
+  right: 1em !important;
+  z-index: 1 !important;
+}
+
+.announcement h1,
+.announcement h2,
+.announcement h3,
+.announcement h4,
+.announcement h5,
+.announcement h6
+{
+  border: none !important;
+  color: inherit !important;
+  margin: 0 !important;
+  text-align: center !important;
+  text-shadow: none !important;
+}
+
+/* event announcement — fundraising/celebrations: warm rose gradient */
+.event .userstuff
+{
+  background: linear-gradient(135deg, var(--clr-blush) 0%, var(--clr-rose) 100%) !important;
+  border-color: var(--clr-rose) !important;
+  color: var(--clr-ink) !important;
+}
+
+.event .userstuff a
+{
+  color: var(--clr-ink) !important;
+}
+
+/* alert announcement — downtime/problems: near-black bg with gold text for
+   maximum legibility; intentionally breaks from the soft palette. */
+.alert .userstuff
+{
+  background: linear-gradient(135deg, #1a1200 0%, #2a1e00 100%) !important;
+  border-color: var(--clr-gold) !important;
+  color: var(--clr-gold) !important;
+}
+
+/* thermometer widget — fundraiser/drive progress bar.
+   .track is the outer container, .progress is the filled portion. */
+.announcement .thermometer-content
+{
+  height: 2.6em !important;
+  margin: auto !important;
+  width: 50% !important;
+}
+
+.announcement .thermometer
+{
+  position: relative !important;
+}
+
+.announcement .thermometer .track
+{
+  background: var(--clr-card-nested) !important;
+  border: 1px solid var(--clr-teal-025) !important;
+  border-radius: 6px !important;
+  height: 1.25em !important;
+  margin: 0 auto !important;
+  overflow: hidden !important;
+  position: relative !important;
+}
+
+.announcement .thermometer .progress
+{
+  background: linear-gradient(90deg, var(--clr-teal) 0%, var(--clr-rose) 100%) !important;
+  bottom: 0 !important;
+  height: 100% !important;
+  left: 0 !important;
+  position: absolute !important;
+}
+
+.announcement .thermometer .goal
+{
+  position: absolute !important;
+  right: 0 !important;
+}
+
+.announcement .thermometer .amount
+{
+  color: var(--clr-ink) !important;
+  font-weight: 700 !important;
+  line-height: 1.25em !important;
+  position: absolute !important;
+}
+
+/* --- Symbols (? help button) ---
+   The circled "?" help buttons AO3 places next to form fields and content
+   rating symbols.  span.symbol is the outer circle, span.question adds the
+   seafoam fill, a.question removes the link underline. */
+span.symbol
+{
+  border: 1px solid var(--clr-teal) !important;
+  border-radius: 0.75em !important;
+  color: var(--clr-abyss) !important;
+  font-family: 'EB Garamond', 'Garamond', 'Book Antiqua', 'Palatino Linotype', Palatino, Georgia, serif !important;
+  vertical-align: super !important;
+}
+
+span.symbol span
+{
+  padding: 0.425em !important;
+}
+
+.symbols a,
+.symbol a
+{
+  border: none !important;
+  text-decoration: none !important;
+}
+
+span.question
+{
+  background: var(--clr-seafoam) !important;
+  border-color: var(--clr-teal) !important;
+  box-shadow: -1px -1px 2px var(--clr-abyss-025) !important;
+}
+
+a.question
+{
+  border: 0 !important;
+  font-weight: bold !important;
+}
+
+.question a:hover
+{
+  background: var(--clr-teal) !important;
+  border-color: var(--clr-teal-deep) !important;
+  color: var(--clr-ink) !important;
+  cursor: help !important;
+}
+
+.heading a.question
+{
+  font-size: 0.75em !important;
+}
+
+/* --- Symbols key ---
+   The legend/key page that explains each content symbol icon.
+   dt holds the icon (100px wide), dd uses a negative top margin to
+   sit alongside the icon rather than below it. */
+dl#symbols-key dt
+{
+  width: 100px !important;
+}
+
+dl#symbols-key dd
+{
+  margin: -55px auto auto 100px !important;
+}
+
+#symbols-key dl
+{
+  border: 1px solid var(--clr-teal-018) !important;
+  border-radius: 6px !important;
+  margin-bottom: 1.286em !important;
+  padding: 0.15em !important;
+}
+
+/* --- Annotation module ---
+   Used in the skin editor and some system pages to display an icon alongside
+   a description.  Flex row wrapping so image and notes sit side by side. */
+.annotation
+{
+  align-items: center !important;
+  background: var(--clr-card-nested) !important;
+  border: 1px solid var(--clr-teal-018) !important;
+  border-left: 3px solid var(--clr-teal) !important;
+  border-radius: 10px !important;
+  display: flex !important;
+  flex-flow: row wrap !important;
+  float: none !important;
+  justify-content: center !important;
+  line-height: 1 !important;
+  margin: 0.643em auto !important;
+  padding: 1.286em !important;
+  width: fit-content !important;
+}
+
+.annotation>*
+{
+  margin: 0.643em !important;
+}
+
+.annotation .image
+{
+  float: none !important;
+  line-height: 1 !important;
+  width: auto !important;
+}
+
+.annotation .notes
+{
+  text-align: center !important;
+}
+
+.annotation .notes code
+{
+  font-size: 1.286em !important;
+}
+
+.annotation .notes .footnote
+{
+  float: none !important;
+}
+
+/* --- Blockquote extras --- */
+
+/* Blockquotes: vertical palette gradient stripe on the left edge.
+   No border-radius on this element, so border-image works correctly. */
+blockquote border-image: linear-gradient(180deg, #A9B4AB 0%, #D7979F 30%, #71A7B0 60%, #DFC5A6 85%, #D87884 100%) 1 !important;
+margin-left: 1em !important;
+padding-left: 1em !important;
+}
+
+blockquote p:first-child
+{
+  margin-top: 0 !important;
+}
+
+blockquote p:last-child
+{
+  margin-bottom: 0 !important;
+}
+
+/* --- p/li/dd margins --- */
+
+/* --- FAQ userstuff extras --- */
+
+.faq .userstuff dd
+{
+  margin-block-start: 0.75em !important;
+  margin-block-end: 0.75em !important;
+  margin-inline-start: 1.75em !important;
+}
+
+.faq .userstuff dl
+{
+  margin: 0.75em 0 !important;
+}
+
+/* --- Bookmark userstuff line-height --- */
+
+.bookmark .user .userstuff
+{
+  line-height: 1.65 !important;
+}
+
+/* Override AO3 default .required red color — use theme rose instead */
+.post .required .warnings,
+dd.required,
+label
+{
+  font-weight: normal;
+  color: var(--clr-rose) !important;
+}
+
+
+/* .alert and .flash — AO3 site-level messages shown at the top of the page.
+   :not(:empty) prevents styling the always-present-but-empty placeholder div.
+   Default flash = dark gold (informational / neutral)
+   .error flash = dark rose (failure / problem)
+   .success flash = dark green tint (confirmation) */
+.alert:not(:empty),
+.flash:not(:empty),
+.alert.flash:not(:empty),
+p.flash
+{
+  background: linear-gradient(135deg, #1a1400 0%, #2a2200 100%) !important;
+  border: 1px solid var(--clr-gold) !important;
+  border-left: 3px solid #a07800 !important;
+  border-radius: 6px !important;
+  box-shadow: 0 2px 8px rgba(201, 160, 90, 0.2) !important;
+  color: var(--clr-gold) !important;
+  padding: 8px 12px !important;
+}
+
+.alert.error:not(:empty),
+.flash.error:not(:empty),
+p.flash.error
+{
+  background: linear-gradient(135deg, #1a0a06 0%, #2a1210 100%) !important;
+  border: 1px solid var(--clr-rose) !important;
+  border-left: 3px solid var(--clr-blush) !important;
+  box-shadow: 0 2px 8px var(--clr-rose-015) !important;
+  color: var(--clr-rose-soft) !important;
+}
+
+.alert.success:not(:empty),
+.flash.success:not(:empty),
+p.flash.success
+{
+  background: linear-gradient(135deg, #081a10 0%, #102a18 100%) !important;
+  border: 1px solid var(--clr-sage) !important;
+  border-left: 3px solid var(--clr-emerald-soft) !important;
+  box-shadow: 0 2px 8px rgba(42, 122, 96, 0.2) !important;
+  color: var(--clr-ink) !important;
+}
+
+/* h1-h6 for system pages: docs, support, faq, guideline, donate.
+   H1 uses the same full-palette gradient text sweep as workskin headings.
+   background-color fallback (#D7979F) is for browsers that don't support
+   background-clip: text (very rare now but kept for safety). */
+#main.system h1,
+#main.docs h1,
+#main.support h1,
+#main.faq h1,
+#main.guideline h1,
+#main.donate h1
+{
+  background: linear-gradient(100deg, #8a6030 0%, #b86878 30%, #71A7B0 60%, #7a5a80 85%, #D87884 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  background-color: #D7979F !important;
+  display: block !important;
+  font-weight: 700 !important;
+}
+
+#main.system h2:not(.heading),
+#main.docs h2:not(.heading),
+#main.support h2:not(.heading),
+#main.faq h2:not(.heading),
+#main.guideline h2:not(.heading),
+#main.donate h2:not(.heading)
+{
+  background-image: linear-gradient(95deg, #D87884 0%, #D7979F 40%, #71A7B0 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  background-color: #D7979F !important;
+  display: block !important;
+  font-weight: 700 !important;
+}
+
+#main.system h3:not(.heading),
+#main.docs h3:not(.heading),
+#main.support h3:not(.heading),
+#main.faq h3:not(.heading),
+#main.guideline h3:not(.heading),
+#main.donate h3:not(.heading)
+{
+  color: var(--clr-abyss) !important;
+  border-bottom: 1px solid var(--clr-emerald-soft) !important;
+}
+
+#main.system h4:not(.heading),
+#main.docs h4:not(.heading),
+#main.support h4:not(.heading),
+#main.faq h4:not(.heading),
+#main.guideline h4:not(.heading),
+#main.donate h4:not(.heading)
+{
+  color: var(--clr-abyss) !important;
+}
+
+#main.system h5:not(.fandoms),
+#main.docs h5:not(.fandoms),
+#main.support h5:not(.fandoms),
+#main.faq h5:not(.fandoms),
+#main.guideline h5:not(.fandoms),
+#main.donate h5:not(.fandoms)
+{
+  color: var(--clr-gold) !important;
+}
+
+#main.system h6,
+#main.docs h6,
+#main.support h6,
+#main.faq h6,
+#main.guideline h6,
+#main.donate h6
+{
+  color: var(--clr-teal-indigo) !important;
+}
+
+
+/*
+ * ============================================
+ * 23. FOOTER
+ * ============================================
+ */
+
+/* Footer: reversed palette gradient (sage→teal→rose→blush→ivory), mirroring
+   the header sweep but flowing right-to-left for visual symmetry.
+   Border-image rainbow stripe on the top edge echoes the header bottom stripe. */
+body #footer
+{
+  background: linear-gradient(270deg, #A9B4AB 0%, #BAC2C0 25%, #D7979F 55%, #DBB9BC 75%, #F7E9E3 100%) !important;
+  border-top: 3px solid !important;
+  border-image: linear-gradient(90deg, #A9B4AB 0%, #D7979F 25%, #71A7B0 50%, #DFC5A6 75%, #D87884 100%) 1 0 0 0 !important;
+  color: var(--clr-ink) !important;
+  font-weight: 600 !important;
+}
+
+/* Footer links: strip all the standard link chrome (border-bottom, padding,
+   radius) so they render as plain inline text within the footer gradient. */
+body #footer a,
+body #footer a:visited,
+body #footer a:hover
+{
+  background: none !important;
+  border: none !important;
+  border-bottom: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: var(--clr-ink) !important;
+  display: inline !important;
+  height: auto !important;
+  padding: 0 !important;
+  padding-left: 0 !important;
+  text-decoration: none !important;
+  transform: none !important;
+}
+
+/* Footer buttons (e.g. language picker): reset to plain text style so they
+   blend with footer link styling rather than showing as pill buttons. */
+body #footer button,
+body #footer .actions li button,
+body #footer input[type="submit"],
+body #footer .action
+{
+  background: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: var(--clr-ink) !important;
+  cursor: pointer !important;
+  font-size: inherit !important;
+  height: auto !important;
+  padding: 0 !important;
+  text-decoration: none !important;
+}
+
+body #footer button:hover,
+body #footer .actions li button:hover,
+body #footer input[type="submit"]:hover,
+body #footer .action:hover,
+body #footer a:hover
+{
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: #5a3830 !important;
+  display: inline !important;
+  padding: 0 !important;
+  padding-left: 0 !important;
+  text-decoration: underline !important;
+  transform: none !important;
+}
+
+/* Footer section headings: Cormorant Garamond, uppercase, rose underline.
+   background/background-image are explicitly cleared to prevent any inherited
+   gradient from the global heading rules bleeding in. */
+body #footer .heading,
+body #footer h2,
+body #footer h3,
+body #footer h4,
+body #footer ul.navigation.actions li.module.group h4.heading
+{
+  background: transparent !important;
+  background-image: none !important;
+  border-bottom: 2px solid var(--clr-rose) !important;
+  color: var(--clr-abyss) !important;
+  font-family: 'Cormorant Garamond', 'Didot', 'Bodoni MT', 'Palatino Linotype', Palatino, 'Book Antiqua', serif !important;
+  font-size: 1.05em !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.06em !important;
+  margin-bottom: 0.5em !important;
+  padding-bottom: 3px !important;
+  text-transform: uppercase !important;
+}
+
+
+
+/*
+ * ============================================================
+ * 24. REPLACE THE AO3 ICONS
+ * by zerafinacss https://github.com/ZerafinaCSS/Replace-the-AO3-Icons-2.0
+ *
+ * Technique: AO3 renders content icons as <img> elements or background
+ * images.  Zerafina's method replaces them by:
+ *   - Using content: url(...) to swap the <img> src on supported elements
+ *   - Using background: url(...), #colour for elements that need bg fills
+ * Icon colours are mapped to the Shabby Rococo palette below.
+ * ============================================================
+ */
+
+/* AO3 sometimes reduces icon opacity — reset to full so custom icons render
+   at intended brightness. */
+ul.required-tags,
+.bookmark .status span,
+.blurb .icon
+{
+  opacity: 1 !important;
+}
+
+/* ========== ICONS FOR USERS, COLLECTIONS, TAGS etc. ========== */
+
+/* default user icon */
+img[src$="/images/skins/iconsets/default/icon_user.png"]
+{
+  box-sizing: border-box;
+  border: 1.5px solid #1a4050;
+  background:
+    #6890A0 content-box;
+  content: url("https://zerafinacss.github.io/ao3/icons/user-default-01.png");
+}
+
+/* anon comment icon */
+.comment .icon .anonymous
+{
+  box-sizing: border-box;
+  border: 1.5px solid #00000025;
+  background:
+    url("https://zerafinacss.github.io/ao3/icons/anon-01.png"),
+    #4a3830 border-box;
+  background-size: cover;
+}
+
+/* guest comment icon */
+.comment .icon .visitor
+{
+  box-sizing: border-box;
+  border: 1.5px solid #00000025;
+  background:
+    url("https://zerafinacss.github.io/ao3/icons/user-visitor-01.png"),
+    #4a3830 border-box;
+  background-size: cover;
+}
+
+/* default collection icon */
+img[src$="/images/skins/iconsets/default/icon_collection.png"]
+{
+  box-sizing: border-box;
+  border: 1.5px solid #00000025;
+  background:
+    linear-gradient(transparent, #ffffff25 45% 55%, transparent),
+    #71A7B0 border-box;
+  content: url("https://zerafinacss.github.io/ao3/icons/collection-01.png");
+}
+
+/* tag icons */
+.tagset .primary .icon,
+.tag .primary .icon,
+.index .tagset .icon
+{
+  box-sizing: border-box;
+  border: 1.5px solid #00000025;
+  background:
+    url("https://zerafinacss.github.io/ao3/icons/tag-01.png"),
+    linear-gradient(transparent, #ffffff25 45% 55%, transparent),
+    #6890A0 border-box;
+  background-size: cover;
+}
+
+/* icon for unrevealed works */
+.index .mystery .icon
+{
+  box-sizing: border-box;
+  border: 1.5px solid #71A7B0;
+  box-shadow: inset 0 0 0 3px #0a2828;
+  background:
+    url("https://zerafinacss.github.io/ao3/icons/anon-01.png"),
+    linear-gradient(transparent, #ffffff25 45% 55%, transparent) #71A7B0 content-box;
+  background-size: cover;
+}
+
+/* admin icon => seen on news posts */
+.admin .primary .icon
+{
+  box-sizing: border-box;
+  border: 1.5px solid #C0B0A888;
+  background:
+    url("https://zerafinacss.github.io/ao3/icons/admin-01.png") no-repeat,
+    linear-gradient(#ffffff30, transparent) #6890A0 border-box;
+  background-size: cover;
+}
+
+/* default icon for skins */
+.skins .primary .icon:not(:has(a .icon)),
+.index .skins .icon:not(:has(a .icon))
+{
+  box-sizing: border-box;
+  border: 1.5px solid #7A9EAA;
+  background:
+    url("https://zerafinacss.github.io/ao3/icons/skins-01.png"),
+    #6890A0 border-box;
+  background-size: cover;
+}
+
+/* >========== CONTENT SYMBOLS ==========<
+   The symbols key images use width/height 0 with padding to create a
+   square hit area — this is Zerafina's standard sizing trick. */
+#symbols-key dl img,
+#bookmark-symbols-key img
+{
+  width: 0 !important;
+  height: 0 !important;
+  padding: 25px 0 0 25px;
+}
+
+/* sizing and borders for content symbols */
+.blurb ul.required-tags li a>span,
+.bookmark p.status a>span,
+#symbols-key dl img,
+#bookmark-symbols-key img
+{
+  box-sizing: border-box;
+  border: 1px solid;
+  background-size: cover;
+  background-origin: border-box;
+}
+
+/* empty symbols boxes (no rating, category or warning) */
+.required-tags .rating-notrated,
+.required-tags .category-none,
+.required-tags .warning-no,
+.status .count,
+img[src$="/images/skins/iconsets/default/rating-notrated.png"],
+img[src$="/images/skins/iconsets/default/category-none.png"],
+img[src$="/images/skins/iconsets/default/warning-no.png"]
+{
+  color: #ffffff20;
+  background: #D0D8D1cc;
+}
+
+/* >>========== Rating ==========<<
+   Colour mapping: General → Rococo Teal (#71A7B0)
+                   Teen    → Slate Blue (#6890A0)
+                   Mature  → Antique Rose (#D7979F)
+                   Explicit→ Deep Rose (#D87884) */
+
+/* General Audiences */
+.required-tags .rating-general-audience,
+img[src$="/images/skins/iconsets/default/rating-general-audience.png"]
+{
+  color: #0000001a;
+  background:
+    url("https://zerafinacss.github.io/ao3/icons/rating-gen-01.png"),
+    #71A7B0;
+}
+
+/* Teen And Up Audiences */
+.required-tags .rating-teen,
+img[src$="/images/skins/iconsets/default/rating-teen.png"]
+{
+  color: #0000001a;
+  background:
+    url("https://zerafinacss.github.io/ao3/icons/rating-teen-01.png"),
+    #6890A0;
+}
+
+/* Mature */
+.required-tags .rating-mature,
+img[src$="/images/skins/iconsets/default/rating-mature.png"]
+{
+  color: #0000001a;
+  background:
+    url("https://zerafinacss.github.io/ao3/icons/rating-mature-01.png"),
+    #D7979F;
+}
+
+/* Explicit */
+.required-tags .rating-explicit,
+img[src$="/images/skins/iconsets/default/rating-explicit.png"]
+{
+  color: #0000001a;
+  background:
+    url("https://zerafinacss.github.io/ao3/icons/rating-explicit-01.png"),
+    #D87884;
+}
+
+/* >>========== Relationships, pairings, orientations ==========<<
+   F/F   → Deep Rose (#D87884)   F/M → Rococo Teal (#71A7B0)
+   Gen   → Sage (#A9B4AB)        M/M → Slate (#7A9EAA)
+   Multi → conic-gradient quadrant    Other → Warm Parchment (#EDD8CC) */
+
+/* F/F */
+.required-tags .category-femslash,
+img[src$="/images/skins/iconsets/default/category-femslash.png"]
+{
+  color: #0000001a;
+  background:
+    url("https://zerafinacss.github.io/ao3/icons/category-ff-01.png"),
+    #D87884;
+}
+
+/* F/M */
+.required-tags .category-het,
+img[src$="/images/skins/iconsets/default/category-het.png"]
+{
+  color: #0000001a;
+  background:
+    url("https://zerafinacss.github.io/ao3/icons/category-mf-01.png"),
+    #71A7B0;
+}
+
+/* Gen */
+.required-tags .category-gen,
+img[src$="/images/skins/iconsets/default/category-gen.png"]
+{
+  color: #0000001a;
+  background:
+    url("https://zerafinacss.github.io/ao3/icons/category-gen-01.png"),
+    #A9B4AB;
+}
+
+/* M/M */
+.required-tags .category-slash,
+img[src$="/images/skins/iconsets/default/category-slash.png"]
+{
+  color: #0000001a;
+  background:
+    url("https://zerafinacss.github.io/ao3/icons/category-mm-01.png"),
+    #7A9EAA;
+}
+
+/* Multi */
+.required-tags .category-multi,
+img[src$="/images/skins/iconsets/default/category-multi.png"]
+{
+  color: #0000001a;
+  background:
+    conic-gradient(from 270deg, #A9B4AB 25%, #71A7B0 25% 50%, #7A9EAA 50% 75%, #D87884 75%);
+}
+
+/* Other relationships */
+.required-tags .category-other,
+img[src$="/images/skins/iconsets/default/category-other.png"]
+{
+  color: #0000001a;
+  background:
+    url("https://zerafinacss.github.io/ao3/icons/category-other-01.png"),
+    #EDD8CC;
+}
+
+/* >>========== Content warnings ==========<<
+   Choose not to warn → Antique Rose (#D7979F)
+   Warnings apply     → Deep Rose (#D87884)
+   External work      → Slate Blue (#6890A0) */
+
+/* Author chose not to warn */
+.required-tags .warning-choosenotto,
+img[src$="/images/skins/iconsets/default/warning-choosenotto.png"]
+{
+  color: #0000001a;
+  background:
+    url("https://zerafinacss.github.io/ao3/icons/warning-choosenotto-01.png"),
+    #D7979F;
+}
+
+/* Warnings apply */
+.required-tags .warning-yes,
+img[src$="/images/skins/iconsets/default/warning-yes.png"]
+{
+  color: #0000001a;
+  background:
+    url("https://zerafinacss.github.io/ao3/icons/warning-yes-01.png"),
+    #D87884;
+}
+
+/* External work */
+.required-tags .external-work,
+img[src$="/images/skins/iconsets/default/warning-external-work.png"]
+{
+  color: #0000001a;
+  background:
+    url("https://zerafinacss.github.io/ao3/icons/warning-external-work-01.png"),
+    #6890A0;
+}
+
+/* >>========== Completion status ==========<<
+   Incomplete → Antique Rose (#D7979F)
+   Complete   → Sage (#A9B4AB) */
+
+/* uncomplete/unfulfilled */
+.required-tags .complete-no,
+img[src$="/images/skins/iconsets/default/complete-no.png"]
+{
+  color: #0000001a;
+  background:
+    url("https://zerafinacss.github.io/ao3/icons/complete-no-01.png"),
+    #D7979F;
+}
+
+/* completed/filled */
+.required-tags .complete-yes,
+img[src$="/images/skins/iconsets/default/complete-yes.png"]
+{
+  color: #0000001a;
+  background:
+    url("https://zerafinacss.github.io/ao3/icons/complete-yes-01.png"),
+    #A9B4AB;
+}
+
+/* >>========== Bookmark symbols ==========<<
+   Rec     → Antique Gold (#DFC5A6)
+   Public  → Rococo Teal (#71A7B0)
+   Private → Black (lock icon — intentionally high contrast)
+   Hidden  → Deep Rose (#D87884) */
+
+/* Rec bookmark */
+.status .rec,
+img[src$="/images/skins/iconsets/default/bookmark-rec.png"]
+{
+  color: #0000001a;
+  background:
+    url("https://zerafinacss.github.io/ao3/icons/bookmark-rec-01.png"),
+    #DFC5A6;
+}
+
+/* Public bookmark */
+.status .public,
+img[src$="/images/skins/iconsets/default/bookmark-public.png"]
+{
+  color: #0000001a;
+  background:
+    url("https://zerafinacss.github.io/ao3/icons/bookmark-public-01.png"),
+    #71A7B0;
+}
+
+/* Private bookmark */
+.status .private,
+img[src$="/images/skins/iconsets/default/bookmark-private.png"]
+{
+  color: #0000001a;
+  background:
+    url("https://zerafinacss.github.io/ao3/icons/bookmark-locked-01.png"),
+    #000;
+  font-size: 0;
+}
+
+/* fix private bookmark — the .text span inside .private picks up the
+   background shorthand; reset it to none so the lock icon shows correctly. */
+.status .private .text
+{
+  background: none;
+}
+
+/* Hidden bookmark */
+.status .hidden,
+img[src$="/images/skins/iconsets/default/bookmark-hidden.png"]
+{
+  color: #0000001a;
+  background:
+    url("https://zerafinacss.github.io/ao3/icons/bookmark-locked-01.png"),
+    #D87884;
+}
+
+/* >========== RSS ICON ==========<
+   AO3's RSS icon is a <span> with a background image inside an <a>.
+   We clear the span's background and rebuild the icon using ::before on
+   the <a>, which lets us control colour and size more precisely. */
+
+/* hide old rss icon */
+a.rss span
+{
+  padding: 0;
+  background: none;
+}
+
+/* setup for the new rss icon */
+.actions li a.rss
+{
+  display: inline-flex;
+  align-content: center;
+  align-items: center;
+}
+
+/* new rss icon */
+.actions li a.rss::before
+{
+  box-sizing: border-box;
+  width: 0.85em;
+  height: 0.85em;
+  margin-right: 0.3em;
+  border: 1px solid #A9B4AB;
+  border-radius: 4px;
+  background:
+    url("https://zerafinacss.github.io/ao3/icons/rss-01.png") #D87884;
+  background-size: cover;
+  content: "";
+}
+
+/* >========== KUDOS ICON ==========<
+   The kudos heart graphic is rebuilt as a ::before pseudo-element on the
+   div that wraps <p.kudos>.  A CSS filter rotates the hue of the original
+   greyscale image to match the rococo teal palette. */
+
+/* hide old kudos icon */
+p.kudos
+{
+  background: none;
+}
+
+/* new kudos icon */
+div:has(> p.kudos)::before
+{
+  position: absolute;
+  width: 55px;
+  height: 55px;
+  background: url("https://zerafinacss.github.io/ao3/icons/kudos-01.png");
+  background-size: cover;
+  content: "";
+  filter: invert(60%) sepia(30%) saturate(800%) hue-rotate(140deg) brightness(90%) contrast(90%);
+}
+
+/* >========== LOCK ICON ==========<
+   Replaces AO3's lockblue.png with Zerafina's SVG via content: url().
+   The brightness/sepia/hue-rotate filter chain recolours the icon to
+   match the rococo teal without needing a separate image asset. */
+
+img[src$="/images/lockblue.png"]
+{
+  content: url("https://zerafinacss.github.io/ao3/icons/lock-01.png");
+  filter: brightness(0) saturate(100%) invert(60%) sepia(30%) saturate(800%) hue-rotate(140deg) brightness(90%) contrast(90%);
+}
