@@ -1,18 +1,20 @@
 /*
  * ============================================
  * Theme Name: Poudre et Plume - AO3 Site Skin
- * Based on: Peacock Flare by intothisshadow
- *   https://github.com/intothisshadow/AO3-SiteSkin_PeacockFlare
- * Last Updated: 2026-May-04 11:37 GMT
+ * Author: intothisshadow
+ * Author URI: https://www.so-obsessed.com
+ * Base URI: https://github.com/intothisshadow/AO3-SiteSkin_PoudreetPlume
+ * Last Updated: 2026-May-04 11:55 GMT
  *
  * CREDITS:
  * - Structure & logic: Moonlit Wisteria by intothisshadow
  *   https://archiveofourown.org/works/79008746
  * - Icons: "Replace the AO3 Icons 2.0" by ZerafinaCSS
  *   https://github.com/ZerafinaCSS/
- * - Fonts: EB Garamond (body) + Cormorant Garamond (header title)
+ * - Fonts: EB Garamond (body) + Cormorant Garamond (header title) + Source *   Code Pro (code)
  *   https://fonts.google.com/specimen/EB+Garamond
  *   https://fonts.google.com/specimen/Cormorant+Garamond
+ *   https://fonts.google.com/specimen/Source+Code+Pro
  *
  *
  * var(--clr-bg)              Antique Ivory       (page background)
@@ -87,7 +89,7 @@
 
 :root
 {
-  /* --- Palette from Adobe Color / Poudre & Plume --- */
+  /* --- Palette: Poudre & Plume --- */
   /* #F7E9E3 pale blush cream  | #F3E1D6 warm ivory     */
   /* #D0D8D1 muted sage        | #BAC2C0 cool grey-teal  */
   /* #A9B4AB sage green-grey   | #DBB9BC dusty rose-grey */
