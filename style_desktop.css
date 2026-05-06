@@ -1,19 +1,20 @@
 /*
  * ============================================
  * Theme Name: Poudre et Plume - AO3 Site Skin
- * Based on: Peacock Flare by intothisshadow
- *   https://github.com/intothisshadow/AO3-SiteSkin_PeacockFlare
- * Palette recolor: Poudre & Plume (dusty pink, slate blue, antique gold, ivory)
- * Last Updated: 
+ * Author: intothisshadow
+ * Author URI: https://www.so-obsessed.com
+ * Base URI: https://github.com/intothisshadow/AO3-SiteSkin_PoudreetPlume
+ * Last Updated: 2026-May-06 17:01 GMT
  *
  * CREDITS:
  * - Structure & logic: Moonlit Wisteria by intothisshadow
  *   https://archiveofourown.org/works/79008746
  * - Icons: "Replace the AO3 Icons 2.0" by ZerafinaCSS
  *   https://github.com/ZerafinaCSS/
- * - Fonts: EB Garamond (body) + Cormorant Garamond (header title)
+ * - Fonts: EB Garamond (body) + Cormorant Garamond (header title) + Source *   Code Pro (code)
  *   https://fonts.google.com/specimen/EB+Garamond
  *   https://fonts.google.com/specimen/Cormorant+Garamond
+ *   https://fonts.google.com/specimen/Source+Code+Pro
  *
  *
  * var(--clr-bg)              Antique Ivory       (page background)
@@ -88,7 +89,7 @@
 
 :root
 {
-  /* --- Palette from Adobe Color / Poudre & Plume --- */
+  /* --- Palette: Poudre & Plume --- */
   /* #F7E9E3 pale blush cream  | #F3E1D6 warm ivory     */
   /* #D0D8D1 muted sage        | #BAC2C0 cool grey-teal  */
   /* #A9B4AB sage green-grey   | #DBB9BC dusty rose-grey */
@@ -165,6 +166,9 @@ html
   font-size: var(--desktop-base) !important;
 }
 
+/* Body: fixed diagonal ivory gradient prevents the page bg looking flat.
+   overflow-x: hidden stops horizontal scroll from AO3's full-width elements.
+   font-smoothing on body is inherited by most children via body *. */
 body
 {
   background: linear-gradient(160deg, #fdf8f5 0%, #faf3ee 40%, #f7efe9 70%, #f4ebe4 100%) fixed !important;
@@ -178,6 +182,7 @@ body
   text-rendering: optimizeLegibility !important;
 }
 
+/* Prevent oversized embedded media from breaking layout */
 img,
 video,
 object,
@@ -192,25 +197,17 @@ iframe
   max-width: 100% !important;
 }
 
-/* FONT: BODY. Replace Lora as the body font here. */
+/* FONT: BODY. Replace the body font here. */
 body *
 {
   font-family: 'EB Garamond', 'Garamond', 'Book Antiqua', 'Palatino Linotype', Palatino, Georgia, serif !important;
   font-weight: 500 !important;
 }
 
-input,
-select,
-textarea,
-button,
-.actions,
-pre,
-code
-{}
-
+/* <hr> rule: zero border-width, then border-image draws the visible line.
+   No border-radius on <hr>, so border-image is safe here. */
 hr
 {
-  border: 0 !important;
   border-bottom: 2px dotted !important;
   border-image: linear-gradient(90deg, transparent 0%, #A9B4AB 15%, #D7979F 35%, #D87884 50%, #DFC5A6 65%, #71A7B0 85%, transparent 100%) 1 !important;
   opacity: 0.7 !important;
@@ -229,6 +226,7 @@ i
   font-style: oblique !important;
 }
 
+/* Text selection highlight: rose tint on the selected range. */
 ::selection
 {
   background: var(--clr-rose-035) !important;
@@ -240,6 +238,10 @@ i
  * ============================================
  * 2. TYPOGRAPHY
  * ============================================
+ * Heading sizes are set on #main/#content children only, so AO3's own
+ * structural headings outside #main (header h1, nav headings) are not
+ * inadvertently oversized.  The Cormorant Garamond heading font is applied
+ * via the shared .heading selector later in the stylesheet.
  */
 
 #main h1,
@@ -304,6 +306,8 @@ h6,
   overflow-wrap: break-word !important;
 }
 
+/* Section headings: rose→blush→teal gradient underline via border-image.
+   These elements have no border-radius so border-image is safe. */
 h2.heading,
 h3.heading,
 h4.heading
@@ -314,6 +318,8 @@ h4.heading
   padding-bottom: 4px !important;
 }
 
+/* AO3 landmark headings are structural/ARIA anchors — visually hidden so they
+   don't render as actual headings on screen while remaining in the DOM */
 h3.landmark.heading,
 h4.landmark.heading,
 h5.landmark.heading,
@@ -335,6 +341,10 @@ h6.landmark.heading
  * ============================================
  * 3. LINKS
  * ============================================
+ * Base link colour is a warm terracotta (#9a5a48).
+ * Visited links shift to antique gold (#8a7040) with a dashed border.
+ * Both border-bottom treatments are stripped on specific contexts below
+ * (tags, headers, nav, blurb titles) that use their own visual treatment.
  */
 
 a,
@@ -390,6 +400,9 @@ li.reading.work.blurb h4.heading
   border-bottom: none !important;
 }
 
+/* Fic/series/bookmark titles: gradient text instead of a plain link colour.
+   Uses -webkit-background-clip + transparent text-fill, which requires
+   border-bottom: none to avoid the underline clipping through. */
 li.work.blurb h4.heading a,
 li.bookmark.blurb h4.heading a,
 li.series.blurb h4.heading a,
@@ -419,6 +432,8 @@ li.reading.work.blurb h4.heading a:hover
   text-decoration: underline !important;
 }
 
+/* Author / byline links: no border-bottom, italic, dusty periwinkle colour.
+   Covers both rel="author" on work pages and .byline links on blurbs. */
 a[rel="author"],
 a[rel="author"]:link,
 a[rel="author"]:visited,
@@ -436,6 +451,8 @@ a[rel="author"]:focus,
   text-decoration: none !important;
 }
 
+/* Injects a "by" label on a separate line before the author name.
+   \a creates a newline inside a pre-formatted string. */
 h3.byline.heading::before
 {
   content: "by \a" !important;
@@ -452,14 +469,17 @@ h3.byline.heading::before
  * ============================================
  */
 
+/* Site header: blush → rose → champagne gradient with a full-palette
+   border-image rainbow stripe on the bottom edge. */
 #header
 {
-  background: linear-gradient(90deg, #A9B4AB 0%, #D7979F 50%, #E8D9CB 100%) !important;
   border-bottom: 4px solid !important;
   border-image: linear-gradient(90deg, #D87884 0%, #DFC5A6 25%, #71A7B0 50%, #D7979F 75%, #8a6030 100%) 1 !important;
   box-shadow: 0 6px 0 0 rgba(215, 151, 159, 0.3) !important;
 }
 
+/* AO3 ships its own "A" logo image — we hide it so the h1 text
+   (the site name) renders as styled text instead. */
 #header .logo,
 #header .logo img,
 #header h1 img
@@ -474,6 +494,9 @@ h3.byline.heading::before
   padding: 0 !important;
 }
 
+/* Site title: Cormorant Garamond with a gold→teal→rose gradient clipped to
+   the text. Gradient text requires -webkit-text-fill-color: transparent and
+   background-clip: text; filter/text-shadow must be cleared. */
 #header h1,
 #header h1 span,
 #header h1 sup
@@ -550,6 +573,8 @@ h3.byline.heading::before
   width: 100% !important;
 }
 
+/* Nav dropdown menu item hover: blush→teal gradient + left accent bar that
+   pushes the text right (padding-left transition) for a sliding-door effect. */
 #header .primary.navigation .dropdown .menu a:hover
 {
   background: linear-gradient(135deg, var(--clr-blush) 0%, var(--clr-teal) 100%) !important;
@@ -569,6 +594,8 @@ h3.byline.heading::before
   vertical-align: middle !important;
 }
 
+/* Top-level nav items: teal translucent wash on hover signals the dropdown
+   is about to open.  .primary.navigation itself is transparent. */
 #header .primary.navigation>ul>li:hover,
 #header .primary.navigation>ol>li:hover
 {
@@ -593,12 +620,12 @@ h3.byline.heading::before
   padding: 0.5em 1em !important;
 }
 
+/* Primary nav links: strip all inherited link chrome (border, radius,
+   box-shadow, background) and render as plain inline blocks.  Font-smoothing
+   re-applied to compensate for any antialiasing lost in the reset. */
 #header .primary.navigation a,
 #header .primary.navigation a:visited
 {
-  background: none !important;
-  border: none !important;
-  border-bottom: none !important;
   border-radius: 0 !important;
   box-shadow: none !important;
   color: var(--clr-ink) !important;
@@ -633,6 +660,8 @@ h3.byline.heading::before
   text-decoration: none !important;
 }
 
+/* Header search: flex row so the text input and submit button sit flush
+   as a joined pill. left input gets rounded left corners, button gets right. */
 #header form[action="/search"],
 #header .search form,
 #header form.search
@@ -740,6 +769,8 @@ h3.byline.heading::before
   vertical-align: middle !important;
 }
 
+/* User avatar in the greeting bar: teal inner ring + rose outer ring
+   via layered box-shadows.  Same double-ring as the profile page icon. */
 #greeting .icon img,
 #greeting .user .icon img
 {
@@ -747,6 +778,8 @@ h3.byline.heading::before
   box-shadow: 0 0 0 3px var(--clr-teal), 0 0 0 5px var(--clr-rose) !important;
 }
 
+/* User menu dropdown (avatar + username in the header): parchment card with
+   rose border, matching the primary nav dropdown style. */
 #greeting .dropdown .menu,
 #greeting .dropdown .menu li
 {
@@ -773,6 +806,8 @@ h3.byline.heading::before
   border-radius: 6px !important;
 }
 
+/* Greeting bar links: strip all button/link chrome so text sits flush in
+   the bar without pill borders or underlines. */
 #greeting a,
 #greeting a:visited,
 #greeting a:hover
@@ -850,6 +885,8 @@ h3.byline.heading::before
  * ============================================
  */
 
+/* Dashboard sidebar: warm rose→blush→gold gradient, prominent border-radius
+   for the rococo card aesthetic. Internal links are styled separately below. */
 nav#dashboard,
 div#dashboard,
 #dashboard
@@ -924,6 +961,8 @@ div#dashboard ul.navigation.actions li
   position: relative !important;
 }
 
+/* Thin teal hairline divider between adjacent nav items in the dashboard,
+   generated via ::before rather than border-bottom to avoid box-model issues. */
 nav#dashboard ul.navigation.actions li+li::before,
 div#dashboard ul.navigation.actions li+li::before
 {
@@ -936,7 +975,8 @@ div#dashboard ul.navigation.actions li+li::before
   width: 100% !important;
 }
 
-/* Pseuds expanded dropdown — ul.expandable.secondary inside li.pseud */
+/* Pseuds expanded dropdown — ul.expandable.secondary inside li.pseud —
+   floats below the pseud name as a nested sub-card within the dashboard. */
 #dashboard li.pseud ul.expandable,
 #dashboard li.pseud ul.secondary,
 #dashboard li.pseud ul
@@ -958,6 +998,8 @@ div#dashboard ul.navigation.actions li+li::before
   padding: 0 !important;
 }
 
+/* Active nav item in the dashboard sidebar: left accent border + card bg,
+   mimicking a selected-tab affordance. */
 nav#dashboard .current,
 div#dashboard .current,
 #dashboard .current,
@@ -980,6 +1022,8 @@ div#dashboard .current a,
   text-decoration: none !important;
 }
 
+/* Inner fandom list inside the profile sidebar fandoms module: parchment
+   card with rounded corners, sitting inside the outer module card. */
 #user-fandoms ol.index.group
 {
   background: linear-gradient(135deg, #F3E1D6 0%, #EDD8CC 100%) !important;
@@ -989,6 +1033,8 @@ div#dashboard .current a,
   padding: 1em !important;
 }
 
+/* User profile sidebar modules (fandoms list, works list): standard card
+   shape with rose left accent and sage/ivory gradient. */
 #user-fandoms,
 #user-works,
 .user .primary .module.group
@@ -1004,6 +1050,8 @@ div#dashboard .current a,
   width: 100% !important;
 }
 
+/* The inner .listbox within profile modules gets its own chrome stripped —
+   the outer module card provides all the visual container treatment. */
 #user-fandoms .listbox,
 #user-works .listbox,
 .user .primary .module.group .listbox
@@ -1015,6 +1063,8 @@ div#dashboard .current a,
   padding: 0 !important;
 }
 
+/* User profile page bio/wrapper module: same card shape as dashboard panels.
+   dl.meta inside this context strips card chrome (no double-nested cards). */
 .user.home .wrapper,
 .user.home .bio.module
 {
@@ -1035,6 +1085,9 @@ div#dashboard .current a,
   display: inline-block !important;
 }
 
+/* User avatar: double ring — teal inner, rose outer — using layered
+   box-shadows.  No border-image: the border-radius (from img being square)
+   must be preserved. */
 .user.home p.icon img
 {
   border-radius: 6px !important;
@@ -1062,6 +1115,10 @@ div#dashboard .current a,
  * ============================================
  * 7. BUTTONS & ACTIONS
  * ============================================
+ * All interactive action elements share a blush-gradient pill base.
+ * Hover / active states flip to the dark abyss→teal→rose gradient.
+ * border-radius: 6px is used throughout (not 32px) so buttons look
+ * less "pill" and more "chip" — leaving the full round-pill to tags.
  */
 
 .actions a,
@@ -1153,6 +1210,8 @@ button:focus
   text-decoration: none !important;
 }
 
+/* Pressed / currently-active state: deeper dark gradient with inset shadow
+   to simulate a depressed key.  Also applied to .current on pagination. */
 .actions a:active,
 .current,
 a.current,
@@ -1165,6 +1224,8 @@ a:link.current,
   color: var(--clr-ink) !important;
 }
 
+/* Disabled action label (e.g. "Post" when form incomplete): sage green
+   gradient at reduced opacity. cursor: default removes the pointer. */
 .actions label.disabled
 {
   background: linear-gradient(180deg, var(--clr-emerald-soft) 0%, var(--clr-emerald-dusty) 100%) !important;
@@ -1180,6 +1241,8 @@ a:link.current,
   color: var(--clr-ink) !important;
 }
 
+/* AO3 skiplinks and landmark anchors: fully hidden visually.
+   These are kept in the DOM for accessibility but must not render. */
 ul#skiplinks,
 .landmark,
 .landmark a,
@@ -1252,6 +1315,8 @@ dl.index p.actions
   margin: 0 !important;
 }
 
+/* Work page action nav (Edit, Bookmark, Download, etc.): spacing and
+   transition tweaks for the top action bar. */
 ul.work.navigation.actions
 {
   margin-bottom: 1.5em !important;
@@ -1278,6 +1343,10 @@ ul.work.navigation.actions li input[type="submit"]:hover
  * ============================================
  * 8. FORMS & INPUTS
  * ============================================
+ * Text inputs/selects: parchment→seafoam gradient with teal border.
+ * Focus ring is a rose glow (outline: none + box-shadow).
+ * Fieldsets use border-radius: 32px ("balloon" cards) — NO border-image.
+ * Legends get a pill gradient badge floating over the fieldset top border.
  */
 
 input[type="text"],
@@ -1297,6 +1366,8 @@ select
   color: var(--clr-ink) !important;
 }
 
+/* Focus ring: suppress the browser default outline, replace with a rose glow
+   via box-shadow so it respects border-radius. */
 input[type="text"]:focus,
 input[type="password"]:focus,
 input[type="email"]:focus,
@@ -1312,11 +1383,11 @@ select:focus
   outline: none !important;
 }
 
+/* Fieldsets: rounded "card within a card" look with a dashed teal top border.
+   The large border-radius gives the rococo balloon effect.
+   Note: no border-image here because border-radius + border-image don't mix. */
 fieldset
 {
-  background: linear-gradient(160deg, #dde5eb 0%, #e8e4ee 50%, #f2ece8 100%) !important;
-  border: 1px solid var(--clr-blush) !important;
-  border-radius: 32px !important;
   border-top: 3px dashed #71A7B0 !important;
   box-shadow: 0 2px 10px var(--clr-teal-008) !important;
   box-sizing: border-box !important;
@@ -1333,12 +1404,17 @@ fieldset legend
   top: -0.4em !important;
 }
 
+/* Nested fieldset legend (e.g. a fieldset inside a fieldset): rose start
+   instead of teal, to visually distinguish the nesting level. */
 fieldset fieldset legend
 {
   background: linear-gradient(135deg, var(--clr-rose) 0%, var(--clr-emerald-soft) 100%) !important;
   box-shadow: none !important;
 }
 
+/* .listbox fieldsets (tag autocomplete, filter panels): same balloon-card
+   style as regular fieldsets.  overflow: hidden clips the inner index list.
+   The double box-shadow adds both a rose glow and a dark outer ring. */
 .listbox,
 fieldset fieldset.listbox
 {
@@ -1359,6 +1435,8 @@ fieldset fieldset.listbox
   box-shadow: none !important;
 }
 
+/* The inbox form fieldset wraps message checkboxes — strip its card chrome
+   so it doesn't create a visual box inside the already-styled inbox layout. */
 form.inbox fieldset
 {
   background: none !important;
@@ -1368,6 +1446,8 @@ form.inbox fieldset
   box-shadow: none !important;
 }
 
+/* Filter panel "expand/collapse" toggle button on search/listing pages:
+   smaller and less prominent than main action buttons. */
 dt.filter-toggle button.expander
 {
   background: var(--clr-emerald-025) !important;
@@ -1395,8 +1475,16 @@ dt.filter-toggle button.expander:hover
  * ============================================
  * 9. TAG SYSTEM
  * ============================================
+ * Tag pills use border-radius: 32px — DO NOT add border-image to these
+ * selectors; border-image and border-radius are incompatible and the
+ * rounded corners will disappear.  Colours are applied per tag type below.
+ * All coloured tag backgrounds must use light text (#fdf8f5) for contrast.
+ * The relationship tag uses --clr-gold (a light background) so it gets
+ * dark text (--clr-abyss) instead — this is the one intentional exception.
  */
 
+/* Base tag pill shape: applied to ALL tag types.
+   Colour overrides follow per tag-type below. */
 .tags a,
 .tags a:visited,
 ul.tags a,
@@ -1603,7 +1691,9 @@ dl.meta dd.character a:hover
   transform: translateY(-1px) !important;
 }
 
-/* --- RELATIONSHIP — golden --- */
+/* --- RELATIONSHIP — golden ---
+   Antique gold background is light enough that dark text is used here.
+   This is the only tag type that intentionally breaks the "light text" rule. */
 .relationships a,
 .relationships a:link,
 .relationships a:visited,
@@ -1625,7 +1715,9 @@ dl.meta dd.relationship a:hover
   transform: translateY(-1px) !important;
 }
 
-/* --- FREEFORM — muted teal/seafoam --- */
+/* --- FREEFORM — muted teal/seafoam ---
+   Additional/freeform tags: muted teal-green, lighter than character tags.
+   .additional-tags is an alias AO3 uses in some views. */
 .freeforms a,
 .freeforms a:link,
 .freeforms a:visited,
@@ -1651,7 +1743,9 @@ dl.meta dd.freeform a:hover
   transform: translateY(-1px) !important;
 }
 
-/* --- Bookmarker's tags --- */
+/* --- Bookmarker's tags ---
+   Tags added by the person who bookmarked a work (not the author).
+   Same colour as freeform tags since they are semantically similar. */
 ul.meta.tags a,
 ul.meta.tags a:visited
 {
@@ -1701,6 +1795,8 @@ ul.tags.cloud.index.group li a:hover
   transform: translateY(-1px) !important;
 }
 
+/* Tag cloud: cloud1–cloud8 classes scale font-size from smallest to largest.
+   cloud8 gets a teal background shift in addition to the size increase. */
 ul.tags.cloud.index.group li a.cloud1
 {
   font-size: 0.75em !important;
@@ -1767,6 +1863,9 @@ h5.fandoms.heading,
   color: transparent !important;
 }
 
+/* Fandom heading links on blurbs (h5.fandoms.heading): parent heading is
+   transparent so only the link text is coloured (rose-soft for legibility
+   against the blurb card gradient without using a full pill). */
 .work .fandom.heading a,
 .fandoms.heading a,
 h5.fandoms.heading a,
@@ -1776,6 +1875,8 @@ h5.fandoms.heading a,
   color: var(--clr-rose-soft) !important;
 }
 
+/* Remove the default AO3 comma separators between tags — pills are
+   visually self-separated by their shape and spacing. */
 .work .fandom.heading li::after,
 .fandoms.heading li::after,
 .work .character.heading li::after,
@@ -1799,7 +1900,8 @@ ul.commas li::after,
 }
 
 
-/* Override global a:visited dashed border-bottom for all tag pill types */
+/* Override global a:visited dashed border-bottom for all tag pill types.
+   Visited tags keep a solid border so the pill outline stays clean. */
 .tags a:visited,
 ul.tags a:visited,
 dl.meta a.tag:visited,
@@ -1833,6 +1935,10 @@ ul.meta.tags a:visited
  * ============================================
  */
 
+/* Work/bookmark/series list cards: alternating diagonal border-radius
+   (2px 16px 2px 16px) gives a subtle rococo asymmetry.
+   Hover swaps the corners (16px 2px 16px 2px) and deepens the shadow.
+   NO border-image here — cards have border-radius. */
 li.work.blurb,
 li.bookmark.blurb,
 li.series.blurb
@@ -1884,6 +1990,8 @@ li.series.blurb p.datetime
   margin-right: 0.5em !important;
 }
 
+/* Bookmarker's annotation section inside a bookmark blurb: sage-tinted
+   background with a teal left border to distinguish it from the work content. */
 .bookmark .user
 {
   background: linear-gradient(160deg, rgba(208, 216, 209, 0.5) 0%, rgba(186, 194, 192, 0.4) 100%) !important;
@@ -1897,6 +2005,8 @@ li.series.blurb p.datetime
   padding: 0.4em 0.75em !important;
 }
 
+/* AO3 "orphan work" or abuse-report caution banner inside a blurb —
+   kept intentionally high-contrast (dark red / white) regardless of theme. */
 li.work.blurb p.caution.notice
 {
   background: linear-gradient(135deg, #8B0000 0%, #5a0000 100%) !important;
@@ -1932,6 +2042,9 @@ li.collection.picture.blurb.group h4.heading a:hover
   text-decoration: underline !important;
 }
 
+/* "Works inspired by this" / related-works listing on a work page.
+   Uses a full-palette border-image on the bottom rule (no border-radius here,
+   so border-image is safe to use). */
 dl.inspired.index.group
 {
   background: none !important;
@@ -2031,6 +2144,8 @@ p.kudos a
   font-weight: 700 !important;
 }
 
+/* Tag cloud container: flex + wrap so pills reflow naturally across multiple
+   rows without needing a fixed grid column count. */
 ul.tags.cloud.index.group
 {
   display: flex !important;
@@ -2039,6 +2154,8 @@ ul.tags.cloud.index.group
   padding: 1em !important;
 }
 
+/* #workskin wraps the actual story text.  We clear AO3's default background
+   and border so the prose sits on the page background rather than a card. */
 #workskin
 {
   background: none !important;
@@ -2058,6 +2175,8 @@ div.wrapper
   box-shadow: none !important;
 }
 
+/* .userstuff is the user-authored story/notes text container.
+   Left dashed rose border acts as a quiet vertical margin marker. */
 .userstuff
 {
   background: none !important;
@@ -2080,6 +2199,8 @@ div.wrapper
   text-transform: none !important;
 }
 
+/* Inside #chapters, .userstuff already inherits from the chapter wrapper —
+   strip the extra dashed left border added by the global .userstuff rule. */
 #chapters .userstuff
 {
   border: none !important;
@@ -2094,6 +2215,8 @@ div.wrapper
   padding-bottom: 0.2em !important;
 }
 
+/* h3.byline inside workskin: the global h3.heading rule adds a border-image
+   gradient underline.  Bylines are not section headings, so we strip it. */
 #workskin h3.byline,
 #chapters h3.byline,
 #workskin h3.byline a,
@@ -2119,7 +2242,10 @@ div.wrapper
   font-weight: 500 !important;
 }
 
-/* --- Workskin headings: shared gradient text base --- */
+/* --- Workskin headings: shared gradient text base ---
+   Each heading level gets its own palette sweep (see below).
+   -webkit-text-fill-color: transparent + background-clip: text is the
+   standard cross-browser gradient-text technique; filter must be none. */
 #workskin h1,
 #workskin h2,
 #workskin h3,
@@ -2201,6 +2327,9 @@ div.wrapper
   background-image: linear-gradient(90deg, #A9B4AB 0%, #BAC2C0 50%, #71A7B0 100%) !important;
 }
 
+/* Work-page metadata card (rating, fandom, tags, stats).
+   Soft iridescent gradient with a rose top border.
+   Border-radius present, so NO border-image on this element. */
 dl.work.meta.group
 {
   background: linear-gradient(135deg, #f0e8e2 0%, #e8ddd8 25%, #dde4e2 55%, #e4dce8 80%, #f0e8e4 100%) !important;
@@ -2379,6 +2508,8 @@ dl.work.meta.group dd.freeform a:hover
   margin-top: 1.5em !important;
 }
 
+/* Chapter previous/next navigation buttons: same pill shape as general
+   action buttons but with the rose border instead of the muted default. */
 .chapter.navigation .next a,
 .chapter.navigation .previous a
 {
@@ -2404,6 +2535,8 @@ div.preface.group
   padding-left: 0 !important;
 }
 
+/* Work title inside the preface block (shown above chapter text).
+   Border-bottom cleared — the title stands alone without a rule beneath it. */
 div.preface.group h3.title
 {
   border-bottom: none !important;
@@ -2427,6 +2560,8 @@ div.preface.group h3.title a:hover
   text-decoration: underline !important;
 }
 
+/* Chapter position label ("Chapter 3/12"): smaller and lighter than the
+   chapter title, rendered in slate ocean colour. */
 div.preface.group .chapter.preface h3 span.position
 {
   color: var(--clr-ocean) !important;
@@ -2434,6 +2569,9 @@ div.preface.group .chapter.preface h3 span.position
   font-weight: 400 !important;
 }
 
+/* Author's notes / end notes module on the work page: iridescent blush→teal
+   gradient with a solid teal left border accent.  Asymmetric border-radius
+   (0 8px 8px 0) leaves the left edge flush to align with the accent border. */
 div.preface.group .notes.module,
 div.afterword.group .notes.module
 {
@@ -2496,6 +2634,10 @@ div.afterword.group h3.heading
   margin-top: 1.5em !important;
 }
 
+/* Comments are separated by a full-palette gradient border-image on the
+   bottom edge.  border-radius is 0 here to keep border-image working.
+   Hover adds a rounded background without border-image — hence the
+   border-image: none reset on :hover. */
 div.comment,
 li.comment
 {
@@ -2552,6 +2694,8 @@ li.comment .heading a:visited
   font-weight: bold !important;
 }
 
+/* Thread zebra-striping: odd comments lean rose, even comments lean teal.
+   These use border-radius, so NO border-image. */
 .thread li.comment:not(.even)
 {
   background: linear-gradient(160deg, rgba(215, 151, 159, 0.45) 0%, rgba(243, 225, 214, 0.6) 60%, rgba(208, 216, 209, 0.2) 100%) !important;
@@ -2623,6 +2767,8 @@ li.comment .icon img
   width: 100px !important;
 }
 
+/* Comment avatar rings: odd comments get teal rings, even get rose rings,
+   complementing the thread zebra-stripe colours. */
 li.comment:nth-child(odd) .icon
 {
   border-color: var(--clr-teal) !important;
@@ -2649,6 +2795,11 @@ li.comment .icon:hover
  * ============================================
  */
 
+/* Inbox message state badges.
+   .unread  → cool teal tint (new/unseen)
+   .replied → sage-green tint (acknowledged)
+   .claimed → dark seafoam (challenge claim)
+   .defaulted → abyss background, rose text (missed deadline warning) */
 .unread
 {
   background: linear-gradient(135deg, #d8e4e8 0%, var(--clr-card) 100%) !important;
@@ -2713,6 +2864,8 @@ li.message h4 a:hover,
   text-decoration: underline !important;
 }
 
+/* Inbox comment list inside a fieldset (e.g. "comments on my works"):
+   rounder card treatment with rose hover and teal tint for unread. */
 fieldset.comments ol.comment.index.group li.comment
 {
   background: linear-gradient(160deg, rgba(243, 225, 214, 0.5) 0%, rgba(237, 216, 204, 0.4) 100%) !important;
@@ -2742,6 +2895,8 @@ fieldset.comments ol.comment.index.group li.comment.unread:hover
   box-shadow: 0 2px 10px var(--clr-teal-020) !important;
 }
 
+/* Standard inbox message list items: parchment card with rose border.
+   .unread variant shifts to a cool teal tint. */
 li.message,
 #inbox-messages li
 {
@@ -2764,6 +2919,8 @@ li.message.unread,
  * ============================================
  * 14. DROPDOWNS & LISTBOXES
  * ============================================
+ * Generic fallback for dropdowns that don't fall under the nav or greeting
+ * selectors.  Shares the same parchment card + rose border treatment.
  */
 
 .dropdown .menu
@@ -2792,6 +2949,8 @@ li.message.unread,
  * ============================================
  */
 
+/* General site notice: gold-tinted background with a dark amber left border.
+   Used for informational messages (quota warnings, queue info, etc.) */
 .notice,
 p.notice,
 .error,
@@ -2822,6 +2981,8 @@ p.notice a:hover
   text-decoration: underline !important;
 }
 
+/* Caution variant of the notice box: rose-tinted background with blush left
+   border.  More urgent-feeling than the gold notice, less severe than an error. */
 .caution,
 p.caution,
 .caution.notice,
@@ -2859,6 +3020,8 @@ p.caution a:hover
  * ============================================
  */
 
+/* Front page (.splash) feature modules: the same rococo card style as blurbs
+   but with alternating corner radii and a rose top border accent. */
 .splash .favorite,
 .splash .news,
 .splash .latest.messages.module,
@@ -3141,6 +3304,9 @@ p.caution a:hover
   font-size: 0.583em !important;
 }
 
+/* Front page layout: .browse + .news float left at 36%, .intro + .social
+   float right at 60%, forming a two-column grid.  Logged-in users get a
+   different module layout (48% wide float columns) directly below. */
 .splash .browse,
 .splash div.news
 {
@@ -3176,6 +3342,7 @@ p.caution a:hover
   width: 50% !important;
 }
 
+/* Decorative » chevron prepended to each Browse link via ::before. */
 .splash .browse li a:before
 {
   color: var(--clr-rose) !important;
@@ -3221,6 +3388,7 @@ p.caution a:hover
   font-weight: 700 !important;
 }
 
+/* Account sign-up/log-in card shown to logged-out visitors on the front page. */
 .splash .module div.account
 {
   background: linear-gradient(160deg, var(--clr-card) 0%, var(--clr-seafoam) 100%) !important;
@@ -3305,6 +3473,8 @@ p.caution a:hover
   display: inline-block !important;
 }
 
+/* Logged-in front page: modules stack in two 48%-wide float columns.
+   Odd-indexed modules clear left to start each new row. */
 .logged-in .splash>.module
 {
   float: left !important;
@@ -3349,6 +3519,9 @@ ul.collection.picture.index.group
   height: auto !important;
 }
 
+/* Media index (e.g. /media): each medium is a parchment card.
+   align-self: start stops cards stretching to equal height in grid containers.
+   height/max-height overrides reset AO3 defaults that cap card height. */
 #main.media-index li.medium.listbox.group
 {
   align-self: start !important;
@@ -3422,6 +3595,9 @@ ul.collection.picture.index.group
   text-decoration: underline !important;
 }
 
+/* Fandoms index: one card per letter of the alphabet, same parchment card
+   treatment as the media index.  width: 100% + box-sizing: border-box ensures
+   cards fill their grid cell without overflowing. */
 #main.fandoms-index li.letter.listbox.group
 {
   align-self: start !important;
@@ -3438,6 +3614,9 @@ ul.collection.picture.index.group
   width: 100% !important;
 }
 
+/* Letter heading (A, B, C…) in the fandoms index: Cormorant Garamond,
+   uppercase, rose underline.  background/border-radius/box-shadow cleared
+   because the global h3.heading rule sets a gradient background. */
 #main.fandoms-index h3.heading
 {
   background: none !important;
@@ -3471,6 +3650,8 @@ ul.collection.picture.index.group
   text-decoration: none !important;
 }
 
+/* "↑ top" back-to-top badge inside the letter heading: small pill button
+   rendered inline-block beside the letter character. */
 #main.fandoms-index h3.heading span.action.top
 {
   background: var(--clr-rose-015) !important;
@@ -3520,6 +3701,8 @@ ul.collection.picture.index.group
  * ============================================
  */
 
+/* Profile stats and work metadata summary: card-style panel with rose
+   left accent border matching the dashboard sidebar treatment. */
 dl.statistics.meta.group,
 .wrapper dl.meta
 {
@@ -3573,6 +3756,8 @@ dl.statistics.meta.group dd
   text-decoration: underline !important;
 }
 
+/* The statistics chart SVG/canvas container: parchment background with
+   rounded corners to match the card system. */
 div#stat_chart,
 div.statistics.chart
 {
@@ -3594,6 +3779,8 @@ ul.statistics.index.group li.fandom.listbox.group
   padding: 0 !important;
 }
 
+/* Per-fandom heading in the statistics page: full-sweep dark gradient with
+   light text — intentionally darker than most card headings for contrast. */
 ul.statistics.index.group li.fandom.listbox.group h5.heading
 {
   background: linear-gradient(135deg, var(--clr-abyss) 0%, var(--clr-teal) 60%, var(--clr-rose) 100%) !important;
@@ -3664,11 +3851,14 @@ ul.statistics.index.group li.fandom.listbox.group ul.index.group li dl dd dl.sta
   font-weight: 500 !important;
 }
 
+/* Zebra-striping for even rows in statistics tables — very subtle teal wash. */
 .statistics .index li:nth-of-type(2n)
 {
   background: rgba(29, 128, 128, 0.08) !important;
 }
 
+/* On the user home page, dl.meta is already inside a styled card wrapper,
+   so we strip its own card chrome to avoid double-nesting. */
 .user.home .wrapper dl.meta
 {
   background: none !important;
@@ -3685,6 +3875,9 @@ ul.statistics.index.group li.fandom.listbox.group ul.index.group li dl dd dl.sta
  * ============================================
  */
 
+/* "Last visited" badge on reading history entries: dark gradient pill with
+   light text.  The h4.viewed.heading variant inside div.user.module.group
+   strips the pill treatment and renders inline as plain meta text instead. */
 .reading h4.viewed
 {
   background: linear-gradient(135deg, var(--clr-abyss) 0%, var(--clr-teal) 60%, var(--clr-rose) 100%) !important;
@@ -3709,6 +3902,8 @@ ul.statistics.index.group li.fandom.listbox.group ul.index.group li dl dd dl.sta
   text-decoration: underline !important;
 }
 
+/* Footer bar at the bottom of each reading history blurb: flex row holding
+   the "last viewed" label and the "Mark as read / Delete" action buttons. */
 li.reading.work.blurb.group div.user.module.group
 {
   align-items: center !important;
@@ -3784,6 +3979,8 @@ li.reading.work.blurb.group div.user.module.group ul.actions li
  * ============================================
  */
 
+/* Custom webkit scrollbar: thin teal→rose gradient thumb on ivory track.
+   Firefox does not support the webkit API; its scrollbar keeps browser defaults. */
 ::-webkit-scrollbar
 {
   width: 8px !important;
@@ -3805,6 +4002,8 @@ li.reading.work.blurb.group div.user.module.group ul.actions li
   background: var(--clr-gold) !important;
 }
 
+/* <pre> blocks (CSS skin editor, code samples): card bg with teal left border.
+   The ::before pseudo-element adds a decorative gradient stripe at the top. */
 pre
 {
   background: linear-gradient(160deg, var(--clr-card) 0%, var(--clr-seafoam) 100%) !important;
@@ -3832,6 +4031,8 @@ pre::before
   top: 0 !important;
 }
 
+/* Highlight for items that belong to or involve the current user:
+   own works, drafts, unread items, child works, unwrangled/unreviewed tags. */
 .own,
 .draft,
 .draft .wrapper,
@@ -3874,12 +4075,16 @@ pre::before
   max-width: initial !important;
 }
 
+/* Login page: push the sign-in form to the right half of the page.
+   The left side shows the welcome/marketing content. */
 .session #signin
 {
   margin-left: 48% !important;
   width: 48% !important;
 }
 
+/* Login and two-factor auth forms: centred at 75% width to keep the
+   form readable without stretching across the full viewport. */
 .sessions-new form.login,
 .sessions-create form.totp
 {
@@ -3892,6 +4097,9 @@ pre::before
   min-width: 0 !important;
 }
 
+/* Login / 2FA authentication forms: lighter card background without the
+   heavy dashed top border used on general fieldsets, since the form itself
+   provides enough visual structure. */
 .authentication fieldset
 {
   background: linear-gradient(160deg, var(--clr-card) 0%, var(--clr-seafoam) 100%) !important;
@@ -3935,6 +4143,8 @@ pre::before
   padding-right: 1em !important;
 }
 
+/* Skin editor textarea: decorative palette gradient on the top edge only.
+   This element has no border-radius, so border-image is safe here. */
 #main.skins-new textarea,
 #main.skins-edit textarea
 {
@@ -4199,6 +4409,8 @@ ul.faq.index.group ul.questions li a
   text-decoration: none !important;
 }
 
+/* TOS table of contents: each section is a <details>/<summary> collapsible.
+   Double-border on summary signals it is interactive/expandable. */
 .tos .userstuff nav.toc>details
 {
   margin-top: 3em !important;
@@ -4231,6 +4443,9 @@ ul.faq.index.group ul.questions li a
   max-width: 100% !important;
 }
 
+/* TOS agreement prompt: full-viewport fixed overlay shown to new users.
+   z-index: 999 ensures it sits above all other content.
+   The heading uses the dark abyss→teal gradient for gravitas. */
 #tos_prompt
 {
   background: var(--clr-card) !important;
@@ -4296,6 +4511,8 @@ ul.faq.index.group ul.questions li a
   white-space: normal !important;
 }
 
+/* Disabled "I agree" button before the user has scrolled to the bottom
+   of the TOS — sage green tint signals it is not yet actionable. */
 #tos_prompt [disabled]
 {
   background: var(--clr-emerald-soft) !important;
@@ -4303,6 +4520,8 @@ ul.faq.index.group ul.questions li a
   color: var(--clr-ink) !important;
 }
 
+/* Proxy / third-party reader notice bar shown at the top of the page when
+   AO3 detects the content is being served through a proxy or mirror. */
 #proxy-notice
 {
   background: linear-gradient(135deg, var(--clr-blush) 0%, var(--clr-seafoam) 100%) !important;
@@ -4328,6 +4547,8 @@ ul.faq.index.group ul.questions li a
 
 /* --- Inline text semantics --- */
 
+/* Nested italic elements: AO3 convention is to un-italicise a nested em/i
+   inside an already-italic context (e.g. italic prose that quotes a title). */
 cite em,
 em cite,
 cite i,
@@ -4356,6 +4577,8 @@ strike
   text-decoration: line-through !important;
 }
 
+/* Abbreviations, definitions, acronyms: dotted teal underline + help cursor
+   signals that hovering will reveal a tooltip/title attribute. */
 dfn,
 abbr,
 acronym
@@ -4381,6 +4604,9 @@ big
   font-size: 114% !important;
 }
 
+/* Inline code / keyboard / sample text: warm card-nested background,
+   teal border, monospace stack.  EB Garamond is overridden here because
+   proportional serif looks wrong for code. */
 kbd,
 tt,
 code,
@@ -4399,6 +4625,9 @@ samp
 
 /* --- Tables --- */
 
+/* Tables: block display + overflow-x: auto so wide tables scroll horizontally
+   rather than breaking layout.  border-radius + border-collapse don't
+   interact perfectly in all browsers — the outer radius is decorative only. */
 table
 {
   background: var(--clr-card-nested) !important;
@@ -4415,6 +4644,7 @@ table
   word-break: break-word !important;
 }
 
+/* AO3 uses <caption> elements for accessibility text — visually hidden. */
 caption
 {
   font-size: 0 !important;
@@ -4510,6 +4740,8 @@ th a:hover
   font-size: 0.85em !important;
 }
 
+/* System notification banners shown after leaving a kudos or comment:
+   teal-tinted background with a solid left accent stripe. */
 .comment_notice,
 .kudos_notice,
 ul.notes
@@ -4525,6 +4757,8 @@ ul.notes
   word-wrap: break-word !important;
 }
 
+/* Error variant of the kudos/comment notification (e.g. already left kudos,
+   comment failed validation). Rose-tinted to signal a problem. */
 .comment_error,
 .kudos_error
 {
@@ -4589,7 +4823,7 @@ ul.notes li,
   text-shadow: none !important;
 }
 
-/* event announcement — fundraising/celebrations */
+/* event announcement — fundraising/celebrations: warm rose gradient */
 .event .userstuff
 {
   background: linear-gradient(135deg, var(--clr-blush) 0%, var(--clr-rose) 100%) !important;
@@ -4602,7 +4836,8 @@ ul.notes li,
   color: var(--clr-ink) !important;
 }
 
-/* alert announcement — downtime/problems */
+/* alert announcement — downtime/problems: near-black bg with gold text for
+   maximum legibility; intentionally breaks from the soft palette. */
 .alert .userstuff
 {
   background: linear-gradient(135deg, #1a1200 0%, #2a1e00 100%) !important;
@@ -4610,7 +4845,8 @@ ul.notes li,
   color: var(--clr-gold) !important;
 }
 
-/* thermometer widget */
+/* thermometer widget — fundraiser/drive progress bar.
+   .track is the outer container, .progress is the filled portion. */
 .announcement .thermometer-content
 {
   height: 2.6em !important;
@@ -4657,8 +4893,10 @@ ul.notes li,
   position: absolute !important;
 }
 
-/* --- Symbols (? help button) --- */
-
+/* --- Symbols (? help button) ---
+   The circled "?" help buttons AO3 places next to form fields and content
+   rating symbols.  span.symbol is the outer circle, span.question adds the
+   seafoam fill, a.question removes the link underline. */
 span.symbol
 {
   border: 1px solid var(--clr-teal) !important;
@@ -4706,8 +4944,10 @@ a.question
   font-size: 0.75em !important;
 }
 
-/* --- Symbols key --- */
-
+/* --- Symbols key ---
+   The legend/key page that explains each content symbol icon.
+   dt holds the icon (100px wide), dd uses a negative top margin to
+   sit alongside the icon rather than below it. */
 dl#symbols-key dt
 {
   width: 100px !important;
@@ -4726,8 +4966,9 @@ dl#symbols-key dd
   padding: 0.15em !important;
 }
 
-/* --- Annotation module --- */
-
+/* --- Annotation module ---
+   Used in the skin editor and some system pages to display an icon alongside
+   a description.  Flex row wrapping so image and notes sit side by side. */
 .annotation
 {
   align-items: center !important;
@@ -4774,6 +5015,8 @@ dl#symbols-key dd
 
 /* --- Blockquote extras --- */
 
+/* Blockquotes: vertical palette gradient stripe on the left edge.
+   No border-radius on this element, so border-image works correctly. */
 blockquote
 {
   border-image: linear-gradient(180deg, #A9B4AB 0%, #D7979F 30%, #71A7B0 60%, #DFC5A6 85%, #D87884 100%) 1 !important;
@@ -4815,7 +5058,7 @@ blockquote p:last-child
   line-height: 1.65 !important;
 }
 
-/* Override AO3 default .required red color */
+/* Override AO3 default .required red color — use theme rose instead */
 .post .required .warnings,
 dd.required,
 label
@@ -4825,7 +5068,11 @@ label
 }
 
 
-/* .alert and .flash — AO3 site messages; :not(:empty) prevents styling the always-present empty div */
+/* .alert and .flash — AO3 site-level messages shown at the top of the page.
+   :not(:empty) prevents styling the always-present-but-empty placeholder div.
+   Default flash = dark gold (informational / neutral)
+   .error flash = dark rose (failure / problem)
+   .success flash = dark green tint (confirmation) */
 .alert:not(:empty),
 .flash:not(:empty),
 .alert.flash:not(:empty),
@@ -4862,7 +5109,10 @@ p.flash.success
   color: var(--clr-ink) !important;
 }
 
-/* h1-h6 for system pages: docs, support, faq, guideline, donate */
+/* h1-h6 for system pages: docs, support, faq, guideline, donate.
+   H1 uses the same full-palette gradient text sweep as workskin headings.
+   background-color fallback (#D7979F) is for browsers that don't support
+   background-clip: text (very rare now but kept for safety). */
 #main.system h1,
 #main.docs h1,
 #main.support h1,
@@ -4943,6 +5193,9 @@ p.flash.success
  * ============================================
  */
 
+/* Footer: reversed palette gradient (sage→teal→rose→blush→ivory), mirroring
+   the header sweep but flowing right-to-left for visual symmetry.
+   Border-image rainbow stripe on the top edge echoes the header bottom stripe. */
 body #footer
 {
   background: linear-gradient(270deg, #A9B4AB 0%, #BAC2C0 25%, #D7979F 55%, #DBB9BC 75%, #F7E9E3 100%) !important;
@@ -4952,6 +5205,8 @@ body #footer
   font-weight: 600 !important;
 }
 
+/* Footer links: strip all the standard link chrome (border-bottom, padding,
+   radius) so they render as plain inline text within the footer gradient. */
 body #footer a,
 body #footer a:visited,
 body #footer a:hover
@@ -4970,6 +5225,8 @@ body #footer a:hover
   transform: none !important;
 }
 
+/* Footer buttons (e.g. language picker): reset to plain text style so they
+   blend with footer link styling rather than showing as pill buttons. */
 body #footer button,
 body #footer .actions li button,
 body #footer input[type="submit"],
@@ -5004,6 +5261,9 @@ body #footer a:hover
   transform: none !important;
 }
 
+/* Footer section headings: Cormorant Garamond, uppercase, rose underline.
+   background/background-image are explicitly cleared to prevent any inherited
+   gradient from the global heading rules bleeding in. */
 body #footer .heading,
 body #footer h2,
 body #footer h3,
@@ -5029,10 +5289,17 @@ body #footer ul.navigation.actions li.module.group h4.heading
  * ============================================================
  * 24. REPLACE THE AO3 ICONS
  * by zerafinacss https://github.com/ZerafinaCSS/Replace-the-AO3-Icons-2.0
- * recolored for Abstract Peacock
+ *
+ * Technique: AO3 renders content icons as <img> elements or background
+ * images.  Zerafina's method replaces them by:
+ *   - Using content: url(...) to swap the <img> src on supported elements
+ *   - Using background: url(...), #colour for elements that need bg fills
+ * Icon colours are mapped to the Shabby Rococo palette below.
  * ============================================================
  */
 
+/* AO3 sometimes reduces icon opacity — reset to full so custom icons render
+   at intended brightness. */
 ul.required-tags,
 .bookmark .status span,
 .blurb .icon
@@ -5134,9 +5401,9 @@ img[src$="/images/skins/iconsets/default/icon_collection.png"]
   box-sizing: border-box;
 }
 
-/* >========== CONTENT SYMBOLS ==========< */
-
-/* sets the size of the symbols keys icons */
+/* >========== CONTENT SYMBOLS ==========<
+   The symbols key images use width/height 0 with padding to create a
+   square hit area — this is Zerafina's standard sizing trick. */
 #symbols-key dl img,
 #bookmark-symbols-key img
 {
@@ -5170,7 +5437,11 @@ img[src$="/images/skins/iconsets/default/warning-no.png"]
   color: #ffffff20;
 }
 
-/* >>========== Rating ==========<< */
+/* >>========== Rating ==========<<
+   Colour mapping: General → Rococo Teal (#71A7B0)
+                   Teen    → Slate Blue (#6890A0)
+                   Mature  → Antique Rose (#D7979F)
+                   Explicit→ Deep Rose (#D87884) */
 
 /* General Audiences */
 .required-tags .rating-general-audience,
@@ -5212,7 +5483,10 @@ img[src$="/images/skins/iconsets/default/rating-explicit.png"]
   color: #0000001a;
 }
 
-/* >>========== Relationships, pairings, orientations ==========<< */
+/* >>========== Relationships, pairings, orientations ==========<<
+   F/F   → Deep Rose (#D87884)   F/M → Rococo Teal (#71A7B0)
+   Gen   → Sage (#A9B4AB)        M/M → Slate (#7A9EAA)
+   Multi → conic-gradient quadrant    Other → Warm Parchment (#EDD8CC) */
 
 /* F/F */
 .required-tags .category-femslash,
@@ -5273,7 +5547,10 @@ img[src$="/images/skins/iconsets/default/category-other.png"]
   color: #0000001a;
 }
 
-/* >>========== Content warnings ==========<< */
+/* >>========== Content warnings ==========<<
+   Choose not to warn → Antique Rose (#D7979F)
+   Warnings apply     → Deep Rose (#D87884)
+   External work      → Slate Blue (#6890A0) */
 
 /* Author chose not to warn */
 .required-tags .warning-choosenotto,
@@ -5305,7 +5582,9 @@ img[src$="/images/skins/iconsets/default/warning-external-work.png"]
   color: #0000001a;
 }
 
-/* >>========== Completion status ==========<< */
+/* >>========== Completion status ==========<<
+   Incomplete → Antique Rose (#D7979F)
+   Complete   → Sage (#A9B4AB) */
 
 /* uncomplete/unfulfilled */
 .required-tags .complete-no,
@@ -5327,7 +5606,11 @@ img[src$="/images/skins/iconsets/default/complete-yes.png"]
   color: #0000001a;
 }
 
-/* >>========== Bookmark symbols ==========<< */
+/* >>========== Bookmark symbols ==========<<
+   Rec     → Antique Gold (#DFC5A6)
+   Public  → Rococo Teal (#71A7B0)
+   Private → Black (lock icon — intentionally high contrast)
+   Hidden  → Deep Rose (#D87884) */
 
 /* Rec bookmark */
 .status .rec,
@@ -5360,7 +5643,8 @@ img[src$="/images/skins/iconsets/default/bookmark-private.png"]
   font-size: 0;
 }
 
-/* fix private bookmark */
+/* fix private bookmark — the .text span inside .private picks up the
+   background shorthand; reset it to none so the lock icon shows correctly. */
 .status .private .text
 {
   background: none;
@@ -5376,7 +5660,10 @@ img[src$="/images/skins/iconsets/default/bookmark-hidden.png"]
   color: #0000001a;
 }
 
-/* >========== RSS ICON ==========< */
+/* >========== RSS ICON ==========<
+   AO3's RSS icon is a <span> with a background image inside an <a>.
+   We clear the span's background and rebuild the icon using ::before on
+   the <a>, which lets us control colour and size more precisely. */
 
 /* hide old rss icon */
 a.rss span
@@ -5408,7 +5695,10 @@ a.rss span
   width: 0.85em;
 }
 
-/* >========== KUDOS ICON ==========< */
+/* >========== KUDOS ICON ==========<
+   The kudos heart graphic is rebuilt as a ::before pseudo-element on the
+   div that wraps <p.kudos>.  A CSS filter rotates the hue of the original
+   greyscale image to match the rococo teal palette. */
 
 /* hide old kudos icon */
 p.kudos
@@ -5428,7 +5718,10 @@ div:has(> p.kudos)::before
   width: 55px;
 }
 
-/* >========== LOCK ICON ==========< */
+/* >========== LOCK ICON ==========<
+   Replaces AO3's lockblue.png with Zerafina's SVG via content: url().
+   The brightness/sepia/hue-rotate filter chain recolours the icon to
+   match the rococo teal without needing a separate image asset. */
 
 img[src$="/images/lockblue.png"]
 {
