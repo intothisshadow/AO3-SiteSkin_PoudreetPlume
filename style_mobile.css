@@ -174,6 +174,10 @@
 
   /* ── Dashboard ───────────────────────────── */
 
+  /* AO3's 25-media-midsize.css already unfloats #dashboard and #main.
+     We only override the visual styling (border, radius) and scope
+     chip-flow to #dashboard.own so it doesn't bleed into #dashboard.admin. */
+
   /* Override AO3's 25-media-midsize.css dark red border */
   #dashboard,
   #dashboard.own
@@ -192,11 +196,38 @@
     clear: both !important;
   }
 
-  /* ── Dashboard nav: inline chip flow (like AO3 default mobile) ── */
+  /* ── Admin/news #dashboard: simple stacked links, no chip pills ── */
+  /* AO3's 25-media-midsize.css already unfloats #dashboard and sets
+     text-align: left. We just ensure our skin's pill styling doesn't
+     bleed in via the broader #dashboard selectors below. */
 
-  nav#dashboard ul.navigation.actions,
-  div#dashboard ul.navigation.actions,
-  #dashboard ul.navigation.actions
+  #dashboard.admin ul.navigation.actions
+  {
+    display: block !important;
+    text-align: left !important;
+  }
+
+  #dashboard.admin ul.navigation.actions li
+  {
+    display: block !important;
+  }
+
+  #dashboard.admin ul.navigation.actions a,
+  #dashboard.admin ul.navigation.actions a:link,
+  #dashboard.admin ul.navigation.actions a:visited
+  {
+    background: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    display: block !important;
+    overflow-wrap: break-word !important;
+    white-space: normal !important;
+    width: 100% !important;
+  }
+
+  /* ── User dashboard (#dashboard.own): chip-flow ── */
+
+  #dashboard.own ul.navigation.actions
   {
     display: flex !important;
     flex-wrap: wrap !important;
@@ -205,9 +236,7 @@
     padding: 0 !important;
   }
 
-  nav#dashboard ul.navigation.actions li,
-  div#dashboard ul.navigation.actions li,
-  #dashboard ul.navigation.actions li
+  #dashboard.own ul.navigation.actions li
   {
     display: inline-block !important;
     flex: 0 0 auto !important;
@@ -217,22 +246,14 @@
   }
 
   /* Remove divider pseudo-elements — not needed in chip layout */
-  nav#dashboard ul.navigation.actions li+li::before,
-  div#dashboard ul.navigation.actions li+li::before,
-  #dashboard ul.navigation.actions li+li::before
+  #dashboard.own ul.navigation.actions li+li::before
   {
     display: none !important;
   }
 
-  nav#dashboard ul.navigation.actions a,
-  nav#dashboard ul.navigation.actions a:link,
-  nav#dashboard ul.navigation.actions a:visited,
-  div#dashboard ul.navigation.actions a,
-  div#dashboard ul.navigation.actions a:link,
-  div#dashboard ul.navigation.actions a:visited,
-  #dashboard ul.navigation.actions a,
-  #dashboard ul.navigation.actions a:link,
-  #dashboard ul.navigation.actions a:visited
+  #dashboard.own ul.navigation.actions a,
+  #dashboard.own ul.navigation.actions a:link,
+  #dashboard.own ul.navigation.actions a:visited
   {
     background: var(--clr-card) !important;
     border: 1px solid var(--clr-rose-020) !important;
@@ -245,9 +266,7 @@
     white-space: nowrap !important;
   }
 
-  nav#dashboard ul.navigation.actions a:hover,
-  div#dashboard ul.navigation.actions a:hover,
-  #dashboard ul.navigation.actions a:hover
+  #dashboard.own ul.navigation.actions a:hover
   {
     background: linear-gradient(135deg, var(--clr-blush) 0%, var(--clr-teal) 100%) !important;
     border-color: var(--clr-rose) !important;
@@ -256,12 +275,8 @@
     padding-left: 0.65em !important;
   }
 
-  nav#dashboard .current a,
-  div#dashboard .current a,
-  #dashboard .current a,
-  nav#dashboard li.current a,
-  div#dashboard li.current a,
-  #dashboard li.current a
+  #dashboard.own .current a,
+  #dashboard.own li.current a
   {
     background: linear-gradient(135deg, var(--clr-bg) 0%, var(--clr-card) 100%) !important;
     border: 1px solid var(--clr-rose) !important;
@@ -277,7 +292,7 @@
   /* AO3 JS toggles .hidden to open/close the sub-ul.   */
   /* We must NOT force display on .hidden elements.      */
 
-  #dashboard ul.navigation.actions li.pseud
+  #dashboard.own ul.navigation.actions li.pseud
   {
     display: block !important;
     flex: 0 0 100% !important;
@@ -285,9 +300,9 @@
     width: 100% !important;
   }
 
-  #dashboard li.pseud>a,
-  #dashboard li.pseud>a:link,
-  #dashboard li.pseud>a:visited
+  #dashboard.own li.pseud>a,
+  #dashboard.own li.pseud>a:link,
+  #dashboard.own li.pseud>a:visited
   {
     border-radius: 20px !important;
     display: inline-block !important;
@@ -296,9 +311,9 @@
   }
 
   /* Only apply flex when AO3 JS has made the sub-list visible */
-  #dashboard li.pseud ul:not(.hidden),
-  #dashboard li.pseud ul.expandable:not(.hidden),
-  #dashboard li.pseud ul.secondary:not(.hidden)
+  #dashboard.own li.pseud ul:not(.hidden),
+  #dashboard.own li.pseud ul.expandable:not(.hidden),
+  #dashboard.own li.pseud ul.secondary:not(.hidden)
   {
     box-sizing: border-box !important;
     display: flex !important;
@@ -311,7 +326,7 @@
     width: 100% !important;
   }
 
-  #dashboard li.pseud ul:not(.hidden) li
+  #dashboard.own li.pseud ul:not(.hidden) li
   {
     display: inline-block !important;
     flex: 0 0 auto !important;
@@ -320,9 +335,9 @@
     padding: 0 !important;
   }
 
-  #dashboard li.pseud ul:not(.hidden) li a,
-  #dashboard li.pseud ul:not(.hidden) li a:link,
-  #dashboard li.pseud ul:not(.hidden) li a:visited
+  #dashboard.own li.pseud ul:not(.hidden) li a,
+  #dashboard.own li.pseud ul:not(.hidden) li a:link,
+  #dashboard.own li.pseud ul:not(.hidden) li a:visited
   {
     border-radius: 20px !important;
     display: inline-block !important;
