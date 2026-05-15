@@ -3,7 +3,7 @@
 **Poudre et Plume** is a soft, romantic site skin for [Archive of Our Own](https://archiveofourown.org) (AO3), built on a palette of dusty pink, slate blue, antique gold, and aged ivory. It is a full palette recolor of [Peacock Flare](https://github.com/intothisshadow/AO3-SiteSkin_PoudreetPlume) by intothisshadow, preserving the original structure and logic while replacing every colour with the Poudre & Plume scheme.
 
 **Based on:** Peacock Flare by intothisshadow  
-**Version:** 1.0.0  
+**Version:** 1.0.1  
 **AO3 instructions:** 
 **GitHub:** https://github.com/intothisshadow/AO3-SiteSkin_PoudreetPlume
 
@@ -50,7 +50,7 @@
 </p>
 </details>
 
- 
+
 
 ## File Structure
 
@@ -174,8 +174,9 @@ Three custom fonts are used. Because AO3 site skins cannot load external fonts, 
 
 ## Version
 
-| **Version** | **Date**    | **Description**                      |
-| ----------- | ----------- | ------------------------------------ |
-| **1.0.0**   | May 2026    | Initial release + mobile add-on      |
+| **Version** | **Date**     | **Description**                 |
+| ----------- | ------------ | ------------------------------- |
+| **1.0.1**   | May 15, 2026 | Restored missing css            |
+| **1.0.0**   | May 4, 2026  | Initial release + mobile add-on |
 
 The changelog documents significant changes only — new features, architectural decisions, and notable bug fixes. Individual CSS tweaks, rule refinements, and minor mobile adjustments are not logged.

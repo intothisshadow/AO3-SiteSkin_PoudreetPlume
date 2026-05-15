@@ -2,12 +2,15 @@
 
 The changelog documents significant changes only — new features, architectural decisions, and notable bug fixes. Individual CSS tweaks, rule refinements, and minor mobile adjustments are not logged.
 
+## [1.0.1] - 2026-05-15 (current)
 
+- Four CSS properties had been dropped at some point during cleaning up. Restored them.
+  - **`hr`** — missing `border: 0 !important` 
+  - **`#header`** — missing `background: linear-gradient(90deg, #A9B4AB 0%, #D7979F 50%, #E8D9CB 100%)` (the header gradient)
+  - **`#header .primary.navigation a`** — missing `background: none`, `border: none`, `border-bottom: none` (the resets that stop nav links inheriting button chrome)
+  - **`fieldset`** — missing the `background` gradient, `border`, and `border-radius: 32px` 
 
-## [1.0.0] - 2026-05-04 (current)
-
-**Theme Name:** Poudre et Plume - AO3 Site Skin  
-**Last Updated:** 2026-May-04  
+## [1.0.0] - 2026-05-04
 
 ### 🎨 Visual & Color Palette
 
